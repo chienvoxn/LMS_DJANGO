@@ -86,7 +86,7 @@ const LessonPlayer = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="text-center text-slate-600">Loading lesson...</div>
+        <div className="text-center text-slate-600 dark:text-slate-400">Loading lesson...</div>
       </div>
     );
   }
@@ -94,7 +94,7 @@ const LessonPlayer = () => {
   if (error || !lesson) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-800">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 rounded-lg p-6 text-red-800 dark:text-red-400">
           <h2 className="text-xl font-bold mb-2">Error</h2>
           <p>{error || 'Lesson not found'}</p>
           <button
@@ -111,17 +111,17 @@ const LessonPlayer = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
       {/* Breadcrumb */}
-      <div className="text-sm text-slate-600">
+      <div className="text-sm text-slate-600 dark:text-slate-400">
         <button
           onClick={() => navigate(`/courses/${courseId}`)}
-          className="hover:text-sky-600"
+          className="hover:text-sky-600 dark:hover:text-sky-400"
         >
           Course
         </button>
         <span className="mx-2">/</span>
         <span>{lesson.section?.title || 'Section'}</span>
         <span className="mx-2">/</span>
-        <span className="text-slate-900 font-medium">{lesson.title}</span>
+        <span className="text-slate-900 dark:text-slate-100 font-medium">{lesson.title}</span>
       </div>
 
       {/* Video Player */}
@@ -138,16 +138,16 @@ const LessonPlayer = () => {
       )}
 
       {/* Lesson Info */}
-      <div className="bg-white rounded-xl border border-slate-200 p-6">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">{lesson.title}</h1>
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">{lesson.title}</h1>
         {lesson.duration > 0 && (
-          <p className="text-slate-600 mb-4">
+          <p className="text-slate-600 dark:text-slate-400 mb-4">
             Duration: {Math.floor(lesson.duration / 60)}:{(lesson.duration % 60).toString().padStart(2, '0')}
           </p>
         )}
         
         {lesson.content && (
-          <div className="prose max-w-none text-slate-700 mb-6">
+          <div className="prose max-w-none text-slate-700 dark:text-slate-300 mb-6">
             <p>{lesson.content}</p>
           </div>
         )}
@@ -171,7 +171,7 @@ const LessonPlayer = () => {
           </button>
           <button
             onClick={() => navigate(`/courses/${courseId}`)}
-            className="px-6 py-3 rounded-lg font-medium bg-slate-200 hover:bg-slate-300 text-slate-700 transition"
+            className="px-6 py-3 rounded-lg font-medium bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 transition"
           >
             Back to Course
           </button>

@@ -149,10 +149,10 @@ const AssignmentDetail = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600 font-medium">Loading assignment...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400 font-medium">Loading assignment...</p>
         </div>
       </div>
     );
@@ -160,14 +160,14 @@ const AssignmentDetail = () => {
 
   if (error && !assignment) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-6">
-          <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-8 text-red-800 shadow-lg">
+          <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 rounded-2xl p-8 text-red-800 dark:text-red-400 shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
-              <span className="font-bold text-lg">{error}</span>
+              <span className="font-bold text-lg text-red-800 dark:text-red-400">{error}</span>
             </div>
             <button
               onClick={() => navigate(`/courses/${courseId}`)}
@@ -183,35 +183,35 @@ const AssignmentDetail = () => {
 
   if (!assignment) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
-        <div className="text-center text-lg text-slate-600 font-medium">Assignment not found</div>
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
+        <div className="text-center text-lg text-slate-600 dark:text-slate-400 font-medium">Assignment not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white py-10">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 py-10">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header - Coursera Style */}
         <div className="mb-8">
           <button
             onClick={() => navigate(`/courses/${courseId}`)}
-            className="text-slate-600 hover:text-primary-600 mb-6 flex items-center gap-2 font-semibold transition-colors"
+            className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 mb-6 flex items-center gap-2 font-semibold transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Course
           </button>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">{assignment.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3">{assignment.title}</h1>
           {assignment.description && (
-            <p className="text-lg text-slate-600">{assignment.description}</p>
+            <p className="text-lg text-slate-600 dark:text-slate-400">{assignment.description}</p>
           )}
         </div>
 
         {/* Error Message - Coursera Style */}
         {error && (
-          <div className="bg-red-50 border-2 border-red-200 text-red-800 rounded-xl p-5 text-base mb-6 shadow-sm">
+          <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 text-red-800 dark:text-red-400 rounded-xl p-5 text-base mb-6 shadow-sm">
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -222,8 +222,8 @@ const AssignmentDetail = () => {
         )}
 
         {/* Assignment Info Card - Coursera Style */}
-        <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 mb-8 shadow-lg">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Assignment Details</h2>
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-8 mb-8 shadow-lg">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">Assignment Details</h2>
           <div className="space-y-6">
             {/* Due Date */}
             {assignment.due_date && (
@@ -234,8 +234,8 @@ const AssignmentDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-700 mb-1">DUE DATE</h3>
-                  <p className="text-base text-slate-900 font-medium">{formatDate(assignment.due_date)}</p>
+                  <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">DUE DATE</h3>
+                  <p className="text-base text-slate-900 dark:text-slate-100 font-medium">{formatDate(assignment.due_date)}</p>
                 </div>
               </div>
             )}
@@ -248,7 +248,7 @@ const AssignmentDetail = () => {
                 </svg>
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-700 mb-2">STATUS</h3>
+                <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">STATUS</h3>
                 <AssignmentStatusBadge status={status} />
               </div>
             </div>
@@ -262,8 +262,8 @@ const AssignmentDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-700 mb-1">MAXIMUM POINTS</h3>
-                  <p className="text-base text-slate-900 font-medium">{assignment.max_points} points</p>
+                  <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1">MAXIMUM POINTS</h3>
+                  <p className="text-base text-slate-900 dark:text-slate-100 font-medium">{assignment.max_points} points</p>
                 </div>
               </div>
             )}
@@ -277,7 +277,7 @@ const AssignmentDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-700 mb-2">ATTACHMENT</h3>
+                  <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">ATTACHMENT</h3>
                   <a
                     href={assignment.attachment_url}
                     target="_blank"
@@ -297,12 +297,12 @@ const AssignmentDetail = () => {
 
         {/* Submission Section - Coursera Style */}
         {canSubmit ? (
-          <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Submit Assignment</h2>
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">Submit Assignment</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Submission Type Toggle - Coursera Style */}
-              <div className="flex items-center gap-6 mb-6 bg-slate-50 p-4 rounded-xl border-2 border-slate-200">
+              <div className="flex items-center gap-6 mb-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="radio"
@@ -312,7 +312,7 @@ const AssignmentDetail = () => {
                     onChange={() => setSubmissionType('text')}
                     className="w-5 h-5 text-primary-500"
                   />
-                  <span className="text-base font-semibold text-slate-700">Text Answer</span>
+                  <span className="text-base font-semibold text-slate-700 dark:text-slate-300">Text Answer</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
@@ -323,21 +323,21 @@ const AssignmentDetail = () => {
                     onChange={() => setSubmissionType('file')}
                     className="w-5 h-5 text-primary-500"
                   />
-                  <span className="text-base font-semibold text-slate-700">File Upload</span>
+                  <span className="text-base font-semibold text-slate-700 dark:text-slate-300">File Upload</span>
                 </label>
               </div>
 
               {/* Text Answer */}
               {submissionType === 'text' && (
                 <div>
-                  <label className="block text-base font-bold text-slate-900 mb-3">
+                  <label className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
                     Your Answer
                   </label>
                   <textarea
                     value={textAnswer}
                     onChange={(e) => setTextAnswer(e.target.value)}
                     rows={12}
-                    className="w-full px-5 py-4 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base"
+                    className="w-full px-5 py-4 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                     placeholder="Enter your answer here..."
                     required
                   />
@@ -347,18 +347,18 @@ const AssignmentDetail = () => {
               {/* File Upload */}
               {submissionType === 'file' && (
                 <div>
-                  <label className="block text-base font-bold text-slate-900 mb-3">
+                  <label className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
                     Upload File
                   </label>
                   <input
                     type="file"
                     onChange={handleFileChange}
-                    className="w-full px-5 py-4 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base"
+                    className="w-full px-5 py-4 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                     required={submissionType === 'file'}
                   />
                   {selectedFile && (
-                    <div className="mt-3 bg-primary-50 border-2 border-primary-200 rounded-lg p-4">
-                      <p className="text-sm font-semibold text-primary-700">
+                    <div className="mt-3 bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-primary-700 dark:text-primary-300">
                         Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
                       </p>
                     </div>
@@ -384,15 +384,15 @@ const AssignmentDetail = () => {
             </form>
           </div>
         ) : (
-          <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Your Submission</h2>
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">Your Submission</h2>
             
             {submission && (
               <div className="space-y-6">
                 {/* Submission Info */}
-                <div className="bg-slate-50 rounded-xl p-5 border-2 border-slate-200">
-                  <p className="text-sm font-semibold text-slate-600 mb-2">Submitted on:</p>
-                  <p className="text-lg text-slate-900 font-bold">
+                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 border-2 border-slate-200 dark:border-slate-700">
+                  <p className="text-sm font-semibold text-slate-600 dark:text-slate-400 mb-2">Submitted on:</p>
+                  <p className="text-lg text-slate-900 dark:text-slate-100 font-bold">
                     {formatDate(submission.submitted_at)}
                   </p>
                 </div>
@@ -400,9 +400,9 @@ const AssignmentDetail = () => {
                 {/* Text Submission */}
                 {submission.content && !submission.content.startsWith('http') && (
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 mb-3">Your Answer</h3>
-                    <div className="bg-slate-50 border-2 border-slate-200 rounded-xl p-6">
-                      <p className="text-base text-slate-900 whitespace-pre-wrap leading-relaxed">{submission.content}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-3">Your Answer</h3>
+                    <div className="bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-6">
+                      <p className="text-base text-slate-900 dark:text-slate-100 whitespace-pre-wrap leading-relaxed">{submission.content}</p>
                     </div>
                   </div>
                 )}
@@ -410,7 +410,7 @@ const AssignmentDetail = () => {
                 {/* File Submission */}
                 {(submission.file_url || (submission.content && submission.content.startsWith('http'))) && (
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 mb-3">Submitted File</h3>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-3">Submitted File</h3>
                     <a
                       href={submission.file_url || submission.content}
                       target="_blank"
@@ -428,21 +428,21 @@ const AssignmentDetail = () => {
 
                 {/* Grade & Feedback - Coursera Style */}
                 {status === 'graded' && (
-                  <div className="border-t-2 border-slate-200 pt-6 mt-6">
-                    <h3 className="text-xl font-bold text-slate-900 mb-4">Grade & Feedback</h3>
-                    <div className="bg-gradient-to-br from-accent-50 to-accent-100 border-2 border-accent-200 rounded-xl p-6">
+                  <div className="border-t-2 border-slate-200 dark:border-slate-700 pt-6 mt-6">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Grade & Feedback</h3>
+                    <div className="bg-gradient-to-br from-accent-50 to-accent-100 dark:from-slate-900 dark:via-slate-900 border-2 border-accent-200 dark:border-accent-800 rounded-xl p-6">
                       <div className="flex items-center gap-4 mb-4">
-                        <span className="text-4xl font-bold text-accent-700">
+                        <span className="text-4xl font-bold text-accent-700 dark:text-accent-400">
                           {submission.grade} / {assignment.max_points || 0}
                         </span>
-                        <span className="text-lg font-semibold text-accent-700">
+                        <span className="text-lg font-semibold text-accent-700 dark:text-accent-400">
                           ({((submission.grade / (assignment.max_points || 1)) * 100).toFixed(1)}%)
                         </span>
                       </div>
                       {submission.feedback && (
-                        <div className="mt-4 pt-4 border-t-2 border-accent-200">
-                          <p className="text-sm font-bold text-slate-700 mb-2">Feedback:</p>
-                          <p className="text-base text-slate-900 whitespace-pre-wrap leading-relaxed">{submission.feedback}</p>
+                        <div className="mt-4 pt-4 border-t-2 border-accent-200 dark:border-accent-800">
+                          <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Feedback:</p>
+                          <p className="text-base text-slate-900 dark:text-slate-100 whitespace-pre-wrap leading-relaxed">{submission.feedback}</p>
                         </div>
                       )}
                     </div>

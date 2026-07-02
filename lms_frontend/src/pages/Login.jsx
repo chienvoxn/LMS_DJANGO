@@ -42,8 +42,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-slate-50 to-primary-50 py-12 px-4">
-      <div className="bg-white rounded-2xl shadow-2xl border-2 border-slate-200 p-10 w-full max-w-lg space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-slate-50 to-primary-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 py-12 px-4 transition-colors">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border-2 border-slate-200 dark:border-slate-700 p-10 w-full max-w-lg space-y-8">
         {/* Header - Coursera Style */}
         <div className="text-center">
           <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
@@ -51,13 +51,13 @@ const Login = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h2 className="text-4xl font-bold text-slate-900 mb-2">Welcome back</h2>
-          <p className="text-lg text-slate-600">Sign in to your account</p>
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Welcome back</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400">Sign in to your account</p>
         </div>
 
         {/* Error Message - Coursera Style */}
         {error && (
-          <div className="bg-red-50 border-2 border-red-200 text-red-800 p-5 rounded-xl shadow-sm">
+          <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 p-5 rounded-xl shadow-sm">
             <div className="flex items-center gap-3">
               <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -70,12 +70,12 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email Field - Coursera Style */}
           <div>
-            <label htmlFor="email" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="email" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Email
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
               </div>
@@ -86,19 +86,19 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="your@email.com"
-                className="w-full border-2 border-slate-300 rounded-lg pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+                className="w-full border-2 border-slate-300 dark:border-slate-600 rounded-lg pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               />
             </div>
           </div>
 
           {/* Password Field - Coursera Style */}
           <div>
-            <label htmlFor="password" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="password" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Password
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
@@ -109,7 +109,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Enter your password"
-                className="w-full border-2 border-slate-300 rounded-lg pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+                className="w-full border-2 border-slate-300 dark:border-slate-600 rounded-lg pl-12 pr-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -133,18 +133,14 @@ const Login = () => {
         </form>
 
         {/* Register Link - Coursera Style */}
-        <div className="pt-4 border-t-2 border-slate-200">
-          <p className="text-base text-center text-slate-600">
+        <div className="pt-4 border-t-2 border-slate-200 dark:border-slate-700">
+          <p className="text-base text-center text-slate-600 dark:text-slate-400">
             Don't have an account?{' '}
             <Link 
               to="/register" 
-              className="text-primary-600 hover:text-primary-700 font-bold transition-colors"
+              className="text-primary-600 hover:text-primary-700 font-bold transition-colors dark:text-primary-400 dark:hover:text-primary-300"
               onClick={() => {
-                // Preserve courseId if exists
                 const redirectCourseId = localStorage.getItem('redirectCourseId');
-                if (redirectCourseId) {
-                  // Already saved, no need to do anything
-                }
               }}
             >
               Register here

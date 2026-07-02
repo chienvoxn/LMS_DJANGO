@@ -19,7 +19,7 @@ const InstructorCard = ({ instructor }) => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white border border-slate-200 rounded-xl p-6 min-w-[240px] cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-primary-300 hover:-translate-y-1 group"
+      className="bg-white border border-slate-200 rounded-xl p-6 min-w-[240px] cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-primary-300 hover:-translate-y-1 group dark:bg-slate-800 dark:border-slate-700"
     >
       <div className="flex flex-col items-center text-center">
         <div className="relative mb-4">
@@ -37,27 +37,27 @@ const InstructorCard = ({ instructor }) => {
             </svg>
           </div>
         </div>
-        <h3 className="font-bold text-slate-900 mb-2 line-clamp-2 text-base group-hover:text-primary-600 transition-colors">
+        <h3 className="font-bold text-slate-900 mb-2 line-clamp-2 text-base group-hover:text-primary-600 transition-colors dark:text-slate-100">
           {instructor.full_name}
         </h3>
         {instructor.headline && (
-          <p className="text-sm text-slate-600 mb-3 line-clamp-2 min-h-[2.5rem]">
+          <p className="text-sm text-slate-600 mb-3 line-clamp-2 min-h-[2.5rem] dark:text-slate-400">
             {instructor.headline}
           </p>
         )}
         {instructor.average_rating > 0 && (
           <div className="flex items-center gap-1.5 mb-4">
-            <span className="text-base font-bold text-slate-900">
+            <span className="text-base font-bold text-slate-900 dark:text-slate-100">
               {instructor.average_rating.toFixed(1)}
             </span>
             <RatingStars value={instructor.average_rating} size="xs" />
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               ({instructor.total_reviews})
             </span>
           </div>
         )}
-        <div className="w-full pt-4 border-t border-slate-100 space-y-2">
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+        <div className="w-full pt-4 border-t border-slate-100 space-y-2 dark:border-slate-700">
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-600 dark:text-slate-400">
             <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>

@@ -228,10 +228,10 @@ const StudentQuizPlayer = () => {
 
   if (authLoading || loading || checkingEnrollment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-slate-600">Loading quiz...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading quiz...</p>
         </div>
       </div>
     );
@@ -239,9 +239,9 @@ const StudentQuizPlayer = () => {
 
   if (error && !quiz) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 rounded-lg p-4 text-red-800 dark:text-red-400">
             <p className="font-semibold mb-2">Access Denied</p>
             <p>{error}</p>
             <button
@@ -258,8 +258,8 @@ const StudentQuizPlayer = () => {
 
   if (!quiz) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center text-slate-600">Quiz not found</div>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="text-center text-slate-600 dark:text-slate-400">Quiz not found</div>
       </div>
     );
   }
@@ -267,7 +267,7 @@ const StudentQuizPlayer = () => {
   // Show result page if quiz is completed
   if (showResult && result) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
         <QuizResult
           quiz={quiz}
           result={result}
@@ -281,11 +281,11 @@ const StudentQuizPlayer = () => {
 
   // Show quiz player
   return (
-    <div className="h-screen flex flex-col bg-slate-50">
+    <div className="h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border-b border-red-200 px-6 py-3">
-          <div className="max-w-7xl mx-auto text-red-800 text-sm">
+        <div className="bg-red-50 dark:bg-red-900/20 border-b border-red-200 dark:border-red-800 px-6 py-3">
+          <div className="max-w-7xl mx-auto text-red-800 dark:text-red-400 text-sm">
             {error}
           </div>
         </div>
@@ -304,7 +304,7 @@ const StudentQuizPlayer = () => {
       {/* Loading or No Attempt */}
       {!attempt && !loading && (
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-center text-slate-600">
+          <div className="text-center text-slate-600 dark:text-slate-400">
             Starting quiz...
           </div>
         </div>

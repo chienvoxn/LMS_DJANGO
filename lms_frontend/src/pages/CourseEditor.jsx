@@ -573,10 +573,10 @@ const CourseEditor = () => {
 
   if (loading || authLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600">Loading course editor...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 dark:border-primary-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading course editor...</p>
         </div>
       </div>
     );
@@ -585,30 +585,30 @@ const CourseEditor = () => {
   // Only check for course if not creating a new one
   if (!isNewCourse && !course) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center text-red-600">Course not found</div>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="text-center text-red-600 dark:text-red-400">Course not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
         {/* Header Section - Coursera Style */}
-        <div className="mb-8 pb-6 border-b border-slate-200">
+        <div className="mb-8 pb-6 border-b border-slate-200 dark:border-slate-700">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">
+              <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                 {isNewCourse ? 'Create New Course' : 'Edit Course'}
               </h1>
               {!isNewCourse && course && (
-                <p className="text-base text-slate-600">{course.title}</p>
+                <p className="text-base text-slate-600 dark:text-slate-400">{course.title}</p>
               )}
             </div>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => navigate(`/teacher/dashboard`)}
-                className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition shadow-sm hover:shadow-md"
+                className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm hover:shadow-md"
               >
                 Back to Dashboard
               </button>
@@ -647,15 +647,15 @@ const CourseEditor = () => {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 bg-red-50 border-l-4 border-red-500 rounded-lg p-4 shadow-sm">
+          <div className="mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 rounded-lg p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="text-sm font-medium text-red-800 whitespace-pre-line">{error}</span>
+                <span className="text-sm font-medium text-red-800 dark:text-red-300 whitespace-pre-line">{error}</span>
               </div>
-              <button onClick={() => setError(null)} className="ml-4 text-sm font-semibold text-red-600 hover:text-red-800 transition">
+              <button onClick={() => setError(null)} className="ml-4 text-sm font-semibold text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition">
                 Dismiss
               </button>
             </div>
@@ -663,68 +663,68 @@ const CourseEditor = () => {
         )}
 
         {/* Course Information Form - Coursera Style */}
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:p-8">
-          <div className="mb-6 pb-4 border-b border-slate-200">
-            <h2 className="text-xl font-bold text-slate-900">Course Information</h2>
-            <p className="text-sm text-slate-500 mt-1">Fill in the details about your course</p>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 lg:p-8">
+          <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Course Information</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Fill in the details about your course</p>
           </div>
           
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Title <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={courseForm.title}
                   onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
                   placeholder="Course title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Subtitle</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Subtitle</label>
                 <input
                   type="text"
                   value={courseForm.subtitle}
                   onChange={(e) => setCourseForm({ ...courseForm, subtitle: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
                   placeholder="Course subtitle"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Description</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Description</label>
               <textarea
                 value={courseForm.description}
                 onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
                 rows={5}
-                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400 resize-y"
+                className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800 resize-y"
                 placeholder="Course description"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Price ($)</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Price ($)</label>
                 <input
                   type="number"
                   step="0.01"
                   min="0"
                   value={courseForm.price}
                   onChange={(e) => setCourseForm({ ...courseForm, price: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
                   placeholder="0.00"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Level</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Level</label>
                 <select
                   value={courseForm.level}
                   onChange={(e) => setCourseForm({ ...courseForm, level: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 bg-white"
+                  className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800"
                 >
                   <option value="beginner">Beginner</option>
                   <option value="intermediate">Intermediate</option>
@@ -732,11 +732,11 @@ const CourseEditor = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Category</label>
                 <select
                   value={courseForm.category}
                   onChange={(e) => setCourseForm({ ...courseForm, category: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 bg-white"
+                  className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800"
                 >
                   <option value="">Select a category</option>
                   {COURSE_CATEGORIES.map(cat => (
@@ -751,17 +751,17 @@ const CourseEditor = () => {
                     </option>
                   )}
                 </select>
-                <p className="text-xs text-slate-500 mt-1.5">Choose a category related to Computer Science</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Choose a category related to Computer Science</p>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Thumbnail URL</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Thumbnail URL</label>
               <input
                 type="url"
                 value={courseForm.thumbnail_url}
                 onChange={(e) => setCourseForm({ ...courseForm, thumbnail_url: e.target.value })}
-                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
@@ -774,12 +774,12 @@ const CourseEditor = () => {
                 onChange={(e) => setCourseForm({ ...courseForm, is_published: e.target.checked })}
                 className="w-4 h-4 text-primary-500 border-slate-300 rounded focus:ring-primary-500 cursor-pointer"
               />
-              <label htmlFor="is_published" className="text-sm font-semibold text-slate-700 cursor-pointer">
+              <label htmlFor="is_published" className="text-sm font-semibold text-slate-700 dark:text-slate-300 cursor-pointer">
                 Publish course
               </label>
             </div>
 
-            <div className="pt-4 border-t border-slate-200">
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
               <button
                 onClick={handleSaveCourse}
                 disabled={saving || !courseForm.title.trim()}
@@ -803,12 +803,12 @@ const CourseEditor = () => {
 
         {/* Curriculum Section - Only show if course exists (not new) */}
         {!isNewCourse && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:p-8">
-          <div className="mb-6 pb-4 border-b border-slate-200">
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 lg:p-8">
+          <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-bold text-slate-900">Curriculum</h2>
-                <p className="text-sm text-slate-500 mt-1">Organize your course content into sections and lessons</p>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Curriculum</h2>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Organize your course content into sections and lessons</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 {isEditingCurriculum ? (
@@ -844,7 +844,7 @@ const CourseEditor = () => {
                         });
                         setEditingSectionTitles(titlesMap);
                       }}
-                      className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
+                      className="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
                     >
                       Cancel
                     </button>
@@ -877,14 +877,14 @@ const CourseEditor = () => {
 
           {/* Add Section Form */}
           {showAddSection && (
-            <div className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Section Title</label>
+            <div className="mb-6 p-4 bg-slate-50 dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Section Title</label>
               <input
                 type="text"
                 placeholder="Enter section title"
                 value={newSectionTitle}
                 onChange={(e) => setNewSectionTitle(e.target.value)}
-                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg mb-3 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition"
+                className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg mb-3 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && newSectionTitle.trim()) {
                     handleAddSection(newSectionTitle);
@@ -913,7 +913,7 @@ const CourseEditor = () => {
                     setShowAddSection(false);
                     setNewSectionTitle('');
                   }}
-                  className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
+                  className="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
                 >
                   Cancel
                 </button>
@@ -924,13 +924,13 @@ const CourseEditor = () => {
           {/* Sections List */}
           {sections.length === 0 ? (
             <div className="text-center py-12">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-                <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+                <svg className="w-8 h-8 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <p className="text-slate-600 font-medium">No sections yet</p>
-              <p className="text-sm text-slate-500 mt-1">Click "Add Section" to create your first section</p>
+              <p className="text-slate-600 dark:text-slate-400 font-medium">No sections yet</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Click "Add Section" to create your first section</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -940,9 +940,9 @@ const CourseEditor = () => {
                 const isEditing = editingSection === section.id;
 
                 return (
-                  <div key={section.id} className="border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <div key={section.id} className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     {/* Section Header */}
-                    <div className="bg-white px-5 py-4 flex items-center justify-between border-b border-slate-100">
+                    <div className="bg-white dark:bg-slate-800 px-5 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-700">
                       <div className="flex items-center gap-3 flex-1">
                         {/* Reorder Buttons - Only show when editing curriculum */}
                         {isEditingCurriculum && (
@@ -951,7 +951,7 @@ const CourseEditor = () => {
                               type="button"
                               onClick={(e) => handleMoveSection(e, section.id, 'up')}
                               disabled={index === 0}
-                              className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
+                              className="px-2 py-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-400 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
                               title="Move up"
                             >
                               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -962,7 +962,7 @@ const CourseEditor = () => {
                               type="button"
                               onClick={(e) => handleMoveSection(e, section.id, 'down')}
                               disabled={index === sections.length - 1}
-                              className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
+                              className="px-2 py-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-400 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
                               title="Move down"
                             >
                               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -973,7 +973,7 @@ const CourseEditor = () => {
                         )}
                         <button
                           onClick={() => toggleSection(section.id)}
-                          className="text-slate-500 hover:text-primary-500 transition-colors"
+                          className="text-slate-500 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                         >
                           <svg className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -990,12 +990,12 @@ const CourseEditor = () => {
                                   [section.id]: e.target.value,
                                 });
                               }}
-                              className="flex-1 px-3 py-2 border border-primary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-primary-500 bg-white transition"
+                              className="flex-1 px-3 py-2 border border-primary-300 dark:border-primary-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 focus:border-primary-500 dark:focus:border-primary-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 transition"
                             />
                           ) : (
-                            <h3 className="font-semibold text-slate-900 flex-1">{section.title}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-slate-100 flex-1">{section.title}</h3>
                           )}
-                          <span className="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full border border-primary-100">
+                          <span className="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold rounded-full border border-primary-100 dark:border-primary-800">
                             {sectionLessons.length} lesson{sectionLessons.length !== 1 ? 's' : ''}
                           </span>
                         </div>
@@ -1025,7 +1025,7 @@ const CourseEditor = () => {
 
                     {/* Section Lessons */}
                     {isExpanded && (
-                      <div className="p-5 bg-slate-50">
+                      <div className="p-5 bg-slate-50 dark:bg-slate-700">
                         {/* Add Lesson Form */}
                         {showAddLesson === section.id && (
                           <div className="mb-4">
@@ -1040,7 +1040,7 @@ const CourseEditor = () => {
                         <div className="space-y-2">
                           {sectionLessons.length === 0 ? (
                             <div className="text-center py-6">
-                              <p className="text-sm text-slate-500">No lessons yet. Click "+ Lesson" to add one.</p>
+                              <p className="text-sm text-slate-500 dark:text-slate-400">No lessons yet. Click "+ Lesson" to add one.</p>
                             </div>
                           ) : (
                             sectionLessons.map((lesson, lessonIndex) => (
@@ -1105,9 +1105,9 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4 p-5 bg-white rounded-lg border border-slate-200 shadow-sm space-y-5">
+    <form onSubmit={handleSubmit} className="mb-4 p-5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm space-y-5">
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">
+        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
           Lesson Title <span className="text-red-500">*</span>
         </label>
         <input
@@ -1115,14 +1115,14 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
           placeholder="Enter lesson title"
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+          className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
           required
         />
-        <p className="text-xs text-slate-500 mt-1.5">The title of this lesson</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">The title of this lesson</p>
       </div>
               
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">
+        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
           Content Type <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-6 mb-4">
@@ -1137,9 +1137,9 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
                 setFormData({ ...formData, document_file: null, video_url: '' });
                 setFilePreview(null);
               }}
-              className="w-4 h-4 text-primary-500 border-slate-300 focus:ring-primary-500"
+              className="w-4 h-4 text-primary-500 border-slate-300 dark:border-slate-600 focus:ring-primary-500"
             />
-            <span className="text-sm font-medium text-slate-700">Video URL</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Video URL</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -1151,9 +1151,9 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
                 setContentType('document');
                 setFormData({ ...formData, video_url: '' });
               }}
-              className="w-4 h-4 text-primary-500 border-slate-300 focus:ring-primary-500"
+              className="w-4 h-4 text-primary-500 border-slate-300 dark:border-slate-600 focus:ring-primary-500"
             />
-            <span className="text-sm font-medium text-slate-700">File Upload (Document)</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">File Upload (Document)</span>
           </label>
         </div>
                 
@@ -1164,9 +1164,9 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
               placeholder="https://www.youtube.com/watch?v=..."
               value={formData.video_url}
               onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+              className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
             />
-            <p className="text-xs text-slate-500 mt-1.5">YouTube, Vimeo, or other video platform URL</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">YouTube, Vimeo, or other video platform URL</p>
           </div>
         ) : (
           <div>
@@ -1174,30 +1174,30 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
               type="file"
               accept=".pdf,.doc,.docx,.txt,.md"
               onChange={handleFileChange}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition"
+              className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 dark:file:bg-primary-900/30 file:text-primary-700 dark:file:text-primary-300 hover:file:bg-primary-100 dark:hover:file:bg-primary-800/50 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
             />
             {filePreview && (
-              <div className="mt-3 p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-600">
+              <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-600 dark:text-slate-400">
                 <span className="font-semibold">Selected:</span> {formData.document_file?.name || 'Current file'}
                 {initialData?.document_file_url && !formData.document_file && (
                   <a
                     href={initialData.document_file_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-2 text-primary-500 hover:underline font-medium"
+                    className="ml-2 text-primary-500 dark:text-primary-400 hover:underline font-medium"
                   >
                     (View current file)
                   </a>
                 )}
               </div>
             )}
-            <p className="text-xs text-slate-500 mt-1.5">Upload PDF, DOC, DOCX, TXT, or MD file for students to read</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Upload PDF, DOC, DOCX, TXT, or MD file for students to read</p>
           </div>
         )}
       </div>
       
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">
+        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
           Lesson Description
         </label>
         <textarea
@@ -1205,13 +1205,13 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
           value={formData.content}
           onChange={(e) => setFormData({ ...formData, content: e.target.value })}
           rows={4}
-          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400 resize-y"
+          className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800 resize-y"
         />
-        <p className="text-xs text-slate-500 mt-1.5">Detailed description or instructions for this lesson</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Detailed description or instructions for this lesson</p>
       </div>
       
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">
+        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
           Duration (seconds)
         </label>
         <input
@@ -1220,9 +1220,9 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
           value={formData.duration}
           onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) || 0 })}
           min="0"
-          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 placeholder-slate-400"
+          className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800"
         />
-        <p className="text-xs text-slate-500 mt-1.5">Lesson duration in seconds (e.g., 480 = 8 minutes)</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Lesson duration in seconds (e.g., 480 = 8 minutes)</p>
       </div>
       <div className="flex gap-2 pt-2">
         <button
@@ -1234,7 +1234,7 @@ const LessonForm = ({ onSubmit, onCancel, initialData = null }) => {
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
+          className="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-semibold transition shadow-sm hover:shadow-md"
         >
           Cancel
         </button>
@@ -1281,7 +1281,7 @@ const LessonItem = ({
 
   if (isEditing) {
     return (
-      <div className="p-3 bg-slate-50 rounded border border-slate-200">
+      <div className="p-3 bg-slate-50 dark:bg-slate-700 rounded border border-slate-200 dark:border-slate-600">
         <LessonForm
           initialData={{
             ...formData,
@@ -1298,7 +1298,7 @@ const LessonItem = ({
   }
 
   return (
-    <div className="p-4 bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+    <div className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
       <div className="flex items-center gap-3 flex-1">
         {/* Reorder Buttons - Only show in edit curriculum mode */}
         {isEditingCurriculum && (
@@ -1307,7 +1307,7 @@ const LessonItem = ({
               type="button"
               onClick={(e) => onMove(e, 'up')}
               disabled={lessonIndex === 0}
-              className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
+              className="px-2 py-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-400 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
               title="Move up"
             >
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1318,7 +1318,7 @@ const LessonItem = ({
               type="button"
               onClick={(e) => onMove(e, 'down')}
               disabled={lessonIndex === totalLessons - 1}
-              className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
+              className="px-2 py-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-400 rounded text-xs disabled:opacity-30 disabled:cursor-not-allowed transition"
               title="Move down"
             >
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1328,16 +1328,16 @@ const LessonItem = ({
           </div>
         )}
         <div className="flex items-center gap-3 flex-1">
-          <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
-            <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-slate-900 truncate">{lesson.title}</h4>
+            <h4 className="font-semibold text-slate-900 dark:text-slate-100 truncate">{lesson.title}</h4>
             {lesson.duration > 0 && (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 {Math.floor(lesson.duration / 60)}:{(lesson.duration % 60).toString().padStart(2, '0')}
               </p>
             )}

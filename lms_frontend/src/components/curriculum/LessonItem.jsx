@@ -71,20 +71,20 @@ const LessonItem = ({
       disabled={isLocked && !isPreview}
       className={`w-full text-left px-3 py-2.5 rounded transition-all duration-150 group relative ${
         isActive
-          ? 'bg-primary-50 text-primary-900 font-semibold border-l-2 border-primary-500'
+          ? 'bg-primary-50 text-primary-900 font-semibold border-l-2 border-primary-500 dark:bg-primary-900/30 dark:text-primary-200'
           : isLocked && !isPreview
-          ? 'text-slate-400 cursor-not-allowed opacity-50'
-          : 'text-slate-700 hover:bg-slate-50'
+          ? 'text-slate-400 cursor-not-allowed opacity-50 dark:text-slate-500'
+          : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-700'
       }`}
     >
       <div className="flex items-center gap-2.5">
         {/* Icon */}
         <div className={`flex-shrink-0 w-4 h-4 flex items-center justify-center ${
           isActive 
-            ? 'text-primary-500' 
+            ? 'text-primary-500 dark:text-primary-400' 
             : isLocked && !isPreview 
-            ? 'text-slate-400' 
-            : 'text-slate-500 group-hover:text-slate-700'
+            ? 'text-slate-400 dark:text-slate-500' 
+            : 'text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-300'
         }`}>
           {getIcon()}
         </div>
@@ -110,7 +110,7 @@ const LessonItem = ({
               {/* Duration */}
               {formatDuration(lesson.duration) && (
                 <span className={`text-xs whitespace-nowrap font-medium ${
-                  isActive ? 'text-primary-500' : 'text-slate-500'
+                  isActive ? 'text-primary-500 dark:text-primary-400' : 'text-slate-500 dark:text-slate-400'
                 }`}>
                   {formatDuration(lesson.duration)}
                 </span>
@@ -133,7 +133,7 @@ const LessonItem = ({
               
               {/* Locked Icon */}
               {isLocked && !isPreview && (
-                <div className="flex-shrink-0 w-4 h-4 flex items-center justify-center text-slate-400">
+                <div className="flex-shrink-0 w-4 h-4 flex items-center justify-center text-slate-400 dark:text-slate-500">
                   <svg 
                     className="w-4 h-4"
                     fill="none" 

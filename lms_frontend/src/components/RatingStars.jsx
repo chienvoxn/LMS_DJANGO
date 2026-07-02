@@ -23,7 +23,7 @@ const RatingStars = ({ value = 0, max = 5, size = "md", showValue = false }) => 
     <div className="inline-flex items-center gap-0.5">
       {Array.from({ length: max }).map((_, index) => {
         const starNumber = index + 1;
-        let starClass = "text-slate-300";
+        let starClass = "text-slate-300 dark:text-slate-600";
         
         if (starNumber <= fullStars) {
           starClass = "text-yellow-400";
@@ -43,7 +43,7 @@ const RatingStars = ({ value = 0, max = 5, size = "md", showValue = false }) => 
         );
       })}
       {showValue && (
-        <span className={`text-slate-600 ml-1 text-sm`}>
+        <span className={`text-slate-600 ml-1 text-sm dark:text-slate-400`}>
           {rating?.toFixed(1) || "0.0"}
         </span>
       )}

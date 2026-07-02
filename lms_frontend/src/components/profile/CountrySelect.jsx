@@ -91,7 +91,7 @@ const CountrySelect = ({ value, onChange, required = false }) => {
       value={value || ''}
       onChange={(e) => onChange(e.target.value)}
       required={required}
-      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+      className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
     >
       <option value="">Select a country</option>
       {COUNTRIES.map((country) => (

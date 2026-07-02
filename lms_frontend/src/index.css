@@ -17,56 +17,18 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-slate-900;
   }
-}
 
-@layer components {
-  /* Card component */
-  .card {
-    @apply bg-white rounded-xl shadow-md border border-slate-200;
+  .dark body {
+    @apply bg-slate-900 text-slate-100;
   }
-
-  /* Primary button - Coursera Blue */
-  .btn-primary {
-    background: linear-gradient(135deg, #0056D2 0%, #0047b3 100%);
-    @apply hover:opacity-90 text-white font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
-  }
-
-  /* Secondary button - Sky Blue */
-  .btn-secondary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-    @apply hover:opacity-90 text-white font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl;
-  }
-
-  /* Badge component */
-  .badge {
-    @apply px-3 py-1 text-xs font-semibold rounded-full;
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-slate-100;
   }
 }
 
-@layer utilities {
-  /* Custom utility styles - Coursera Colors */
-  .text-gradient-primary {
-    background: linear-gradient(to right, #0056D2, #0047b3);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  .text-gradient-secondary {
-    background: linear-gradient(to right, #0ea5e9, #0284c7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+.card {
+  @apply bg-white rounded-xl shadow-md border border-slate-200;
+}
+.dark .card {
+  @apply bg-slate-800 border-slate-700;
 }

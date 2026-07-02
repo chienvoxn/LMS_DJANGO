@@ -46,7 +46,7 @@ const CurriculumPanel = ({
   if (!curriculum?.sections || curriculum.sections.length === 0) {
     return (
       <div className={`p-5 ${className}`}>
-        <p className="text-slate-500 text-sm">No content available</p>
+        <p className="text-slate-500 text-sm dark:text-slate-400">No content available</p>
       </div>
     );
   }
@@ -70,21 +70,21 @@ const CurriculumPanel = ({
   };
 
   return (
-    <div className={`flex flex-col h-full bg-white ${className}`}>
+    <div className={`flex flex-col h-full bg-white dark:bg-slate-800 ${className}`}>
       {/* Header - Coursera Style */}
-      <div className="px-4 py-3.5 border-b border-slate-200 bg-white flex-shrink-0">
-        <h2 className="text-xs font-bold text-slate-900 mb-2.5 uppercase tracking-wider">
+      <div className="px-4 py-3.5 border-b border-slate-200 bg-white flex-shrink-0 dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="text-xs font-bold text-slate-900 mb-2.5 uppercase tracking-wider dark:text-slate-100">
           Course Content
         </h2>
         {totalLessons > 0 && (
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
-            <span className="text-slate-600 font-medium">
+            <span className="text-slate-600 font-medium dark:text-slate-400">
               {totalLessons} {totalLessons === 1 ? 'lesson' : 'lessons'}
             </span>
             {totalDuration > 0 && (
               <>
-                <span className="text-slate-300">•</span>
-                <span className="text-slate-500 font-medium">
+                <span className="text-slate-300 dark:text-slate-600">•</span>
+                <span className="text-slate-500 font-medium dark:text-slate-400">
                   {formatDuration(totalDuration)}
                 </span>
               </>

@@ -53,7 +53,7 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
     return (
       <div className="text-center py-8">
         <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-primary-500"></div>
-        <p className="mt-3 text-slate-600 font-medium">Loading attempt history...</p>
+        <p className="mt-3 text-slate-600 font-medium dark:text-slate-400">Loading attempt history...</p>
       </div>
     );
   }
@@ -64,7 +64,7 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
 
   return (
     <div className="mt-10">
-      <h3 className="text-2xl font-bold text-slate-900 mb-6">Attempt History</h3>
+      <h3 className="text-2xl font-bold text-slate-900 mb-6 dark:text-slate-100">Attempt History</h3>
       <div className="space-y-4">
         {attempts.map((attempt, index) => {
           const percentage = calculatePercentage(attempt.score, totalPoints);
@@ -75,16 +75,16 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
           return (
             <div
               key={attempt.id}
-              className={`bg-white rounded-2xl border-2 p-6 shadow-md hover:shadow-xl transition-all ${
+              className={`bg-white rounded-2xl border-2 p-6 shadow-md hover:shadow-xl transition-all dark:bg-slate-800 ${
                 isLatest 
-                  ? 'border-primary-300 bg-gradient-to-br from-primary-50 to-secondary-50 shadow-lg' 
-                  : 'border-slate-200 hover:border-primary-200'
+                  ? 'border-primary-300 bg-gradient-to-br from-primary-50 to-secondary-50 shadow-lg dark:from-slate-800 dark:via-slate-800 dark:to-slate-800' 
+                  : 'border-slate-200 hover:border-primary-200 dark:border-slate-700'
               }`}
             >
               <div className="flex items-center justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4 flex-wrap">
-                    <span className="text-base font-bold text-slate-900">
+                    <span className="text-base font-bold text-slate-900 dark:text-slate-100">
                       Attempt #{attempts.length - index}
                     </span>
                     {isLatest && (
@@ -95,7 +95,7 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
                         Latest
                       </span>
                     )}
-                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                       <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
@@ -109,17 +109,17 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
                           ? 'text-accent-600' 
                           : isGood 
                           ? 'text-primary-600' 
-                          : 'text-slate-600'
+                          : 'text-slate-600 dark:text-slate-400'
                       }`}>
                         {percentage.toFixed(1)}%
                       </span>
-                      <span className="text-sm font-semibold text-slate-500">Score</span>
+                      <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">Score</span>
                     </div>
-                    <div className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-lg border-2 border-slate-200">
+                    <div className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-lg border-2 border-slate-200 dark:bg-slate-700 dark:border-slate-700">
                       <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                       </svg>
-                      <span className="text-base font-bold text-slate-900">
+                      <span className="text-base font-bold text-slate-900 dark:text-slate-100">
                         {attempt.score} / {totalPoints} points
                       </span>
                     </div>
@@ -128,7 +128,7 @@ const QuizHistory = ({ quizId, quiz, onViewAttempt }) => {
                 {onViewAttempt && (
                   <button
                     onClick={() => onViewAttempt(attempt)}
-                    className="px-6 py-3 text-sm font-semibold rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 transition-all shadow-sm hover:shadow-md flex-shrink-0 border-2 border-slate-300"
+                    className="px-6 py-3 text-sm font-semibold rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 transition-all shadow-sm hover:shadow-md flex-shrink-0 border-2 border-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-300 dark:border-slate-600"
                   >
                     View Details
                   </button>

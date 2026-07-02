@@ -20,7 +20,7 @@ const AssignmentStatusBadge = ({ status = "not_submitted" }) => {
         };
       default:
         return {
-          className: "inline-flex items-center px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-medium",
+          className: "inline-flex items-center px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-medium dark:bg-slate-700 dark:text-slate-400",
           label: "Not submitted"
         };
     }

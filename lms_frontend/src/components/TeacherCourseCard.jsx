@@ -14,7 +14,7 @@ import RatingStars from './RatingStars';
 
 const TeacherCourseCard = ({ course, onView, onEdit, onManageQuizzes, onManageAssignments, onManageStudents }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-slate-200 hover:border-primary-200 flex flex-col group">
+    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-slate-200 hover:border-primary-200 flex flex-col group dark:bg-slate-800 dark:border-slate-700">
       {/* Thumbnail with overlay on hover */}
       <div className="relative h-48 bg-gradient-to-br from-primary-100 via-secondary-100 to-accent-100 overflow-hidden">
         {course.thumbnail_url ? (
@@ -33,7 +33,7 @@ const TeacherCourseCard = ({ course, onView, onEdit, onManageQuizzes, onManageAs
           <div className="w-full h-full flex items-center justify-center">
             <div className="text-center">
               <div className="text-5xl mb-2">📚</div>
-              <div className="text-xs text-slate-500 font-medium">No thumbnail</div>
+              <div className="text-xs text-slate-500 font-medium dark:text-slate-400">No thumbnail</div>
             </div>
           </div>
         )}
@@ -63,25 +63,25 @@ const TeacherCourseCard = ({ course, onView, onEdit, onManageQuizzes, onManageAs
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
         {/* Title */}
-        <h3 className="font-bold text-xl text-slate-900 line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors">
+        <h3 className="font-bold text-xl text-slate-900 line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors dark:text-slate-100">
           {course.title || 'Untitled Course'}
         </h3>
 
         {/* Subtitle */}
         {course.subtitle && (
-          <p className="text-sm text-slate-600 line-clamp-2 mb-4 leading-relaxed">
+          <p className="text-sm text-slate-600 line-clamp-2 mb-4 leading-relaxed dark:text-slate-400">
             {course.subtitle}
           </p>
         )}
 
         {/* Rating display */}
         {(course.average_rating !== undefined || course.reviews_count !== undefined) && (
-          <div className="flex items-center gap-1.5 text-sm text-slate-700 mb-4">
-            <span className="font-bold text-slate-900">
+          <div className="flex items-center gap-1.5 text-sm text-slate-700 mb-4 dark:text-slate-300">
+            <span className="font-bold text-slate-900 dark:text-slate-100">
               {course.average_rating?.toFixed(1) ?? "0.0"}
             </span>
             <RatingStars value={course.average_rating || 0} size="sm" />
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               ({course.reviews_count || 0})
             </span>
           </div>
@@ -103,7 +103,7 @@ const TeacherCourseCard = ({ course, onView, onEdit, onManageQuizzes, onManageAs
 
         {/* Price */}
         <div className="mb-5">
-          <span className="text-2xl font-bold text-slate-900">
+          <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">
             {course.price ? `$${parseFloat(course.price).toFixed(2)}` : 'Free'}
           </span>
         </div>

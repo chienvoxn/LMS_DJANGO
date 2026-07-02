@@ -18,7 +18,7 @@ const QuizSidebar = ({
   };
 
   return (
-    <div className="w-24 bg-white border-r-2 border-slate-200 p-6 overflow-y-auto shadow-sm">
+    <div className="w-24 bg-white border-r-2 border-slate-200 p-6 overflow-y-auto shadow-sm dark:bg-slate-800 dark:border-slate-700">
       <div className="flex flex-col gap-3">
         {questions.map((question, index) => {
           const status = getQuestionStatus(question);
@@ -32,7 +32,7 @@ const QuizSidebar = ({
                   ? 'bg-primary-500 text-white shadow-xl scale-110 ring-4 ring-primary-200 border-primary-600'
                   : status === 'answered'
                   ? 'bg-accent-500 text-white hover:bg-accent-600 border-accent-600 shadow-md hover:shadow-lg'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-300 hover:border-slate-400'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-300 hover:border-slate-400 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:border-slate-600'
               }`}
               title={`Question ${index + 1}${status === 'answered' ? ' (Answered)' : status === 'current' ? ' (Current)' : ''}`}
             >

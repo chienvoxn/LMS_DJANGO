@@ -510,7 +510,7 @@ const LessonPlayer = ({
   // If document file exists, show document viewer
   if (documentFileUrl && !videoUrl) {
     return (
-      <div className="w-full bg-white rounded-xl border border-slate-200 shadow-sm">
+      <div className="w-full bg-white rounded-xl border border-slate-200 shadow-sm dark:bg-slate-800 dark:border-slate-700">
         <div className="p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -519,19 +519,19 @@ const LessonPlayer = ({
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Reading Material</h3>
-              <p className="text-sm text-slate-600">Download and read the document below</p>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Reading Material</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Download and read the document below</p>
             </div>
           </div>
-          <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
+          <div className="border border-slate-200 rounded-lg p-4 bg-slate-50 dark:border-slate-700 dark:bg-slate-700">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <svg className="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
                 <div>
-                  <p className="text-sm font-medium text-slate-900">Document File</p>
-                  <p className="text-xs text-slate-500">Click to download and view</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-slate-100">Document File</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Click to download and view</p>
                 </div>
               </div>
               <a
@@ -548,9 +548,9 @@ const LessonPlayer = ({
             </div>
           </div>
           {lesson?.content && (
-            <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
-              <h4 className="text-sm font-semibold text-slate-900 mb-2">Instructions</h4>
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{lesson.content}</p>
+            <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-700">
+              <h4 className="text-sm font-semibold text-slate-900 mb-2 dark:text-slate-100">Instructions</h4>
+              <p className="text-sm text-slate-700 whitespace-pre-wrap dark:text-slate-300">{lesson.content}</p>
             </div>
           )}
         </div>

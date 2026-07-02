@@ -56,22 +56,22 @@ const StudentCertificates = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600 font-medium">Loading certificates...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400 font-medium">Loading certificates...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <div className="max-w-6xl mx-auto px-6 py-10">
         {/* Header - Coursera Style */}
         <div className="mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">My Certificates</h1>
-          <p className="text-lg text-slate-600">View all your course completion certificates</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3">My Certificates</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400">View all your course completion certificates</p>
         </div>
 
         {/* Error Message - Coursera Style */}
@@ -88,14 +88,14 @@ const StudentCertificates = () => {
 
         {/* Certificates List - Coursera Style */}
         {certificates.length === 0 ? (
-          <div className="bg-white border-2 border-slate-200 rounded-2xl p-16 text-center shadow-lg">
-            <div className="w-24 h-24 bg-gradient-to-br from-accent-100 to-accent-200 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-16 text-center shadow-lg">
+            <div className="w-24 h-24 bg-gradient-to-br from-accent-100 to-accent-200 dark:from-slate-800 dark:to-slate-700 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-12 h-12 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">No Certificates Yet</h2>
-            <p className="text-lg text-slate-600 mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">No Certificates Yet</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
               Complete paid courses to earn certificates of completion.
             </p>
             <button
@@ -110,7 +110,7 @@ const StudentCertificates = () => {
             {certificates.map((cert) => (
               <div
                 key={cert.certificate_id}
-                className="bg-white rounded-2xl border-2 border-slate-200 p-8 hover:shadow-xl hover:border-primary-200 transition-all shadow-md"
+                className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-8 hover:shadow-xl hover:border-primary-200 transition-all shadow-md"
               >
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-20 h-20 bg-gradient-to-br from-accent-100 to-accent-200 rounded-full flex items-center justify-center border-4 border-accent-300 shadow-lg">
@@ -119,10 +119,10 @@ const StudentCertificates = () => {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4 line-clamp-2 text-center min-h-[3.5rem]">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4 line-clamp-2 text-center min-h-[3.5rem]">
                   {cert.course_title}
                 </h3>
-                <div className="flex items-center justify-center gap-2 mb-6 text-slate-600">
+                <div className="flex items-center justify-center gap-2 mb-6 text-slate-600 dark:text-slate-400">
                   <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>

@@ -168,22 +168,22 @@ const EditProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600 font-medium">Loading profile...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400 font-medium">Loading profile...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 py-12">
       <div className="max-w-4xl mx-auto px-6">
         {/* Header - Coursera Style */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">Edit Profile</h1>
-          <p className="text-lg text-slate-600">Update your profile information</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3">Edit Profile</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400">Update your profile information</p>
         </div>
 
         {/* Error Message - Coursera Style */}
@@ -199,10 +199,10 @@ const EditProfile = () => {
         )}
 
         {/* Form - Coursera Style */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-10">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-700 p-10">
           {/* Avatar Upload - Coursera Style */}
-          <div className="mb-10 pb-10 border-b-2 border-slate-200">
-            <label className="block text-base font-bold text-slate-900 mb-4">
+          <div className="mb-10 pb-10 border-b-2 border-slate-200 dark:border-slate-700">
+            <label className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-4">
               Profile Photo
             </label>
             <AvatarUploader
@@ -214,7 +214,7 @@ const EditProfile = () => {
 
           {/* Full Name - Coursera Style */}
           <div className="mb-8">
-            <label htmlFor="full_name" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="full_name" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Full Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -223,14 +223,14 @@ const EditProfile = () => {
               value={formData.full_name}
               onChange={(e) => handleInputChange('full_name', e.target.value)}
               required
-              className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+              className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
               placeholder="Enter your full name"
             />
           </div>
 
           {/* Headline - Coursera Style */}
           <div className="mb-8">
-            <label htmlFor="headline" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="headline" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Headline
             </label>
             <input
@@ -238,17 +238,17 @@ const EditProfile = () => {
               id="headline"
               value={formData.headline}
               onChange={(e) => handleInputChange('headline', e.target.value)}
-              className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+              className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
               placeholder="e.g., Software Engineer, Teacher, Student"
             />
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               A short description that appears below your name
             </p>
           </div>
 
           {/* Bio - Coursera Style */}
           <div className="mb-8">
-            <label htmlFor="bio" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="bio" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               About Me
             </label>
             <textarea
@@ -256,14 +256,14 @@ const EditProfile = () => {
               value={formData.bio}
               onChange={(e) => handleInputChange('bio', e.target.value)}
               rows={6}
-              className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition resize-none text-base"
+              className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition resize-none text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
               placeholder="Tell us about yourself..."
             />
           </div>
 
           {/* Country - Coursera Style */}
           <div className="mb-8">
-            <label htmlFor="country" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="country" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Country
             </label>
             <CountrySelect
@@ -274,12 +274,12 @@ const EditProfile = () => {
 
           {/* Social Links - Coursera Style */}
           <div className="mb-10">
-            <label className="block text-base font-bold text-slate-900 mb-6">
+            <label className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-6">
               Social Links
             </label>
             <div className="space-y-6">
               <div>
-                <label htmlFor="facebook" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label htmlFor="facebook" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Facebook
                 </label>
                 <input
@@ -287,13 +287,13 @@ const EditProfile = () => {
                   id="facebook"
                   value={formData.social_links.facebook}
                   onChange={(e) => handleSocialLinkChange('facebook', e.target.value)}
-                  className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+                  className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                   placeholder="facebook.com/yourprofile"
                 />
               </div>
 
               <div>
-                <label htmlFor="linkedin" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label htmlFor="linkedin" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   LinkedIn
                 </label>
                 <input
@@ -301,13 +301,13 @@ const EditProfile = () => {
                   id="linkedin"
                   value={formData.social_links.linkedin}
                   onChange={(e) => handleSocialLinkChange('linkedin', e.target.value)}
-                  className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+                  className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                   placeholder="linkedin.com/in/yourprofile"
                 />
               </div>
 
               <div>
-                <label htmlFor="github" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label htmlFor="github" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   GitHub
                 </label>
                 <input
@@ -315,13 +315,13 @@ const EditProfile = () => {
                   id="github"
                   value={formData.social_links.github}
                   onChange={(e) => handleSocialLinkChange('github', e.target.value)}
-                  className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+                  className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                   placeholder="github.com/yourusername"
                 />
               </div>
 
               <div>
-                <label htmlFor="website" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label htmlFor="website" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Website
                 </label>
                 <input
@@ -329,18 +329,18 @@ const EditProfile = () => {
                   id="website"
                   value={formData.social_links.website}
                   onChange={(e) => handleSocialLinkChange('website', e.target.value)}
-                  className="w-full px-5 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base"
+                  className="w-full px-5 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                   placeholder="yourwebsite.com"
                 />
               </div>
             </div>
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
               Enter full URLs or just the domain name (e.g., facebook.com/yourprofile)
             </p>
           </div>
 
           {/* Action Buttons - Coursera Style */}
-          <div className="flex gap-4 pt-8 border-t-2 border-slate-200">
+          <div className="flex gap-4 pt-8 border-t-2 border-slate-200 dark:border-slate-700">
             <button
               type="submit"
               disabled={saving}
@@ -361,7 +361,7 @@ const EditProfile = () => {
             <button
               type="button"
               onClick={() => navigate(`/profile/${userId}`)}
-              className="px-8 py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-base transition-all border-2 border-slate-300 hover:border-slate-400"
+              className="px-8 py-4 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg font-bold text-base transition-all border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400"
             >
               Cancel
             </button>

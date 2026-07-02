@@ -134,12 +134,12 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-slate-50 to-white py-12 px-4">
-      <div className="bg-white rounded-2xl shadow-xl border-2 border-slate-200 p-10 w-full max-w-lg space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 py-12 px-4">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border-2 border-slate-200 dark:border-slate-700 p-10 w-full max-w-lg space-y-8">
         {/* Header - Coursera Style */}
         <div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Change Password</h2>
-          <p className="text-lg text-slate-600">Update your account password</p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">Change Password</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400">Update your account password</p>
         </div>
 
         {/* Success Message - Coursera Style */}
@@ -169,7 +169,7 @@ const ChangePassword = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Current Password - Coursera Style */}
           <div>
-            <label htmlFor="old_password" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="old_password" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Current Password
             </label>
             <input
@@ -179,8 +179,8 @@ const ChangePassword = () => {
               value={formData.old_password}
               onChange={handleChange}
               autoComplete="current-password"
-              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base ${
-                errors.old_password ? 'border-red-300 bg-red-50' : 'border-slate-300'
+              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 ${
+                errors.old_password ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-slate-300 dark:border-slate-600'
               }`}
               placeholder="Enter your current password"
             />
@@ -196,7 +196,7 @@ const ChangePassword = () => {
 
           {/* New Password - Coursera Style */}
           <div>
-            <label htmlFor="new_password" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="new_password" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               New Password
             </label>
             <input
@@ -206,8 +206,8 @@ const ChangePassword = () => {
               value={formData.new_password}
               onChange={handleChange}
               autoComplete="new-password"
-              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base ${
-                errors.new_password ? 'border-red-300 bg-red-50' : 'border-slate-300'
+              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 ${
+                errors.new_password ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-slate-300 dark:border-slate-600'
               }`}
               placeholder="Enter your new password (min. 8 characters)"
             />
@@ -223,7 +223,7 @@ const ChangePassword = () => {
 
           {/* Confirm New Password - Coursera Style */}
           <div>
-            <label htmlFor="confirm_password" className="block text-base font-bold text-slate-900 mb-3">
+            <label htmlFor="confirm_password" className="block text-base font-bold text-slate-900 dark:text-slate-100 mb-3">
               Confirm New Password
             </label>
             <input
@@ -233,8 +233,8 @@ const ChangePassword = () => {
               value={formData.confirm_password}
               onChange={handleChange}
               autoComplete="new-password"
-              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base ${
-                errors.confirm_password ? 'border-red-300 bg-red-50' : 'border-slate-300'
+              className={`w-full px-5 py-3.5 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-base bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 ${
+                errors.confirm_password ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : 'border-slate-300 dark:border-slate-600'
               }`}
               placeholder="Confirm your new password"
             />
@@ -272,7 +272,7 @@ const ChangePassword = () => {
         <div className="text-center pt-4">
           <button
             onClick={() => navigate(-1)}
-            className="text-base text-slate-600 hover:text-primary-600 font-semibold transition-colors flex items-center gap-2 mx-auto"
+            className="text-base text-slate-600 dark:text-slate-400 hover:text-primary-600 font-semibold transition-colors flex items-center gap-2 mx-auto"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
