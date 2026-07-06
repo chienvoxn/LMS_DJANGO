@@ -75,14 +75,14 @@ const QuizTimer = ({
   return (
     <div className={`flex items-center gap-3 px-6 py-3 rounded-xl font-mono border-2 shadow-md ${
       isWarning 
-        ? 'bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300' 
-        : 'bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 border-primary-300'
+        ? 'bg-gradient-to-r from-red-50 to-red-100 text-red-700 border-red-300 dark:from-red-900/20 dark:to-red-900/20 dark:text-red-400 dark:border-red-700' 
+        : 'bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 border-primary-300 dark:from-slate-800 dark:to-slate-800 dark:text-primary-300 dark:border-primary-700'
     }`}>
       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-        isWarning ? 'bg-red-200' : 'bg-primary-200'
+        isWarning ? 'bg-red-200 dark:bg-red-800' : 'bg-primary-200 dark:bg-primary-800'
       }`}>
         <svg 
-          className={`w-6 h-6 ${isWarning ? 'text-red-600' : 'text-primary-600'}`}
+          className={`w-6 h-6 ${isWarning ? 'text-red-600 dark:text-red-400' : 'text-primary-600 dark:text-primary-400'}`}
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"

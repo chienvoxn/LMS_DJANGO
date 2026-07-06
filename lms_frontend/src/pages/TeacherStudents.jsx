@@ -151,43 +151,43 @@ const TeacherStudents = () => {
   // Loading state
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600">Loading students...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 dark:border-primary-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading students...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
         {/* Header */}
         <div>
           <button
             onClick={() => navigate(`/teacher/courses/${courseId}/edit`)}
-            className="text-slate-600 hover:text-slate-900 mb-4 flex items-center gap-2"
+            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-4 flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Course
           </button>
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Manage Students</h1>
-          <p className="text-xl text-slate-600">
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Manage Students</h1>
+          <p className="text-xl text-slate-600 dark:text-slate-400">
             View & manage students enrolled in this course.
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-800 dark:text-red-300">
             <div className="flex items-center justify-between">
               <span>{error}</span>
               <button
                 onClick={() => setError(null)}
-                className="ml-4 text-sm underline hover:text-red-900"
+                className="ml-4 text-sm underline hover:text-red-900 dark:hover:text-red-400"
               >
                 Dismiss
               </button>
@@ -196,7 +196,7 @@ const TeacherStudents = () => {
         )}
 
         {/* Search and Filter Bar - Coursera Style */}
-        <div className="bg-white border-2 border-slate-200 rounded-xl p-4 shadow-md">
+        <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-md">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search Input */}
             <div className="flex-1">
@@ -205,7 +205,7 @@ const TeacherStudents = () => {
                 placeholder="Search by name or email…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                className="w-full px-4 py-2 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
               />
             </div>
 
@@ -216,7 +216,7 @@ const TeacherStudents = () => {
                 className={`px-4 py-2 rounded-full font-medium transition ${
                   filter === 'all'
                     ? 'bg-primary-500 text-white shadow-md'
-                    : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50'
+                    : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                 }`}
               >
                 All
@@ -226,7 +226,7 @@ const TeacherStudents = () => {
                 className={`px-4 py-2 rounded-full font-medium transition ${
                   filter === 'in_progress'
                     ? 'bg-primary-500 text-white shadow-md'
-                    : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50'
+                    : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                 }`}
               >
                 In Progress
@@ -236,7 +236,7 @@ const TeacherStudents = () => {
                 className={`px-4 py-2 rounded-full font-medium transition ${
                   filter === 'completed'
                     ? 'bg-primary-500 text-white shadow-md'
-                    : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50'
+                    : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                 }`}
               >
                 Completed
@@ -247,22 +247,22 @@ const TeacherStudents = () => {
 
         {/* Students Table */}
         {students.length === 0 ? (
-          <div className="bg-white border border-slate-200 rounded-xl p-16 text-center shadow-sm">
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-16 text-center shadow-sm">
             <div className="text-6xl mb-4">👥</div>
-            <h3 className="text-2xl font-semibold text-slate-900 mb-2">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
               No students found
             </h3>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-400">
               {search || filter !== 'all'
                 ? 'Try adjusting your search or filter criteria.'
                 : 'No students enrolled in this course yet.'}
             </p>
           </div>
         ) : (
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
-                <thead className="bg-slate-100 text-slate-600 uppercase text-xs">
+                <thead className="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 uppercase text-xs">
                   <tr>
                     <th className="px-4 py-3 text-left">Student</th>
                     <th className="px-4 py-3 text-left">Enrollment</th>
@@ -275,7 +275,7 @@ const TeacherStudents = () => {
                 </thead>
                 <tbody>
                   {students.map((student) => (
-                    <tr key={student.student_id} className="border-t hover:bg-slate-50 transition">
+                    <tr key={student.student_id} className="border-t dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition">
                       {/* Student Info */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
@@ -290,14 +290,14 @@ const TeacherStudents = () => {
                           <div>
                             <button
                               onClick={() => navigate(`/profile/${student.student_id}`)}
-                              className="font-medium text-slate-900 hover:text-primary-500 transition cursor-pointer text-left"
+                              className="font-medium text-slate-900 dark:text-slate-100 hover:text-primary-500 dark:hover:text-primary-400 transition cursor-pointer text-left"
                             >
                               {student.full_name || 'No name'}
                             </button>
-                            <div className="text-slate-500 text-xs">
+                            <div className="text-slate-500 dark:text-slate-400 text-xs">
                               {student.email}
                             </div>
-                            <div className="text-slate-400 text-xs mt-0.5">
+                            <div className="text-slate-400 dark:text-slate-500 text-xs mt-0.5">
                               Enrolled {formatDate(student.enrolled_at)}
                             </div>
                           </div>
@@ -315,14 +315,14 @@ const TeacherStudents = () => {
                                 <span
                                   className={
                                     isPaid
-                                      ? 'inline-flex items-center px-2 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-medium'
-                                      : 'inline-flex items-center px-2 py-1 rounded-full bg-slate-100 text-slate-600 text-xs'
+                                      ? 'inline-flex items-center px-2 py-1 rounded-full bg-sky-50 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300 text-xs font-medium'
+                                      : 'inline-flex items-center px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs'
                                   }
                                 >
                                   {isPaid ? 'Paid' : enrollmentType === 'audit' ? 'Audit' : 'Audit'}
                                 </span>
                                 {isPaid && student.price_paid && parseFloat(student.price_paid) > 0 && (
-                                  <div className="text-xs text-slate-500 mt-1">
+                                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                     ${parseFloat(student.price_paid).toFixed(2)}
                                   </div>
                                 )}
@@ -335,7 +335,7 @@ const TeacherStudents = () => {
                       {/* Progress - Coursera Style */}
                       <td className="px-4 py-3">
                         <div className="w-32">
-                          <div className="w-full bg-slate-200 h-2 rounded">
+                          <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded">
                             <div
                               className="bg-primary-500 h-full rounded transition-all"
                               style={{ width: `${Math.min(student.progress_percentage || 0, 100)}%` }}
@@ -348,29 +348,29 @@ const TeacherStudents = () => {
                       </td>
 
                       {/* Lessons */}
-                      <td className="px-4 py-3 text-slate-700">
-                        {student.completed_lessons || 0} / {student.total_lessons || 0}
-                      </td>
+                        <td className="px-4 py-3 text-slate-700 dark:text-slate-300">
+                          {student.completed_lessons || 0} / {student.total_lessons || 0}
+                        </td>
 
                       {/* Last Accessed */}
                       <td className="px-4 py-3">
                         {student.last_accessed_lesson_title ? (
                           <div>
-                            <div className="text-slate-900 font-medium text-xs">
+                            <div className="text-slate-900 dark:text-slate-100 font-medium text-xs">
                               {student.last_accessed_lesson_title}
                             </div>
-                            <div className="text-slate-500 text-xs">
+                            <div className="text-slate-500 dark:text-slate-400 text-xs">
                               {formatDate(student.last_accessed_at)}
                             </div>
                           </div>
                         ) : (
-                          <span className="text-slate-400">—</span>
+                          <span className="text-slate-400 dark:text-slate-500">—</span>
                         )}
                       </td>
 
                       {/* Activity */}
                       <td className="px-4 py-3">
-                        <div className="text-xs text-slate-600 space-y-1">
+                        <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1">
                           <div>Completed Quizzes: {student.quiz_attempts_count || 0}</div>
                           <div>Assignments: {student.assignments_submitted_count || 0}</div>
                         </div>
@@ -404,17 +404,17 @@ const TeacherStudents = () => {
 
       {/* Student Details Modal */}
       {viewingStudent && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
             <div className="p-6">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-slate-900">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   Student Information
                 </h3>
                 <button
                   onClick={() => setViewingStudent(null)}
-                  className="text-slate-400 hover:text-slate-600 transition"
+                  className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -423,7 +423,7 @@ const TeacherStudents = () => {
               </div>
 
               {/* Student Profile Section */}
-              <div className="flex items-start gap-6 mb-6 pb-6 border-b border-slate-200">
+              <div className="flex items-start gap-6 mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
                 <img
                   src={getAvatarUrl(viewingStudent)}
                   alt={viewingStudent.full_name || viewingStudent.email}
@@ -433,11 +433,11 @@ const TeacherStudents = () => {
                   }}
                 />
                 <div className="flex-1">
-                  <h4 className="text-xl font-bold text-slate-900 mb-1">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-1">
                     {viewingStudent.full_name || 'No name'}
                   </h4>
-                  <p className="text-slate-600 mb-2">{viewingStudent.email}</p>
-                  <p className="text-sm text-slate-500">
+                  <p className="text-slate-600 dark:text-slate-400 mb-2">{viewingStudent.email}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
                     Student ID: {viewingStudent.student_id}
                   </p>
                 </div>
@@ -447,41 +447,41 @@ const TeacherStudents = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Enrollment Info */}
                 <div className="space-y-4">
-                  <h5 className="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2">
+                  <h5 className="text-lg font-semibold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
                     Enrollment Information
                   </h5>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Enrolled Date</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Enrolled Date</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                         {formatDate(viewingStudent.enrolled_at)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Enrollment Type</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Enrollment Type</p>
                       <div className="flex items-center gap-2">
                         {viewingStudent.enrollment_type && (
                           <span
                             className={
                               viewingStudent.enrollment_type === 'paid'
-                                ? 'inline-flex items-center px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-sm font-medium'
-                                : 'inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm'
+                                ? 'inline-flex items-center px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300 text-sm font-medium'
+                                : 'inline-flex items-center px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-sm'
                             }
                           >
                             {viewingStudent.enrollment_type === 'paid' ? 'Paid' : 'Audit'}
                           </span>
                         )}
                         {viewingStudent.enrollment_type === 'paid' && viewingStudent.price_paid > 0 && (
-                          <span className="text-sm font-medium text-slate-900">
+                          <span className="text-sm font-medium text-slate-900 dark:text-slate-100">
                             ${parseFloat(viewingStudent.price_paid || 0).toFixed(2)}
                           </span>
                         )}
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Progress</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Progress</p>
                       <div className="space-y-1">
-                        <div className="w-full bg-slate-200 h-3 rounded">
+                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-3 rounded">
                           <div
                             className="bg-primary-500 h-full rounded transition-all"
                             style={{ width: `${Math.min(viewingStudent.progress_percentage || 0, 100)}%` }}
@@ -497,29 +497,29 @@ const TeacherStudents = () => {
 
                 {/* Lesson Progress */}
                 <div className="space-y-4">
-                  <h5 className="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2">
+                  <h5 className="text-lg font-semibold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
                     Lesson Progress
                   </h5>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Completed Lessons</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Completed Lessons</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                         {viewingStudent.completed_lessons || 0} / {viewingStudent.total_lessons || 0}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Total Lessons</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Lessons</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                         {viewingStudent.total_lessons || 0}
                       </p>
                     </div>
                     {viewingStudent.last_accessed_lesson_title && (
                       <div>
-                        <p className="text-xs text-slate-500 mb-1">Last Accessed Lesson</p>
-                        <p className="text-sm font-medium text-slate-900">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Last Accessed Lesson</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                           {viewingStudent.last_accessed_lesson_title}
                         </p>
-                        <p className="text-xs text-slate-500 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                           {formatDate(viewingStudent.last_accessed_at)}
                         </p>
                       </div>
@@ -529,19 +529,19 @@ const TeacherStudents = () => {
 
                 {/* Activity */}
                 <div className="space-y-4">
-                  <h5 className="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2">
+                  <h5 className="text-lg font-semibold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
                     Activity
                   </h5>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Completed Quizzes</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Completed Quizzes</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                         {viewingStudent.quiz_attempts_count || 0}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Assignment Submissions</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Assignment Submissions</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                         {viewingStudent.assignments_submitted_count || 0}
                       </p>
                     </div>
@@ -551,22 +551,22 @@ const TeacherStudents = () => {
                 {/* Additional Info - Only show if there's data */}
                 {(viewingStudent.avatar_url || viewingStudent.last_accessed_lesson_id) && (
                   <div className="space-y-4">
-                    <h5 className="text-lg font-semibold text-slate-900 border-b border-slate-200 pb-2">
+                    <h5 className="text-lg font-semibold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
                       Additional Information
                     </h5>
                     <div className="space-y-3">
                       {viewingStudent.avatar_url && (
                         <div>
-                          <p className="text-xs text-slate-500 mb-1">Avatar URL</p>
-                          <p className="text-sm font-medium text-slate-900 break-all">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Avatar URL</p>
+                          <p className="text-sm font-medium text-slate-900 dark:text-slate-100 break-all">
                             {viewingStudent.avatar_url}
                           </p>
                         </div>
                       )}
                       {viewingStudent.last_accessed_lesson_id && (
                         <div>
-                          <p className="text-xs text-slate-500 mb-1">Last Accessed Lesson ID</p>
-                          <p className="text-sm font-medium text-slate-900">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Last Accessed Lesson ID</p>
+                          <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                             {viewingStudent.last_accessed_lesson_id}
                           </p>
                         </div>
@@ -577,7 +577,7 @@ const TeacherStudents = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-6 pt-6 border-t border-slate-200 flex gap-3">
+              <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700 flex gap-3">
                 <button
                   onClick={() => {
                     navigate(`/profile/${viewingStudent.student_id}`);
@@ -592,7 +592,7 @@ const TeacherStudents = () => {
                 </button>
                 <button
                   onClick={() => setViewingStudent(null)}
-                  className="flex-1 px-4 py-2.5 rounded-lg font-medium bg-slate-200 hover:bg-slate-300 text-slate-700 transition"
+                  className="flex-1 px-4 py-2.5 rounded-lg font-medium bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 transition"
                 >
                   Close
                 </button>
@@ -604,18 +604,18 @@ const TeacherStudents = () => {
 
       {/* Remove Confirmation Modal */}
       {deletingId && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-sm w-full p-6 shadow-xl">
-            <h3 className="text-xl font-bold text-slate-900 mb-2">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl max-w-sm w-full p-6 shadow-xl">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
               Remove Student?
             </h3>
-            <p className="text-slate-600 mb-6">
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
               Are you sure you want to remove this student from the course? This action cannot be undone.
             </p>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDeletingId(null)}
-                className="flex-1 px-4 py-2.5 rounded-lg font-medium bg-slate-200 hover:bg-slate-300 text-slate-700 transition"
+                className="flex-1 px-4 py-2.5 rounded-lg font-medium bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 transition"
               >
                 Cancel
               </button>

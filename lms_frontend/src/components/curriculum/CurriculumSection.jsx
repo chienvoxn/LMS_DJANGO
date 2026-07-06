@@ -44,18 +44,18 @@ const CurriculumSection = ({
   };
 
   return (
-    <div className="border-b border-slate-100 last:border-b-0 bg-white">
+    <div className="border-b border-slate-100 last:border-b-0 bg-white dark:border-slate-700 dark:bg-slate-800">
       {/* Section Header */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors duration-150 group"
+        className="w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors duration-150 group dark:hover:bg-slate-700/50"
       >
         <div className="flex items-center gap-2.5 flex-1 min-w-0">
           {/* Expand/Collapse Icon */}
           <div className="flex-shrink-0 w-4 h-4 flex items-center justify-center">
             <svg
-              className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 transition-all duration-200 ${
-                isExpanded ? 'rotate-90 text-slate-600' : ''
+              className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 transition-all duration-200 dark:text-slate-500 dark:group-hover:text-slate-300 ${
+                isExpanded ? 'rotate-90 text-slate-600 dark:text-slate-300' : ''
               }`}
               fill="none"
               stroke="currentColor"
@@ -67,7 +67,7 @@ const CurriculumSection = ({
 
           {/* Section Title */}
           <div className="flex-1 min-w-0 text-left">
-            <h3 className="font-semibold text-slate-900 text-sm leading-snug truncate">
+            <h3 className="font-semibold text-slate-900 text-sm leading-snug truncate dark:text-slate-100">
               {section.title}
             </h3>
           </div>
@@ -76,13 +76,13 @@ const CurriculumSection = ({
         {/* Section Stats */}
         <div className="flex items-center gap-2.5 flex-shrink-0 ml-2">
           {/* Lesson Count & Duration */}
-          <div className="flex items-center gap-1.5 text-xs text-slate-500">
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
             <span className="whitespace-nowrap font-medium">
               {lessons.length} {lessons.length === 1 ? 'lesson' : 'lessons'}
             </span>
             {sectionDuration > 0 && (
               <>
-                <span className="text-slate-300">•</span>
+                <span className="text-slate-300 dark:text-slate-600">•</span>
                 <span className="whitespace-nowrap">
                   {formatDuration(sectionDuration)}
                 </span>
@@ -94,7 +94,7 @@ const CurriculumSection = ({
 
       {/* Lessons List - Coursera Style */}
       {isExpanded && lessons.length > 0 && (
-        <div className="pl-10 pr-2 pb-2.5 space-y-0.5 bg-slate-50/50">
+        <div className="pl-10 pr-2 pb-2.5 space-y-0.5 bg-slate-50/50 dark:bg-slate-700/30">
           {lessons.map((lesson, index) => {
             const lessonId = parseInt(lesson.id) || lesson.id;
             const currentId = parseInt(currentLessonId) || currentLessonId;

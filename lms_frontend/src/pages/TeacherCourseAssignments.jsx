@@ -143,44 +143,44 @@ const TeacherCourseAssignments = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600">Loading assignments...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 dark:border-primary-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading assignments...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="mb-6">
           <button
             onClick={() => navigate(`/teacher/courses/${courseId}/edit`)}
-            className="text-slate-600 hover:text-slate-900 mb-4 flex items-center gap-2"
+            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-4 flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Course
           </button>
-          <h1 className="text-3xl font-bold text-slate-900">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
             Assignments for {course?.title || 'Course'}
           </h1>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 mb-6">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 rounded-xl p-4 mb-6">
             {error}
           </div>
         )}
 
         {/* Create Assignment Form - Coursera Style */}
-        <div className="bg-white rounded-2xl border-2 border-slate-200 shadow-md p-6 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 shadow-md p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-slate-900">Create New Assignment</h2>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Create New Assignment</h2>
             <button
               onClick={() => {
                 setShowCreateForm(false);
@@ -192,7 +192,7 @@ const TeacherCourseAssignments = () => {
                   is_published: false,
                 });
               }}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition"
+              className="px-4 py-2 text-sm font-medium rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition"
             >
               Cancel
             </button>
@@ -200,47 +200,47 @@ const TeacherCourseAssignments = () => {
 
           <form onSubmit={handleCreate} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Title <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                className="w-full px-4 py-2 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="Assignment title"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Description
               </label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
-                className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                className="w-full px-4 py-2 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="Assignment description"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Due Date
                 </label>
                 <input
                   type="datetime-local"
                   value={formData.due_date}
                   onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                  className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                  className="w-full px-4 py-2 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Max Points
                 </label>
                 <input
@@ -248,7 +248,7 @@ const TeacherCourseAssignments = () => {
                   value={formData.max_points}
                   onChange={(e) => setFormData({ ...formData, max_points: parseInt(e.target.value) || 10 })}
                   min="1"
-                  className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                  className="w-full px-4 py-2 border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
                 />
               </div>
             </div>
@@ -261,7 +261,7 @@ const TeacherCourseAssignments = () => {
                 onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
                 className="h-4 w-4 text-primary-500 rounded focus:ring-primary-500"
               />
-              <label htmlFor="is_published" className="ml-2 text-sm text-slate-700">
+              <label htmlFor="is_published" className="ml-2 text-sm text-slate-700 dark:text-slate-300">
                 Publish assignment
               </label>
             </div>
@@ -278,12 +278,12 @@ const TeacherCourseAssignments = () => {
 
         {/* Assignments List */}
         <div>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
             Assignments ({assignments.length})
           </h2>
 
           {assignments.length === 0 ? (
-            <div className="bg-white rounded-2xl border-2 border-slate-200 p-8 text-center text-slate-500 shadow-md">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-8 text-center text-slate-500 dark:text-slate-400 shadow-md">
               No assignments yet. Create your first assignment above.
             </div>
           ) : (
@@ -291,29 +291,29 @@ const TeacherCourseAssignments = () => {
               {assignments.map((assignment) => (
                 <div
                   key={assignment.id}
-                  className="bg-white border-2 border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-primary-200 transition-all"
+                  className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-5 hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-800 transition-all"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-slate-900">{assignment.title}</h3>
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{assignment.title}</h3>
                         {assignment.is_published && (
-                          <span className="px-2.5 py-1 bg-accent-100 text-accent-700 rounded-full text-xs font-medium border border-accent-200">
+                          <span className="px-2.5 py-1 bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 rounded-full text-xs font-medium border border-accent-200 dark:border-accent-800">
                             Published
                           </span>
                         )}
                       </div>
                       {assignment.description && (
-                        <p className="text-sm text-slate-600 line-clamp-2 mb-2">{assignment.description}</p>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-2">{assignment.description}</p>
                       )}
-                      <div className="flex items-center gap-4 text-xs text-slate-500 flex-wrap">
+                      <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 flex-wrap">
                         <span className="flex items-center gap-1">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
                           Due: {formatDate(assignment.due_date)}
                         </span>
-                        <span className="text-slate-300">•</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
                         <span className="flex items-center gap-1">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />

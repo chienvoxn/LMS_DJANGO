@@ -53,7 +53,7 @@ const MyLearningCourseCard = ({ course }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border-2 border-slate-200 overflow-hidden flex flex-col h-full hover:shadow-xl hover:border-primary-200 transition-all duration-300 group">
+    <div className="bg-white rounded-2xl shadow-md border-2 border-slate-200 overflow-hidden flex flex-col h-full hover:shadow-xl hover:border-primary-200 transition-all duration-300 group dark:bg-slate-800 dark:border-slate-700">
       {/* Thumbnail */}
       <div className="relative h-40 bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden">
         {course.course_thumbnail ? (
@@ -75,7 +75,7 @@ const MyLearningCourseCard = ({ course }) => {
             <svg className="w-16 h-16 text-primary-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
-            <p className="text-xs text-slate-500 font-medium">Course Image</p>
+            <p className="text-xs text-slate-500 font-medium dark:text-slate-400">Course Image</p>
           </div>
         </div>
         {/* Status Badge Overlay */}
@@ -94,23 +94,23 @@ const MyLearningCourseCard = ({ course }) => {
       {/* Content */}
       <div className="p-5 flex-1 flex flex-col gap-3">
         <div>
-          <h3 className="text-base font-bold text-slate-900 line-clamp-2 mb-1 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-base font-bold text-slate-900 line-clamp-2 mb-1 group-hover:text-primary-600 transition-colors dark:text-slate-100">
             {course.course_title}
           </h3>
           {course.instructor_name && (
-            <p className="text-sm text-slate-600">By {course.instructor_name}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">By {course.instructor_name}</p>
           )}
         </div>
 
         {/* Progress bar - Coursera Style */}
         <div className="mt-1">
-          <div className="flex items-center justify-between text-xs font-medium text-slate-700 mb-2">
+          <div className="flex items-center justify-between text-xs font-medium text-slate-700 mb-2 dark:text-slate-300">
             <span>{Math.round(course.progress_percentage || 0)}% completed</span>
-            <span className="text-slate-500">
+            <span className="text-slate-500 dark:text-slate-400">
               {course.completed_lessons || 0}/{course.total_lessons || 0} lessons
             </span>
           </div>
-          <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden">
+          <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden dark:bg-slate-700">
             <div
               className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-500"
               style={{
@@ -150,7 +150,7 @@ const MyLearningCourseCard = ({ course }) => {
               className={
                 course.enrollment_type === 'paid'
                   ? 'inline-flex items-center px-3 py-1 rounded-full bg-secondary-50 text-secondary-700 font-semibold text-xs border border-secondary-200'
-                  : 'inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-200'
+                  : 'inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-200 dark:bg-slate-700 dark:text-slate-400 dark:border-slate-600'
               }
             >
               {course.enrollment_type === 'paid' ? 'Paid' : 'Audit'}
@@ -160,14 +160,14 @@ const MyLearningCourseCard = ({ course }) => {
 
         {/* Enrollment Date */}
         {course.enrolled_at && (
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Enrolled {formatDate(course.enrolled_at)}
           </p>
         )}
 
         {/* Last accessed lesson */}
         {course.last_accessed_lesson_title && (
-          <div className="flex items-start gap-2 text-xs text-slate-600 bg-slate-50 rounded-lg p-2">
+          <div className="flex items-start gap-2 text-xs text-slate-600 bg-slate-50 rounded-lg p-2 dark:text-slate-400 dark:bg-slate-700">
             <svg className="w-4 h-4 text-primary-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

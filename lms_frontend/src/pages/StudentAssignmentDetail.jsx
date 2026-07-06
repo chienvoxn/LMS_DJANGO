@@ -214,10 +214,10 @@ const StudentAssignmentDetail = () => {
 
   if (authLoading || loading || checkingEnrollment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-slate-600">Loading assignment...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading assignment...</p>
         </div>
       </div>
     );
@@ -225,9 +225,9 @@ const StudentAssignmentDetail = () => {
 
   if (error && !assignment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 rounded-lg p-4 text-red-800 dark:text-red-400">
             <p className="font-semibold mb-2">Access Denied</p>
             <p>{error}</p>
             <button
@@ -244,61 +244,61 @@ const StudentAssignmentDetail = () => {
 
   if (!assignment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center text-slate-600">Assignment not found</div>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="text-center text-slate-600 dark:text-slate-400">Assignment not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
         {/* Header */}
         <div>
           <button
             onClick={() => navigate(-1)}
-            className="text-slate-600 hover:text-slate-900 mb-4 flex items-center gap-2"
+            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-4 flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back
           </button>
-          <h1 className="text-3xl font-bold text-slate-900">{assignment.title}</h1>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">{assignment.title}</h1>
           {assignment.due_date && (
-            <p className="text-slate-600 mt-2">Due: {formatDate(assignment.due_date)}</p>
+            <p className="text-slate-600 dark:text-slate-400 mt-2">Due: {formatDate(assignment.due_date)}</p>
           )}
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 text-red-800 dark:text-red-400 rounded-xl p-4 text-sm">
             {error}
           </div>
         )}
 
         {/* Success Message */}
         {successMessage && (
-          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4 text-sm">
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 text-emerald-800 dark:text-emerald-400 rounded-xl p-4 text-sm">
             {successMessage}
           </div>
         )}
 
         {/* Assignment Info Card */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6">
           <div className="flex items-center gap-2 mb-5">
-            <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <h2 className="text-xl font-semibold text-slate-900">Assignment Details</h2>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Assignment Details</h2>
           </div>
           
           <div className="space-y-5">
             {/* Description */}
             {assignment.description && (
-              <div className="pb-4 border-b border-slate-100">
-                <h3 className="text-sm font-semibold text-slate-700 mb-2">Description</h3>
-                <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">{assignment.description}</p>
+              <div className="pb-4 border-b border-slate-100 dark:border-slate-700">
+                <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Description</h3>
+                <p className="text-slate-600 dark:text-slate-400 whitespace-pre-wrap leading-relaxed">{assignment.description}</p>
               </div>
             )}
 
@@ -307,12 +307,12 @@ const StudentAssignmentDetail = () => {
               {/* Due Date */}
               {assignment.due_date && (
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-slate-400 dark:text-slate-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <div>
-                    <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Due Date</h3>
-                    <p className="text-sm font-medium text-slate-900">{formatDate(assignment.due_date)}</p>
+                    <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Due Date</h3>
+                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{formatDate(assignment.due_date)}</p>
                   </div>
                 </div>
               )}
@@ -323,8 +323,8 @@ const StudentAssignmentDetail = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0-1.946-.806 3.42 3.42 0 00-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
                 <div>
-                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Maximum Points</h3>
-                  <p className="text-sm font-medium text-slate-900">{assignment.max_points || 10} points</p>
+                    <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Maximum Points</h3>
+                    <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{assignment.max_points || 10} points</p>
                 </div>
               </div>
 
@@ -334,7 +334,7 @@ const StudentAssignmentDetail = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Status</h3>
+                    <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Status</h3>
                   <div className="mt-1">
                     <AssignmentStatusBadge status={status} />
                   </div>
@@ -344,8 +344,8 @@ const StudentAssignmentDetail = () => {
 
             {/* Attachment */}
             {assignment.attachment_url && (
-              <div className="pt-4 border-t border-slate-100">
-                <h3 className="text-sm font-semibold text-slate-700 mb-3">Attachment</h3>
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-700">
+                <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">Attachment</h3>
                 <a
                   href={assignment.attachment_url.startsWith('http') 
                     ? assignment.attachment_url 
@@ -366,8 +366,8 @@ const StudentAssignmentDetail = () => {
 
         {/* Submission Block */}
         {status === 'not_submitted' ? (
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-slate-900 mb-4">Submit Assignment</h2>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Submit Assignment</h2>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Submission Type Toggle */}
@@ -386,7 +386,7 @@ const StudentAssignmentDetail = () => {
                     }}
                     className="w-4 h-4 text-blue-600"
                   />
-                  <span className="text-sm font-medium text-slate-700">Text Answer</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Text Answer</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -400,21 +400,21 @@ const StudentAssignmentDetail = () => {
                     }}
                     className="w-4 h-4 text-blue-600"
                   />
-                  <span className="text-sm font-medium text-slate-700">Upload File</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Upload File</span>
                 </label>
               </div>
 
               {/* Text Answer */}
               {submissionType === 'text' && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Your Answer
                   </label>
                   <textarea
                     value={answerContent}
                     onChange={(e) => setAnswerContent(e.target.value)}
                     rows={8}
-                    className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                     placeholder="Write your answer here..."
                     required={submissionType === 'text'}
                   />
@@ -424,25 +424,25 @@ const StudentAssignmentDetail = () => {
               {/* File Upload */}
               {submissionType === 'file' && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Upload File
                   </label>
                   <div className="relative">
                     <input
                       type="file"
                       onChange={handleFileChange}
-                      className="w-full px-3 py-2.5 text-sm border-2 border-dashed border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer hover:border-slate-400"
+                      className="w-full px-3 py-2.5 text-sm border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer hover:border-slate-400 dark:hover:border-slate-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                       required={submissionType === 'file'}
                     />
                   </div>
                   {selectedFile && (
-                    <div className="mt-3 flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg">
-                      <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="mt-3 flex items-center gap-2 px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg">
+                      <svg className="w-5 h-5 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-slate-900 truncate">{selectedFile.name}</p>
-                        <p className="text-xs text-slate-500">{(selectedFile.size / 1024).toFixed(2)} KB</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">{selectedFile.name}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">{(selectedFile.size / 1024).toFixed(2)} KB</p>
                       </div>
                     </div>
                   )}
@@ -459,19 +459,19 @@ const StudentAssignmentDetail = () => {
             </form>
           </div>
         ) : (
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-slate-900 mb-4">Your Submission</h2>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Your Submission</h2>
             
             {submission && (
               <div className="space-y-4">
                 {/* Submitted Content */}
                 <div>
-                  <h3 className="text-sm font-medium text-slate-700 mb-2">Your Submission</h3>
-                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                  <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Your Submission</h3>
+                  <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
                     {/* Check if content is a URL (file submission) */}
                     {submission.content && (submission.content.startsWith('http') || submission.content.startsWith('/media/')) ? (
                       <div>
-                        <p className="text-sm text-slate-600 mb-2">Submitted file:</p>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Submitted file:</p>
                         <a
                           href={submission.content.startsWith('http') 
                             ? submission.content 
@@ -487,36 +487,36 @@ const StudentAssignmentDetail = () => {
                         </a>
                       </div>
                     ) : (
-                      <p className="text-slate-900 whitespace-pre-wrap">{submission.content || 'No content submitted'}</p>
+                      <p className="text-slate-900 dark:text-slate-100 whitespace-pre-wrap">{submission.content || 'No content submitted'}</p>
                     )}
                   </div>
                 </div>
 
                 {/* Submitted At */}
                 <div>
-                  <h3 className="text-sm font-medium text-slate-700 mb-1">Submitted At</h3>
-                  <p className="text-slate-600">{formatDate(submission.submitted_at)}</p>
+                  <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Submitted At</h3>
+                  <p className="text-slate-600 dark:text-slate-400">{formatDate(submission.submitted_at)}</p>
                 </div>
 
                 {/* Grade & Feedback (if graded) */}
                 {status === 'graded' && (
-                  <div className="border-t border-slate-200 pt-4 mt-4">
-                    <h3 className="text-sm font-medium text-slate-700 mb-3">Grade & Feedback</h3>
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                  <div className="border-t border-slate-200 dark:border-slate-700 pt-4 mt-4">
+                    <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Grade & Feedback</h3>
+                    <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 rounded-lg p-4">
                       <div className="flex items-center gap-4 mb-2">
                         <div>
-                          <span className="text-2xl font-bold text-emerald-700">
+                          <span className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">
                             {submission.grade} / {assignment.max_points || 10}
                           </span>
                         </div>
-                        <div className="text-sm text-emerald-700">
+                        <div className="text-sm text-emerald-700 dark:text-emerald-400">
                           ({((submission.grade / (assignment.max_points || 10)) * 100).toFixed(1)}%)
                         </div>
                       </div>
                       {submission.feedback && (
                         <div className="mt-3">
-                          <p className="text-sm font-medium text-slate-700 mb-1">Feedback:</p>
-                          <p className="text-slate-900 whitespace-pre-wrap">{submission.feedback}</p>
+                          <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Feedback:</p>
+                          <p className="text-slate-900 dark:text-slate-100 whitespace-pre-wrap">{submission.feedback}</p>
                         </div>
                       )}
                     </div>

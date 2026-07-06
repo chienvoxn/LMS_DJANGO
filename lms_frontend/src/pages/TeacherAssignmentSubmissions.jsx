@@ -123,24 +123,24 @@ const TeacherAssignmentSubmissions = () => {
   const getStatusBadge = (status) => {
     if (status === 'graded') {
       return (
-        <span className="px-3 py-1 bg-accent-100 text-accent-700 rounded-full text-xs font-semibold border border-accent-200">
+        <span className="px-3 py-1 bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 rounded-full text-xs font-semibold border border-accent-200 dark:border-accent-800">
           Graded
         </span>
       );
     }
     return (
-      <span className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold border border-amber-200">
-        Submitted
-      </span>
+        <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-xs font-semibold border border-amber-200 dark:border-amber-800">
+          Submitted
+        </span>
     );
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600">Loading submissions...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 dark:border-primary-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading submissions...</p>
         </div>
       </div>
     );
@@ -148,9 +148,9 @@ const TeacherAssignmentSubmissions = () => {
 
   if (error && !assignment) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 text-red-800">
+          <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 rounded-lg p-4 text-red-800 dark:text-red-300">
             {error}
             <button
               onClick={() => navigate(-1)}
@@ -166,20 +166,20 @@ const TeacherAssignmentSubmissions = () => {
 
   if (!assignment) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center text-slate-600">Assignment not found</div>
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex items-center justify-center">
+        <div className="text-center text-slate-600 dark:text-slate-400">Assignment not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white py-8">
+    <div className="min-h-screen bg-white dark:bg-slate-900 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Header */}
-        <div className="mb-6 pb-6 border-b border-slate-200">
+        <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
           <button
             onClick={() => navigate(`/teacher/assignments/${assignmentId}/edit`)}
-            className="text-slate-600 hover:text-primary-500 mb-4 flex items-center gap-2 transition"
+            className="text-slate-600 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400 mb-4 flex items-center gap-2 transition"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -188,26 +188,26 @@ const TeacherAssignmentSubmissions = () => {
           </button>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">Submissions</h1>
-              <p className="text-base text-slate-600 mt-1">{assignment.title}</p>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Submissions</h1>
+              <p className="text-base text-slate-600 dark:text-slate-400 mt-1">{assignment.title}</p>
             </div>
             <div className="text-right">
-              <div className="text-sm text-slate-500">Total Submissions</div>
-              <div className="text-2xl font-bold text-primary-500">{submissions.length}</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400">Total Submissions</div>
+              <div className="text-2xl font-bold text-primary-500 dark:text-primary-400">{submissions.length}</div>
             </div>
           </div>
         </div>
 
         {/* Submissions List */}
         {submissions.length === 0 ? (
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-              <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-12 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+              <svg className="w-8 h-8 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">No submissions yet</h3>
-            <p className="text-slate-600">Students haven't submitted their work for this assignment yet.</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">No submissions yet</h3>
+            <p className="text-slate-600 dark:text-slate-400">Students haven't submitted their work for this assignment yet.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -219,23 +219,23 @@ const TeacherAssignmentSubmissions = () => {
               return (
                 <div
                   key={submission.id}
-                  className="bg-white border border-slate-200 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary-600 font-bold text-lg">
+                      <div className="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary-600 dark:text-primary-400 font-bold text-lg">
                           {studentName !== 'N/A' ? studentName.charAt(0).toUpperCase() : 'S'}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-base font-semibold text-slate-900">
+                        <div className="text-base font-semibold text-slate-900 dark:text-slate-100">
                           {studentName !== 'N/A' ? studentName : 'Student'}
                         </div>
-                        <div className="text-sm text-slate-500 mt-0.5">
+                        <div className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
                           {submission.student_email || submission.student?.email || `ID: ${submission.student}`}
                         </div>
-                        <div className="text-xs text-slate-400 mt-1">
+                        <div className="text-xs text-slate-400 dark:text-slate-500 mt-1">
                           Submitted at: {formatDate(submission.submitted_at)}
                         </div>
                       </div>
@@ -249,7 +249,7 @@ const TeacherAssignmentSubmissions = () => {
                       {/* Check if content is a file URL */}
                       {(submission.content.startsWith('http') || submission.content.startsWith('/media/')) ? (
                         <div>
-                          <div className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Submitted File</div>
+                          <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide">Submitted File</div>
                           <a
                             href={submission.content.startsWith('http') 
                               ? submission.content 
@@ -263,16 +263,16 @@ const TeacherAssignmentSubmissions = () => {
                             </svg>
                             View Submitted File
                           </a>
-                          <p className="text-xs text-slate-500 mt-2">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
                             {submission.content.startsWith('http') 
                               ? submission.content 
                               : `http://localhost:8000${submission.content}`}
                           </p>
                         </div>
                       ) : (
-                        <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg">
-                          <div className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Submission</div>
-                          <div className="text-sm text-slate-900 whitespace-pre-wrap">
+                        <div className="p-4 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg">
+                          <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide">Submission</div>
+                          <div className="text-sm text-slate-900 dark:text-slate-100 whitespace-pre-wrap">
                             {submission.content}
                           </div>
                         </div>
@@ -283,7 +283,7 @@ const TeacherAssignmentSubmissions = () => {
                   {/* Fallback: Check file_url if content is not a file */}
                   {!submission.content && submission.file_url && (
                     <div className="mb-4">
-                      <div className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Attachment</div>
+                      <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide">Attachment</div>
                       <a
                         href={submission.file_url.startsWith('http') 
                           ? submission.file_url 
@@ -301,10 +301,10 @@ const TeacherAssignmentSubmissions = () => {
                   )}
 
                   {/* Grading Form */}
-                  <div className="border-t border-slate-200 pt-4 mt-4">
+                  <div className="border-t border-slate-200 dark:border-slate-700 pt-4 mt-4">
                     <div className="grid gap-4 md:grid-cols-2 mb-4">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                           Grade (out of {assignment.max_points})
                         </label>
                         <input
@@ -322,12 +322,12 @@ const TeacherAssignmentSubmissions = () => {
                           min="0"
                           max={assignment.max_points}
                           step="0.1"
-                          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900"
+                          className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800"
                           placeholder="0"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">Feedback</label>
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Feedback</label>
                         <textarea
                           value={gradingState.feedback}
                           onChange={(e) => {
@@ -340,7 +340,7 @@ const TeacherAssignmentSubmissions = () => {
                             });
                           }}
                           rows={3}
-                          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition text-slate-900 resize-y"
+                          className="w-full px-4 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-100 dark:focus:ring-primary-900 transition text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800 resize-y"
                           placeholder="Feedback for student..."
                         />
                       </div>
@@ -348,8 +348,8 @@ const TeacherAssignmentSubmissions = () => {
 
                     {/* Current Grade Display */}
                     {submission.grade !== null && submission.grade !== undefined && (
-                      <div className="mb-4 px-4 py-2 bg-primary-50 border border-primary-200 rounded-lg">
-                        <div className="text-sm text-primary-700">
+                      <div className="mb-4 px-4 py-2 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg">
+                        <div className="text-sm text-primary-700 dark:text-primary-300">
                           Current grade: <span className="font-bold text-lg">{submission.grade}</span> / {assignment.max_points}
                         </div>
                       </div>

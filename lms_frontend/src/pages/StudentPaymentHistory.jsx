@@ -36,20 +36,20 @@ const StudentPaymentHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <div className="max-w-5xl mx-auto px-6 py-10">
         {/* Header - Coursera Style */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3">
             Payment history
           </h1>
-          <p className="text-lg text-slate-600">View all your course purchase transactions</p>
+          <p className="text-lg text-slate-600 dark:text-slate-400">View all your course purchase transactions</p>
         </div>
 
         {loading && (
           <div className="text-center py-16">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-            <p className="mt-4 text-slate-600 font-medium">Loading...</p>
+            <p className="mt-4 text-slate-600 dark:text-slate-400 font-medium">Loading...</p>
           </div>
         )}
 
@@ -65,14 +65,14 @@ const StudentPaymentHistory = () => {
         )}
 
         {!loading && !error && payments.length === 0 && (
-          <div className="bg-white border-2 border-slate-200 rounded-2xl p-16 text-center shadow-lg">
-            <div className="w-24 h-24 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-16 text-center shadow-lg">
+            <div className="w-24 h-24 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">No Payment Records</h2>
-            <p className="text-lg text-slate-600 mb-8">You have no payment records yet.</p>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">No Payment Records</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">You have no payment records yet.</p>
             <button
               onClick={() => navigate('/browse')}
               className="px-8 py-3 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg"
@@ -87,7 +87,7 @@ const StudentPaymentHistory = () => {
             {payments.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border-2 border-slate-200 rounded-2xl shadow-md p-6 flex gap-6 hover:shadow-xl hover:border-primary-200 transition-all"
+                className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl shadow-md p-6 flex gap-6 hover:shadow-xl hover:border-primary-200 transition-all"
               >
                 <div className="relative w-40 h-28 rounded-lg overflow-hidden bg-gradient-to-br from-primary-100 to-secondary-100 flex-shrink-0">
                   {item.course_thumbnail ? (
@@ -110,7 +110,7 @@ const StudentPaymentHistory = () => {
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-lg text-slate-900 line-clamp-2 mb-3">
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 line-clamp-2 mb-3">
                       {item.course_title || 'Course unavailable'}
                     </h3>
 
@@ -140,7 +140,7 @@ const StudentPaymentHistory = () => {
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 mb-4">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400 mb-4">
                       <div className="flex items-center gap-2">
                         <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />

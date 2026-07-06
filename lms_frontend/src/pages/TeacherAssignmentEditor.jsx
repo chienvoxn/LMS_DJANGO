@@ -316,24 +316,24 @@ const TeacherAssignmentEditor = () => {
   const getStatusBadge = (status) => {
     if (status === 'graded') {
       return (
-        <span className="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">
+        <span className="px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-medium">
           Graded
         </span>
       );
     }
     return (
-      <span className="px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">
-        Submitted
-      </span>
+        <span className="px-2.5 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-xs font-medium">
+          Submitted
+        </span>
     );
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-slate-600">Loading assignment...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading assignment...</p>
         </div>
       </div>
     );
@@ -341,9 +341,9 @@ const TeacherAssignmentEditor = () => {
 
   if (error && !assignment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-800 dark:text-red-300">
             {error}
             <button
               onClick={() => navigate(-1)}
@@ -359,74 +359,74 @@ const TeacherAssignmentEditor = () => {
 
   if (!assignment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center text-slate-600">Assignment not found</div>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="text-center text-slate-600 dark:text-slate-400">Assignment not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8">
       <div className="max-w-6xl mx-auto px-4 space-y-6">
         {/* Header */}
         <div>
           <button
             onClick={() => navigate(`/teacher/courses/${assignment.course}/assignments`)}
-            className="text-slate-600 hover:text-slate-900 mb-4 flex items-center gap-2"
+            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 mb-4 flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Course Assignments
           </button>
-          <h1 className="text-3xl font-bold text-slate-900">Edit Assignment</h1>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Edit Assignment</h1>
         </div>
 
         {/* Assignment Info Card */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-          <h2 className="text-xl font-semibold text-slate-900 mb-4">Assignment Information</h2>
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Assignment Information</h2>
           
           <form onSubmit={handleSaveAssignment} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Title <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Description
               </label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={5}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Due Date
                 </label>
                 <input
                   type="datetime-local"
                   value={formData.due_date}
                   onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Max Points
                 </label>
                 <input
@@ -434,13 +434,13 @@ const TeacherAssignmentEditor = () => {
                   value={formData.max_points}
                   onChange={(e) => setFormData({ ...formData, max_points: parseInt(e.target.value) || 10 })}
                   min="1"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Attachment
               </label>
               
@@ -449,12 +449,12 @@ const TeacherAssignmentEditor = () => {
                 <input
                   type="file"
                   onChange={handleFileChange}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 file:border-0"
                   accept=".pdf,.doc,.docx,.txt,.zip,.rar,.jpg,.jpeg,.png"
                 />
                 {selectedFile && (
                   <div className="mt-2 flex items-center gap-3 flex-wrap">
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-slate-600 dark:text-slate-400">
                       Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
                     </span>
                     <button
@@ -473,7 +473,7 @@ const TeacherAssignmentEditor = () => {
                         const fileInput = document.querySelector('input[type="file"]');
                         if (fileInput) fileInput.value = '';
                       }}
-                      className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition"
+                      className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition"
                     >
                       Clear
                     </button>
@@ -482,7 +482,7 @@ const TeacherAssignmentEditor = () => {
               </div>
 
               {/* Or enter URL manually */}
-              <div className="text-xs text-slate-500 mb-2">Or enter URL manually:</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Or enter URL manually:</div>
               <input
                 type="text"
                 value={formData.attachment_url}
@@ -490,7 +490,7 @@ const TeacherAssignmentEditor = () => {
                   setFormData({ ...formData, attachment_url: e.target.value });
                   setSelectedFile(null);
                 }}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="https://... or /media/uploads/..."
               />
               {formData.attachment_url && !formData.attachment_url.startsWith('data:') && (
@@ -501,7 +501,7 @@ const TeacherAssignmentEditor = () => {
                       : `http://localhost:8000${formData.attachment_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-blue-600 hover:text-blue-700 inline-flex items-center gap-1"
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -520,7 +520,7 @@ const TeacherAssignmentEditor = () => {
                 onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
                 className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
               />
-              <label htmlFor="is_published" className="ml-2 text-sm text-slate-700">
+              <label htmlFor="is_published" className="ml-2 text-sm text-slate-700 dark:text-slate-300">
                 Publish assignment
               </label>
             </div>

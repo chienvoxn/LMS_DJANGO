@@ -65,8 +65,8 @@ const CourseReviewForm = ({
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-      <h3 className="text-sm font-semibold text-slate-900">
+    <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3 dark:bg-slate-800 dark:border-slate-700">
+      <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
         {initialRating ? "Update your review" : "Write a review"}
       </h3>
       
@@ -80,13 +80,13 @@ const CourseReviewForm = ({
             disabled={disabled}
             className="text-2xl transition-transform hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span className={star <= rating ? "text-yellow-400" : "text-slate-300"}>
+            <span className={star <= rating ? "text-yellow-400" : "text-slate-300 dark:text-slate-600"}>
               ★
             </span>
           </button>
         ))}
         {rating > 0 && (
-          <span className="text-sm text-slate-600 ml-2">
+          <span className="text-sm text-slate-600 ml-2 dark:text-slate-400">
             {rating} {rating === 1 ? 'star' : 'stars'}
           </span>
         )}
@@ -98,7 +98,7 @@ const CourseReviewForm = ({
         onChange={(e) => !disabled && setComment(e.target.value)}
         disabled={disabled}
         rows={3}
-        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
         placeholder="Share your experience with this course (optional)..."
       />
 

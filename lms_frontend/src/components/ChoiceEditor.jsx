@@ -57,7 +57,7 @@ const ChoiceEditor = ({ choice, onUpdated, onDeleted }) => {
 
   return (
     <div 
-      className="flex items-center gap-3 w-full p-2 bg-slate-50 rounded-lg border border-slate-200"
+      className="flex items-center gap-3 w-full p-2 bg-slate-50 rounded-lg border border-slate-200 dark:bg-slate-700 dark:border-slate-600"
       onClick={(e) => e.stopPropagation()}
       onMouseDown={(e) => e.stopPropagation()}
     >
@@ -66,20 +66,20 @@ const ChoiceEditor = ({ choice, onUpdated, onDeleted }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Choice text"
-        className="flex-1 px-3 py-1.5 text-sm border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition bg-white"
+        className="flex-1 px-3 py-1.5 text-sm border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
         disabled={loading}
         onClick={(e) => e.stopPropagation()}
       />
       
       <label 
-        className="flex items-center gap-1 text-xs text-slate-600 cursor-pointer whitespace-nowrap"
+        className="flex items-center gap-1 text-xs text-slate-600 cursor-pointer whitespace-nowrap dark:text-slate-400"
         onClick={(e) => e.stopPropagation()}
       >
         <input
           type="checkbox"
           checked={isCorrect}
           onChange={(e) => setIsCorrect(e.target.checked)}
-          className="h-3 w-3 text-primary-500 border-slate-300 rounded focus:ring-primary-500"
+          className="h-3 w-3 text-primary-500 border-slate-300 rounded focus:ring-primary-500 dark:border-slate-600"
           disabled={loading}
           onClick={(e) => e.stopPropagation()}
         />
@@ -121,7 +121,7 @@ const ChoiceEditor = ({ choice, onUpdated, onDeleted }) => {
       </button>
 
       {error && (
-        <div className="text-xs text-red-600 bg-red-50 px-2 py-1 rounded">{error}</div>
+        <div className="text-xs text-red-600 bg-red-50 px-2 py-1 rounded dark:bg-red-900/30 dark:text-red-400">{error}</div>
       )}
     </div>
   );

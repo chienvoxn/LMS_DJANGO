@@ -1,0 +1,46 @@
+# ==========================================
+# 1. Python & Django (Cho thư mục lms_api)
+# ==========================================
+# Bỏ qua các file cache compiled của Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bỏ qua các file log của Django hoặc hệ thống
+*.log
+
+# Bỏ qua thư mục media (nơi lưu file user upload, tránh làm nặng Git)
+lms_api/media/
+
+# ==========================================
+# 2. Môi trường ảo & Dependencies
+# ==========================================
+# Bỏ qua thư mục môi trường ảo python ở gốc
+venv/
+.venv/
+env/
+
+# ==========================================
+# 3. Database & Sao lưu (Bảo mật)
+# ==========================================
+# Bỏ qua các file database SQLite cục bộ (nếu có dùng test)
+*.sqlite3
+
+# Bỏ qua file database.sql bạn vừa liệt kê ở thư mục gốc 
+# (Tránh lộ dữ liệu thật hoặc đè file cấu hình khi kéo code về)
+database.sql
+
+# ==========================================
+# 4. Bảo mật môi trường (Environment Variables)
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# 5. File rác từ IDE & Hệ điều hành
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

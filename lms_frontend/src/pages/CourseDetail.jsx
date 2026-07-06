@@ -340,7 +340,7 @@ const CourseDetail = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="text-center text-slate-600">Loading course...</div>
+        <div className="text-center text-slate-600 dark:text-slate-400">Loading course...</div>
       </div>
     );
   }
@@ -360,15 +360,15 @@ const CourseDetail = () => {
           <div>
             <div className="flex items-start justify-between mb-2">
               <div className="flex-1">
-                <h1 className="text-3xl font-bold text-slate-900 mb-2">{course.title}</h1>
-                {course.subtitle && <p className="text-lg text-slate-600 mb-4">{course.subtitle}</p>}
+                <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">{course.title}</h1>
+                {course.subtitle && <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">{course.subtitle}</p>}
                 {/* Rating display */}
-                <div className="flex items-center gap-2 text-sm text-slate-700 mt-1 mb-4">
+                <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 mt-1 mb-4">
                   <RatingStars value={ratingSummary.average_rating || 0} size="sm" />
                   <span className="font-semibold">
                     {ratingSummary.average_rating ? ratingSummary.average_rating.toFixed(1) : "0.0"}
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     ({ratingSummary.total_reviews} {ratingSummary.total_reviews === 1 ? 'rating' : 'ratings'})
                   </span>
                 </div>
@@ -385,11 +385,11 @@ const CourseDetail = () => {
             <div className="flex gap-2 flex-wrap mb-4">
               <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">{course.level}</span>
               {course.category && (
-                <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full">{course.category}</span>
+                <span className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm rounded-full">{course.category}</span>
               )}
             </div>
             {course.description && (
-              <div className="prose max-w-none text-slate-700 mb-6">
+              <div className="prose max-w-none text-slate-700 dark:text-slate-300 mb-6">
                 <p>{course.description}</p>
               </div>
             )}
@@ -397,14 +397,14 @@ const CourseDetail = () => {
 
           {/* Instructor Section */}
           {course.teacher_id && (
-            <div className="bg-white rounded-xl border border-slate-200 p-6 mb-6">
-              <h2 className="text-xl font-semibold text-slate-900 mb-4">Your Instructor</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-6">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Your Instructor</h2>
               {loadingInstructor ? (
                 <div className="flex items-start gap-4">
-                  <div className="w-20 h-20 rounded-full bg-slate-200 animate-pulse"></div>
+                  <div className="w-20 h-20 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse"></div>
                   <div className="flex-1 space-y-2">
-                    <div className="h-6 w-48 bg-slate-200 rounded animate-pulse"></div>
-                    <div className="h-4 w-64 bg-slate-200 rounded animate-pulse"></div>
+                    <div className="h-6 w-48 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
+                    <div className="h-4 w-64 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
                   </div>
                 </div>
               ) : instructorProfile ? (
@@ -413,18 +413,18 @@ const CourseDetail = () => {
                     <img
                       src={instructorProfile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(instructorProfile.full_name || 'Instructor')}&background=6366f1&color=fff&size=128`}
                       alt={instructorProfile.full_name || 'Instructor'}
-                      className="w-20 h-20 rounded-full object-cover border-2 border-slate-200 shadow-sm"
+                      className="w-20 h-20 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700 shadow-sm"
                       onError={(e) => {
                         e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(instructorProfile.full_name || 'Instructor')}&background=6366f1&color=fff&size=128`;
                       }}
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-1">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-1">
                       {instructorProfile.full_name || course.teacher_name || 'Instructor'}
                     </h3>
                     {instructorProfile.headline && (
-                      <p className="text-sm text-slate-600 mb-2">
+                      <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                         {instructorProfile.headline}
                       </p>
                     )}
@@ -435,15 +435,15 @@ const CourseDetail = () => {
                         {/* Luôn hiển thị rating, kể cả khi không có review */}
                         <div className="flex items-center gap-1">
                           <RatingStars value={instructorProfile.stats.average_rating || 0} size="sm" />
-                          <span className="font-semibold text-slate-700">
+                          <span className="font-semibold text-slate-700 dark:text-slate-300">
                             {(instructorProfile.stats.average_rating || 0).toFixed(1)}
                           </span>
-                          <span className="text-slate-500">
+                          <span className="text-slate-500 dark:text-slate-400">
                             ({instructorProfile.stats.total_reviews || 0} {instructorProfile.stats.total_reviews === 1 ? 'review' : 'reviews'})
                           </span>
                         </div>
                         {instructorProfile.stats.total_courses > 0 && (
-                          <div className="flex items-center gap-1 text-slate-600">
+                          <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
@@ -467,14 +467,14 @@ const CourseDetail = () => {
                     <img
                       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(course.teacher_name || 'Instructor')}&background=6366f1&color=fff&size=128`}
                       alt={course.teacher_name || 'Instructor'}
-                      className="w-20 h-20 rounded-full object-cover border-2 border-slate-200 shadow-sm"
+                      className="w-20 h-20 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700 shadow-sm"
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
                       {course.teacher_name || 'Instructor'}
                     </h3>
-                    <p className="text-sm text-slate-600 mb-3">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                       Learn from an experienced instructor
                     </p>
                     <button
@@ -490,22 +490,22 @@ const CourseDetail = () => {
           )}
 
           {curriculum && curriculum.sections && curriculum.sections.length > 0 && (
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">Course Curriculum</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Course Curriculum</h2>
               <div className="space-y-4">
                 {curriculum.sections.map((section) => (
-                  <div key={section.id} className="bg-slate-50 rounded-xl border border-slate-200">
-                    <div className="px-4 py-3 bg-slate-100 rounded-t-xl">
-                      <h3 className="font-semibold text-slate-900">{section.title}</h3>
+                  <div key={section.id} className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div className="px-4 py-3 bg-slate-100 dark:bg-slate-700 rounded-t-xl">
+                      <h3 className="font-semibold text-slate-900 dark:text-slate-100">{section.title}</h3>
                     </div>
                     {section.lessons && section.lessons.length > 0 && (
-                      <ul className="divide-y divide-slate-200">
+                      <ul className="divide-y divide-slate-200 dark:divide-slate-700">
                         {section.lessons.map((lesson) => (
                           <li 
                             key={lesson.id} 
                             className={`px-4 py-3 flex justify-between items-center ${
                               isAuthenticated && isEnrolled 
-                                ? 'hover:bg-slate-50 cursor-pointer' 
+                                ? 'hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer' 
                                 : 'opacity-60 cursor-not-allowed'
                             }`}
                             onClick={() => {
@@ -521,9 +521,9 @@ const CourseDetail = () => {
                               navigate(`/courses/${course.id}/learn?lesson=${lesson.id}`);
                             }}
                           >
-                            <span className="text-slate-700">{lesson.title}</span>
+                            <span className="text-slate-700 dark:text-slate-300">{lesson.title}</span>
                             {lesson.duration > 0 && (
-                              <span className="text-sm text-slate-500">
+                              <span className="text-sm text-slate-500 dark:text-slate-400">
                                 {Math.floor(lesson.duration / 60)}:{(lesson.duration % 60).toString().padStart(2, '0')}
                               </span>
                             )}
@@ -541,15 +541,15 @@ const CourseDetail = () => {
           {isAuthenticated && isEnrolled && (
             <section className="mt-8">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-slate-900">Course Quizzes</h2>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Course Quizzes</h2>
               </div>
 
               {loadingQuizzes && (
-                <div className="text-sm text-slate-500">Loading quizzes...</div>
+                <div className="text-sm text-slate-500 dark:text-slate-400">Loading quizzes...</div>
               )}
 
               {!loadingQuizzes && quizzes.length === 0 && (
-                <div className="text-sm text-slate-500">
+                <div className="text-sm text-slate-500 dark:text-slate-400">
                   No quizzes available for this course yet.
                 </div>
               )}
@@ -564,20 +564,20 @@ const CourseDetail = () => {
                     return (
                       <div 
                         key={quiz.id} 
-                        className="bg-white border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                        className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 hover:shadow-md transition-shadow"
                       >
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                           <div className="flex-1 space-y-1">
-                            <h3 className="font-semibold text-slate-900">{quiz.title}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-slate-100">{quiz.title}</h3>
                             {quiz.description && (
-                              <p className="text-sm text-slate-500 line-clamp-2">{quiz.description}</p>
+                              <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{quiz.description}</p>
                             )}
-                            <div className="flex items-center gap-3 text-xs text-slate-500 mt-1 flex-wrap">
+                            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1 flex-wrap">
                               {quiz.time_limit && <span>Time limit: {quiz.time_limit} min</span>}
                               <QuizStatusBadge status={status} />
                               {isCompleted && result && (
                                 <>
-                                  <span className="text-slate-300">•</span>
+                                  <span className="text-slate-300 dark:text-slate-600">•</span>
                                   <span className="font-semibold text-blue-600">
                                     Score: {result.score}/{result.total_points} ({result.percentage.toFixed(1)}%)
                                   </span>
@@ -612,15 +612,15 @@ const CourseDetail = () => {
           {isAuthenticated && isEnrolled && (
             <section className="mt-8">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-slate-900">Course Assignments</h2>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Course Assignments</h2>
               </div>
 
               {loadingAssignments && (
-                <div className="text-sm text-slate-500">Loading assignments...</div>
+                <div className="text-sm text-slate-500 dark:text-slate-400">Loading assignments...</div>
               )}
 
               {!loadingAssignments && assignments.length === 0 && (
-                <div className="text-sm text-slate-500">
+                <div className="text-sm text-slate-500 dark:text-slate-400">
                   No assignments available for this course yet.
                 </div>
               )}
@@ -643,22 +643,22 @@ const CourseDetail = () => {
                     return (
                       <div 
                         key={assignment.id} 
-                        className="bg-white border border-slate-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                        className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 hover:shadow-md transition-shadow"
                       >
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                           <div className="flex-1 space-y-1">
-                            <h3 className="font-semibold text-slate-900">{assignment.title}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-slate-100">{assignment.title}</h3>
                             {assignment.description && (
-                              <p className="text-sm text-slate-500 line-clamp-2">{assignment.description}</p>
+                              <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{assignment.description}</p>
                             )}
-                            <div className="flex items-center gap-3 text-xs text-slate-500 mt-1 flex-wrap">
+                            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1 flex-wrap">
                               {assignment.due_date && (
                                 <span>Due: {formatDate(assignment.due_date)}</span>
                               )}
                               <AssignmentStatusBadge status={status} />
                               {status === 'graded' && score && (
                                 <>
-                                  <span className="text-slate-300">•</span>
+                                  <span className="text-slate-300 dark:text-slate-600">•</span>
                                   <span className="font-semibold text-blue-600">
                                     Score: {score.grade}/{score.max_points}
                                   </span>
@@ -691,10 +691,10 @@ const CourseDetail = () => {
 
           {/* Student Reviews Section */}
           <section className="mt-10">
-            <h2 className="text-lg font-semibold text-slate-900 mb-3">Student reviews</h2>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-3">Student reviews</h2>
 
             {loadingReviews && (
-              <div className="text-sm text-slate-500">Loading reviews...</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400">Loading reviews...</div>
             )}
 
             {!loadingReviews && (
@@ -754,7 +754,7 @@ const CourseDetail = () => {
         </div>
 
         <div className="lg:sticky lg:top-4 h-fit">
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 space-y-4">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg dark:shadow-none border border-slate-200 dark:border-slate-700 p-6 space-y-4">
             {course.thumbnail_url && (
               <img
                 src={course.thumbnail_url}
@@ -765,7 +765,7 @@ const CourseDetail = () => {
                 }}
               />
             )}
-            <div className="text-3xl font-bold text-slate-900 mb-4">
+            <div className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
               ${parseFloat(course.price || 0).toFixed(2)}
             </div>
             
@@ -784,7 +784,7 @@ const CourseDetail = () => {
             ) : user?.role === 'teacher' && course?.teacher_id === user?.id ? (
               // Teacher viewing their own course
               <div className="space-y-3">
-                <p className="text-sm text-slate-600 text-center">You are the instructor of this course.</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 text-center">You are the instructor of this course.</p>
                 <button
                   onClick={() => navigate(`/teacher/courses/${courseId}/edit`)}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition"
@@ -805,12 +805,12 @@ const CourseDetail = () => {
               ) : enrollmentType === 'audit' ? (
                 // Auditing - can upgrade
                 <div className="space-y-3">
-                  <p className="text-sm text-slate-600 text-center">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
                     You are auditing this course. You can upgrade to full purchase to get a certificate.
                   </p>
                   <button
                     onClick={() => navigate(`/courses/${courseId}/learn`)}
-                    className="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-3 rounded-lg transition"
+                    className="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-300 font-medium py-3 rounded-lg transition"
                   >
                     Go to course
                   </button>
@@ -839,7 +839,7 @@ const CourseDetail = () => {
                   </button>
                   <button
                     onClick={() => handlePurchase('audit')}
-                    className="w-full border-2 border-slate-300 hover:border-slate-400 text-slate-700 font-medium py-3 rounded-lg transition"
+                    className="w-full border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 dark:text-slate-300 font-medium py-3 rounded-lg transition"
                   >
                     Audit for free
                   </button>
@@ -864,7 +864,7 @@ const CourseDetail = () => {
               </button>
             )}
             
-            <ul className="text-sm text-slate-600 space-y-2 mt-4">
+            <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2 mt-4">
               <li>✓ Lifetime access</li>
               <li>✓ Certificate of completion</li>
             </ul>

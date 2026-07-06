@@ -76,10 +76,10 @@ const StudentProfile = () => {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-slate-600">Loading profile...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading profile...</p>
         </div>
       </div>
     );
@@ -88,14 +88,14 @@ const StudentProfile = () => {
   // Error state
   if (error || !profile) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="bg-white border border-red-200 rounded-xl p-8 shadow-sm">
+          <div className="bg-white dark:bg-slate-800 border border-red-200 rounded-xl p-8 shadow-sm">
             <div className="text-6xl mb-4">😕</div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
               {error || 'Student not found'}
             </h2>
-            <p className="text-slate-600 mb-6">
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
               The student profile you're looking for doesn't exist or has been removed.
             </p>
             <button
@@ -115,10 +115,10 @@ const StudentProfile = () => {
   const socialLinks = profile.social_links || {};
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
         {/* Header Section */}
-        <div className="bg-white shadow-sm border-b rounded-xl overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 shadow-sm border-b rounded-xl overflow-hidden">
           <div className="p-6">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Avatar */}
@@ -126,7 +126,7 @@ const StudentProfile = () => {
                 <img
                   src={getAvatarUrl(profile)}
                   alt={profile.full_name || 'Student'}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-slate-200"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-slate-200 dark:border-slate-700"
                   onError={(e) => {
                     e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name?.[0] || '?')}&background=6366f1&color=fff&size=256`;
                   }}
@@ -135,12 +135,12 @@ const StudentProfile = () => {
 
               {/* Info Block */}
               <div className="flex-1">
-                <h1 className="text-2xl font-bold text-slate-900 mb-2">
+                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                   {profile.full_name || 'Student'}
                 </h1>
                 
                 {/* Country / Language */}
-                <div className="flex items-center gap-4 text-sm text-slate-600 mb-4">
+                <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400 mb-4">
                   {profile.country && (
                     <span className="flex items-center gap-1">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,7 +175,7 @@ const StudentProfile = () => {
                         href={socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-600 hover:text-blue-600 transition"
+                        className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition"
                         title="LinkedIn"
                       >
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@ const StudentProfile = () => {
                         href={socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-600 hover:text-slate-900 transition"
+                        className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition"
                         title="GitHub"
                       >
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ const StudentProfile = () => {
                         href={socialLinks.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-600 hover:text-blue-600 transition"
+                        className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition"
                         title="Facebook"
                       >
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -218,34 +218,34 @@ const StudentProfile = () => {
 
         {/* Stats Section */}
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-xl">
-            <p className="text-sm text-slate-500 mb-1">Enrolled Courses</p>
-            <p className="text-2xl font-bold text-slate-900">{stats.total_enrolled_courses || 0}</p>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm p-4 rounded-xl">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Enrolled Courses</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.total_enrolled_courses || 0}</p>
           </div>
-          <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-xl">
-            <p className="text-sm text-slate-500 mb-1">Completed Courses</p>
-            <p className="text-2xl font-bold text-slate-900">{stats.total_completed_courses || 0}</p>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm p-4 rounded-xl">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Completed Courses</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.total_completed_courses || 0}</p>
           </div>
-          <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-xl">
-            <p className="text-sm text-slate-500 mb-1">Reviews</p>
-            <p className="text-2xl font-bold text-slate-900">{stats.total_reviews || 0}</p>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm p-4 rounded-xl">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Reviews</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.total_reviews || 0}</p>
           </div>
-          <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-xl">
-            <p className="text-sm text-slate-500 mb-1">Quiz Attempts</p>
-            <p className="text-2xl font-bold text-slate-900">{stats.total_quiz_attempts || 0}</p>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm p-4 rounded-xl">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Quiz Attempts</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.total_quiz_attempts || 0}</p>
           </div>
-          <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-xl">
-            <p className="text-sm text-slate-500 mb-1">Assignments</p>
-            <p className="text-2xl font-bold text-slate-900">{stats.total_assignments_submitted || 0}</p>
+          <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm p-4 rounded-xl">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Assignments</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.total_assignments_submitted || 0}</p>
           </div>
         </div>
 
         {/* About Section */}
         {profile.bio && (
           <div>
-            <h2 className="text-xl font-semibold text-slate-900 mb-4">About</h2>
-            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <p className="text-slate-700 leading-relaxed whitespace-pre-line">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">About</h2>
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                 {profile.bio}
               </p>
             </div>
@@ -254,15 +254,15 @@ const StudentProfile = () => {
 
         {/* Courses Section */}
         <div>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4">Learning Activity</h2>
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">Learning Activity</h2>
           
           {courses.length === 0 ? (
-            <div className="bg-white border border-slate-200 rounded-xl p-12 text-center shadow-sm">
+            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-12 text-center shadow-sm">
               <div className="text-6xl mb-4">📚</div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-2">
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
                 No courses enrolled yet
               </h3>
-              <p className="text-slate-600">
+              <p className="text-slate-600 dark:text-slate-400">
                 This student hasn't enrolled in any courses.
               </p>
             </div>
@@ -271,11 +271,11 @@ const StudentProfile = () => {
               {courses.map((course) => (
                 <div
                   key={course.course_id}
-                  className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer"
+                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer"
                   onClick={() => navigate(`/courses/${course.course_id}`)}
                 >
                   {/* Thumbnail */}
-                  <div className="h-40 bg-slate-200">
+                  <div className="h-40 bg-slate-200 dark:bg-slate-700">
                     {course.thumbnail_url ? (
                       <img
                         src={course.thumbnail_url}
@@ -286,7 +286,7 @@ const StudentProfile = () => {
                         }}
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-xs text-slate-500">
+                      <div className="w-full h-full flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">
                         No thumbnail
                       </div>
                     )}
@@ -294,28 +294,28 @@ const StudentProfile = () => {
 
                   {/* Content */}
                   <div className="p-4">
-                    <h3 className="font-semibold text-slate-900 line-clamp-2 mb-3">
+                    <h3 className="font-semibold text-slate-900 dark:text-slate-100 line-clamp-2 mb-3">
                       {course.title}
                     </h3>
 
                     {/* Progress Bar */}
                     <div className="mt-3">
-                      <div className="w-full bg-slate-200 h-2 rounded">
+                      <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded">
                         <div
                           className="bg-blue-600 h-full rounded transition-all"
                           style={{ width: `${Math.min(course.progress_percentage || 0, 100)}%` }}
                         />
                       </div>
-                      <p className="text-xs text-slate-600 mt-1">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                         {course.progress_percentage?.toFixed(1) || 0}% complete
                       </p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                         {course.completed_lessons || 0} / {course.total_lessons || 0} lessons
                       </p>
                     </div>
 
                     {/* Enrolled Date */}
-                    <p className="text-xs text-slate-400 mt-3">
+                    <p className="text-xs text-slate-400 dark:text-slate-500 mt-3">
                       Enrolled: {formatDate(course.enrolled_at)}
                     </p>
                   </div>

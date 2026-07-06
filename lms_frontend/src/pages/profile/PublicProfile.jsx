@@ -99,10 +99,10 @@ const PublicProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600 font-medium">Loading profile...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-400 font-medium">Loading profile...</p>
         </div>
       </div>
     );
@@ -110,15 +110,15 @@ const PublicProfile = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl border-2 border-slate-200 p-10 text-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center">
+        <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl border-2 border-slate-200 dark:border-slate-700 p-10 text-center">
           <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-12 h-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-3">Profile Not Found</h2>
-          <p className="text-lg text-slate-600 mb-8">{error}</p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-3">Profile Not Found</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">{error}</p>
           <button
             onClick={() => navigate(-1)}
             className="px-8 py-3 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg"
@@ -138,10 +138,10 @@ const PublicProfile = () => {
   const socialLinks = profile.social_links || {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 py-12">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header Section - Coursera Style */}
-        <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-10 mb-8">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-700 p-10 mb-8">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             {/* Avatar */}
             <div className="flex-shrink-0 relative">
@@ -164,19 +164,19 @@ const PublicProfile = () => {
 
             {/* User Info */}
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3">
                 {profile.full_name || 'No name'}
               </h1>
               
               {profile.headline && (
-                <p className="text-xl text-slate-600 mb-6 font-medium">
+                <p className="text-xl text-slate-600 dark:text-slate-400 mb-6 font-medium">
                   {profile.headline}
                 </p>
               )}
 
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6">
                 {profile.country && (
-                  <div className="flex items-center gap-2 text-slate-700 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                  <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700">
                     <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 002 2h2.945M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -185,7 +185,7 @@ const PublicProfile = () => {
                 )}
 
                 {profile.date_joined && (
-                  <div className="flex items-center gap-2 text-slate-700 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                  <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700">
                     <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -217,10 +217,10 @@ const PublicProfile = () => {
 
         {/* About Section - Coursera Style */}
         {profile.bio && (
-          <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-10">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">About Me</h2>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-700 p-10">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">About Me</h2>
             <div className="prose max-w-none">
-              <p className="text-lg text-slate-700 leading-relaxed whitespace-pre-wrap">
+              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
                 {profile.bio}
               </p>
             </div>

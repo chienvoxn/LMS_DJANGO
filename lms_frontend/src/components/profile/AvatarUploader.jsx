@@ -71,7 +71,7 @@ const AvatarUploader = ({ currentAvatarUrl, onAvatarChange, size = 150 }) => {
         <img
           src={avatarUrl}
           alt="Avatar"
-          className="rounded-full object-cover border-4 border-slate-200"
+          className="rounded-full object-cover border-4 border-slate-200 dark:border-slate-700"
           style={{ width: `${size}px`, height: `${size}px` }}
           onError={(e) => {
             e.target.src = getDefaultAvatar('');
@@ -98,14 +98,14 @@ const AvatarUploader = ({ currentAvatarUrl, onAvatarChange, size = 150 }) => {
         {(preview || currentAvatarUrl) && (
           <button
             onClick={handleRemoveAvatar}
-            className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition"
+            className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-300"
           >
             Remove
           </button>
         )}
       </div>
 
-      <p className="text-xs text-slate-500 text-center max-w-xs">
+      <p className="text-xs text-slate-500 text-center max-w-xs dark:text-slate-400">
         JPG, PNG or GIF. Max size 5MB
       </p>
     </div>

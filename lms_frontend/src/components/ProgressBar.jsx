@@ -13,10 +13,10 @@ const ProgressBar = ({ progress = 0, className = '' }) => {
   return (
     <div className={`w-full ${className}`}>
       <div className="flex items-center justify-between mb-1">
-        <span className="text-sm font-medium text-slate-700">Progress</span>
-        <span className="text-sm font-medium text-slate-700">{Math.round(clampedProgress)}%</span>
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Progress</span>
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{Math.round(clampedProgress)}%</span>
       </div>
-      <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+      <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden dark:bg-slate-700">
         <div
           className="bg-sky-600 h-full rounded-full transition-all duration-300 ease-out"
           style={{ width: `${clampedProgress}%` }}

@@ -326,24 +326,24 @@ const CourseLandingPage = () => {
   const isTeacher = user?.role === 'teacher' && course.teacher_id === user?.id;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 pb-16">
       <div className="max-w-7xl mx-auto px-6 pt-8 grid gap-8 lg:grid-cols-[2fr,1fr]">
         {/* LEFT COLUMN - Course Content */}
         <div className="space-y-10">
           {/* HERO SECTION - Coursera Style */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 leading-tight">{course.title}</h1>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3 leading-tight">{course.title}</h1>
             {course.subtitle && (
-              <p className="text-xl text-slate-600 mb-6 font-medium">{course.subtitle}</p>
+              <p className="text-xl text-slate-600 dark:text-slate-400 mb-6 font-medium">{course.subtitle}</p>
             )}
             
             <div className="flex flex-wrap items-center gap-4 mb-6">
-              <div className="flex items-center gap-2 bg-slate-50 rounded-lg px-4 py-2">
+              <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-700 rounded-lg px-4 py-2">
                 <RatingStars value={ratingSummary.average_rating || 0} size="sm" />
-                <span className="font-bold text-slate-900 text-lg">
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">
                   {ratingSummary.average_rating ? ratingSummary.average_rating.toFixed(1) : '0.0'}
                 </span>
-                <span className="text-sm text-slate-600">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
                   ({ratingSummary.total_reviews || 0} {ratingSummary.total_reviews === 1 ? 'rating' : 'ratings'})
                 </span>
               </div>
@@ -361,7 +361,7 @@ const CourseLandingPage = () => {
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-sm text-slate-600 pt-4 border-t border-slate-200">
+            <div className="flex flex-wrap items-center gap-6 text-sm text-slate-600 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
               {course.updated_at && (
                 <div className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -391,19 +391,19 @@ const CourseLandingPage = () => {
 
           {/* WHAT YOU'LL LEARN - Coursera Style */}
           {course.description && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">What you'll learn</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">What you'll learn</h2>
               <div className="prose max-w-none">
-                <p className="text-lg text-slate-700 whitespace-pre-line leading-relaxed">{course.description}</p>
+                <p className="text-lg text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">{course.description}</p>
               </div>
             </div>
           )}
 
           {/* COURSE DESCRIPTION */}
           {course.description && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Course Description</h2>
-              <div className="prose max-w-none text-slate-700">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">Course Description</h2>
+              <div className="prose max-w-none text-slate-700 dark:text-slate-300">
                 <p className="text-lg whitespace-pre-line leading-relaxed">{course.description}</p>
               </div>
             </div>
@@ -411,8 +411,8 @@ const CourseLandingPage = () => {
 
           {/* INSTRUCTOR SECTION - Coursera Style */}
           {course.teacher_id && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Instructor</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">Instructor</h2>
               {instructor ? (
                 <div className="flex items-start gap-6">
                   <div className="relative">
@@ -431,21 +431,21 @@ const CourseLandingPage = () => {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                       {instructor.full_name || course.teacher_name || 'Instructor'}
                     </h3>
                     {instructor.headline && (
-                      <p className="text-base text-slate-600 mb-4">{instructor.headline}</p>
+                      <p className="text-base text-slate-600 dark:text-slate-400 mb-4">{instructor.headline}</p>
                     )}
                     {instructor.stats && (
                       <div className="flex flex-wrap items-center gap-6 text-sm mb-4">
                         {instructor.stats.average_rating > 0 && (
-                          <div className="flex items-center gap-2 bg-slate-50 rounded-lg px-3 py-2">
+                          <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-700 rounded-lg px-3 py-2">
                             <RatingStars value={instructor.stats.average_rating} size="sm" />
-                            <span className="font-bold text-slate-900">
+                            <span className="font-bold text-slate-900 dark:text-slate-100">
                               {instructor.stats.average_rating.toFixed(1)}
                             </span>
-                            <span className="text-slate-600">({instructor.stats.total_reviews || 0} {instructor.stats.total_reviews === 1 ? 'review' : 'reviews'})</span>
+                            <span className="text-slate-600 dark:text-slate-400">({instructor.stats.total_reviews || 0} {instructor.stats.total_reviews === 1 ? 'review' : 'reviews'})</span>
                           </div>
                         )}
                         {instructor.stats.total_courses > 0 && (
@@ -453,7 +453,7 @@ const CourseLandingPage = () => {
                             <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
-                            <span className="font-semibold text-slate-700">{instructor.stats.total_courses} {instructor.stats.total_courses === 1 ? 'course' : 'courses'}</span>
+                            <span className="font-semibold text-slate-700 dark:text-slate-300">{instructor.stats.total_courses} {instructor.stats.total_courses === 1 ? 'course' : 'courses'}</span>
                           </div>
                         )}
                         {instructor.stats.total_students > 0 && (
@@ -461,7 +461,7 @@ const CourseLandingPage = () => {
                             <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                            <span className="font-semibold text-slate-700">{instructor.stats.total_students} {instructor.stats.total_students === 1 ? 'student' : 'students'}</span>
+                            <span className="font-semibold text-slate-700 dark:text-slate-300">{instructor.stats.total_students} {instructor.stats.total_students === 1 ? 'student' : 'students'}</span>
                           </div>
                         )}
                       </div>
@@ -485,10 +485,10 @@ const CourseLandingPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                       {course.teacher_name || 'Instructor'}
                     </h3>
-                    <p className="text-base text-slate-600">Learn from an experienced instructor</p>
+                    <p className="text-base text-slate-600 dark:text-slate-400">Learn from an experienced instructor</p>
                   </div>
                 </div>
               )}
@@ -497,22 +497,22 @@ const CourseLandingPage = () => {
 
           {/* CURRICULUM - Coursera Style */}
           {curriculum?.sections && curriculum.sections.length > 0 && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Course Curriculum</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">Course Curriculum</h2>
               <div className="space-y-3">
                 {curriculum.sections.map((section, sectionIndex) => (
                   <details
                     key={section.id}
-                    className="bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden hover:border-primary-200 transition"
+                    className="bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden hover:border-primary-200 transition"
                     open={sectionIndex === 0}
                   >
-                    <summary className="px-6 py-4 cursor-pointer hover:bg-slate-100 transition font-bold text-slate-900 flex items-center justify-between">
+                    <summary className="px-6 py-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition font-bold text-slate-900 dark:text-slate-100 flex items-center justify-between">
                       <span className="text-lg">{section.title}</span>
-                      <span className="text-sm font-normal text-slate-600 bg-white px-3 py-1 rounded-full">
+                      <span className="text-sm font-normal text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 px-3 py-1 rounded-full">
                         {section.lessons?.length || 0} {section.lessons?.length === 1 ? 'lesson' : 'lessons'}
                       </span>
                     </summary>
-                    <div className="bg-white divide-y divide-slate-100">
+                    <div className="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
                       {section.lessons?.map((lesson, lessonIndex) => (
                         <div
                           key={lesson.id}
@@ -527,11 +527,11 @@ const CourseLandingPage = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
-                              <span className="text-slate-900 font-medium">{lesson.title}</span>
+                              <span className="text-slate-900 dark:text-slate-100 font-medium">{lesson.title}</span>
                             </div>
                           </div>
                           {lesson.duration > 0 && (
-                            <span className="text-sm text-slate-600 font-medium bg-slate-100 px-3 py-1 rounded-full">
+                            <span className="text-sm text-slate-600 dark:text-slate-400 font-medium bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
                               {formatDuration(lesson.duration)}
                             </span>
                           )}
@@ -546,24 +546,24 @@ const CourseLandingPage = () => {
 
           {/* QUIZZES SECTION - Coursera Style */}
           {isEnrolled && isAuthenticated && user?.role === 'student' && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Course Quizzes</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">Course Quizzes</h2>
               
               {loadingQuizzes && (
                 <div className="text-center py-8">
                   <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
-                  <p className="mt-2 text-sm text-slate-600">Loading quizzes...</p>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Loading quizzes...</p>
                 </div>
               )}
 
               {!loadingQuizzes && quizzes.length === 0 && (
-                <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-slate-200">
-                  <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-slate-200 dark:border-slate-700">
+                  <div className="w-16 h-16 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                   </div>
-                  <p className="text-base font-semibold text-slate-600">No quizzes available for this course yet.</p>
+                  <p className="text-base font-semibold text-slate-600 dark:text-slate-400">No quizzes available for this course yet.</p>
                 </div>
               )}
 
@@ -582,11 +582,11 @@ const CourseLandingPage = () => {
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
-                              <h3 className="text-lg font-bold text-slate-900">{quiz.title}</h3>
+                              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{quiz.title}</h3>
                               <QuizStatusBadge status={status} />
                             </div>
                             {quiz.description && (
-                              <p className="text-sm text-slate-600 mb-3 leading-relaxed">{quiz.description}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">{quiz.description}</p>
                             )}
                             <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                               {quiz.total_points > 0 && (
@@ -631,24 +631,24 @@ const CourseLandingPage = () => {
 
           {/* ASSIGNMENTS SECTION - Coursera Style */}
           {isEnrolled && isAuthenticated && user?.role === 'student' && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Course Assignments</h2>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">Course Assignments</h2>
               
               {loadingAssignments && (
                 <div className="text-center py-8">
                   <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
-                  <p className="mt-2 text-sm text-slate-600">Loading assignments...</p>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Loading assignments...</p>
                 </div>
               )}
 
               {!loadingAssignments && assignments.length === 0 && (
-                <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-slate-200">
-                  <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-slate-200 dark:border-slate-700">
+                  <div className="w-16 h-16 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
-                  <p className="text-base font-semibold text-slate-600">No assignments available for this course yet.</p>
+                  <p className="text-base font-semibold text-slate-600 dark:text-slate-400">No assignments available for this course yet.</p>
                 </div>
               )}
 
@@ -675,11 +675,11 @@ const CourseLandingPage = () => {
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
-                              <h3 className="text-lg font-bold text-slate-900">{assignment.title}</h3>
+                              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{assignment.title}</h3>
                               <AssignmentStatusBadge status={status} />
                             </div>
                             {assignment.description && (
-                              <p className="text-sm text-slate-600 mb-3 leading-relaxed">{assignment.description}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">{assignment.description}</p>
                             )}
                             <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                               {assignment.max_points > 0 && (
@@ -724,23 +724,23 @@ const CourseLandingPage = () => {
 
           {/* REVIEWS - Coursera Style */}
           {reviews.length > 0 && (
-            <div className="bg-white rounded-2xl p-8 border-2 border-slate-200 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
                 Student reviews
               </h2>
-              <div className="mb-8 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl p-6 border-2 border-primary-100">
+              <div className="mb-8 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-slate-900 dark:via-slate-900 rounded-xl p-6 border-2 border-primary-100">
                 <div className="flex items-center gap-4">
-                  <div className="text-5xl font-bold text-slate-900">
+                  <div className="text-5xl font-bold text-slate-900 dark:text-slate-100">
                     {ratingSummary.average_rating ? ratingSummary.average_rating.toFixed(1) : '0.0'}
                   </div>
                   <div className="flex-1">
                     <div className="mb-2">
                       <RatingStars value={ratingSummary.average_rating || 0} size="lg" />
                     </div>
-                    <p className="text-base font-semibold text-slate-700">
+                    <p className="text-base font-semibold text-slate-700 dark:text-slate-300">
                       Course average rating
                     </p>
-                    <p className="text-sm text-slate-600 mt-1">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                       Based on {ratingSummary.total_reviews || 0} {ratingSummary.total_reviews === 1 ? 'review' : 'reviews'}
                     </p>
                   </div>
@@ -753,7 +753,7 @@ const CourseLandingPage = () => {
 
         {/* RIGHT SIDEBAR - Purchase CTA - Coursera Style */}
         <div className="lg:sticky lg:top-4 h-fit">
-          <div className="bg-white border-2 border-slate-200 rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl overflow-hidden">
             {/* Course Preview */}
             {course.thumbnail_url && (
               <div className="relative w-full aspect-video bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden">
@@ -777,7 +777,7 @@ const CourseLandingPage = () => {
 
             <div className="p-6 space-y-5">
               {/* Price - Coursera Style */}
-              <div className="text-4xl font-bold text-slate-900">
+              <div className="text-4xl font-bold text-slate-900 dark:text-slate-100">
                 ${parseFloat(course.price || 0).toFixed(2)}
               </div>
 
@@ -823,7 +823,7 @@ const CourseLandingPage = () => {
                     </div>
                     <button
                       onClick={() => navigate(`/courses/${courseId}/learn`)}
-                      className="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-4 rounded-lg transition"
+                        className="w-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 font-bold py-4 rounded-lg transition"
                     >
                       Go to course
                     </button>
@@ -879,9 +879,9 @@ const CourseLandingPage = () => {
               )}
 
               {/* Course Features - Coursera Style */}
-              <div className="pt-5 border-t-2 border-slate-200">
-                <h3 className="font-bold text-slate-900 mb-4">This course includes:</h3>
-                <ul className="space-y-3 text-sm text-slate-700">
+              <div className="pt-5 border-t-2 border-slate-200 dark:border-slate-700">
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4">This course includes:</h3>
+                <ul className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
                   <li className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-accent-100 flex items-center justify-center flex-shrink-0">
                       <svg className="w-4 h-4 text-accent-600" fill="currentColor" viewBox="0 0 20 20">

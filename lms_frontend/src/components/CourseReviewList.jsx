@@ -41,14 +41,14 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
   
   if (reviewsArray.length === 0) {
     return (
-      <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-slate-200">
-        <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+        <div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4 dark:bg-slate-700">
+          <svg className="w-8 h-8 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         </div>
-        <p className="text-base font-semibold text-slate-600">No reviews yet.</p>
-        <p className="text-sm text-slate-500 mt-1">Be the first to review this course!</p>
+        <p className="text-base font-semibold text-slate-600 dark:text-slate-400">No reviews yet.</p>
+        <p className="text-sm text-slate-500 mt-1 dark:text-slate-400">Be the first to review this course!</p>
       </div>
     );
   }
@@ -88,7 +88,7 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
         {currentReviews.map((review) => (
           <div 
             key={review.id} 
-            className="bg-slate-50 border-2 border-slate-200 rounded-xl p-6 hover:border-primary-200 transition-all shadow-sm"
+            className="bg-slate-50 border-2 border-slate-200 rounded-xl p-6 hover:border-primary-200 transition-all shadow-sm dark:bg-slate-800 dark:border-slate-700"
           >
             <div className="flex items-start gap-4">
               {/* Avatar */}
@@ -111,12 +111,12 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
                       {review.user?.id ? (
                         <button
                           onClick={() => navigate(`/profile/${review.user.id}`)}
-                          className="text-base font-bold text-slate-900 hover:text-primary-600 transition cursor-pointer"
+                          className="text-base font-bold text-slate-900 hover:text-primary-600 transition cursor-pointer dark:text-slate-100"
                         >
                           {review.user?.full_name || review.user?.email || 'Anonymous'}
                         </button>
                       ) : (
-                        <div className="text-base font-bold text-slate-900">
+                        <div className="text-base font-bold text-slate-900 dark:text-slate-100">
                           {review.user?.full_name || review.user?.email || 'Anonymous'}
                         </div>
                       )}
@@ -128,14 +128,14 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
                     </div>
                     <div className="flex items-center gap-2">
                       <RatingStars value={review.rating} size="sm" />
-                      <span className="text-xs text-slate-500 font-medium">
+                      <span className="text-xs text-slate-500 font-medium dark:text-slate-400">
                         {formatDate(review.created_at)}
                       </span>
                     </div>
                   </div>
                 </div>
                 {review.comment && (
-                  <p className="text-base text-slate-700 leading-relaxed mb-2">{review.comment}</p>
+                  <p className="text-base text-slate-700 leading-relaxed mb-2 dark:text-slate-300">{review.comment}</p>
                 )}
               </div>
             </div>
@@ -145,13 +145,13 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
 
       {/* Pagination Controls - Coursera Style */}
       {totalPages > 1 && (
-        <div className="pt-6 border-t-2 border-slate-200">
+        <div className="pt-6 border-t-2 border-slate-200 dark:border-slate-700">
           <div className="flex items-center justify-between">
             {/* Previous Button */}
             <button
               onClick={handlePrevious}
               disabled={currentPage === 1}
-              className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border-2 border-slate-300 rounded-lg hover:bg-slate-50 hover:border-primary-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border-2 border-slate-300 rounded-lg hover:bg-slate-50 hover:border-primary-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -172,7 +172,7 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
                   // Show ellipsis
                   if (page === currentPage - 2 || page === currentPage + 2) {
                     return (
-                      <span key={page} className="px-2 text-slate-500 font-medium">
+                      <span key={page} className="px-2 text-slate-500 font-medium dark:text-slate-400">
                         ...
                       </span>
                     );
@@ -187,7 +187,7 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
                     className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${
                       currentPage === page
                         ? 'bg-primary-500 text-white shadow-md hover:bg-primary-600'
-                        : 'text-slate-700 bg-white border-2 border-slate-300 hover:bg-slate-50 hover:border-primary-300'
+                        : 'text-slate-700 bg-white border-2 border-slate-300 hover:bg-slate-50 hover:border-primary-300 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700'
                     }`}
                   >
                     {page}
@@ -200,7 +200,7 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border-2 border-slate-300 rounded-lg hover:bg-slate-50 hover:border-primary-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border-2 border-slate-300 rounded-lg hover:bg-slate-50 hover:border-primary-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700"
             >
               Next
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,7 +210,7 @@ const CourseReviewList = ({ reviews = [], currentUserId, reviewsPerPage = 5 }) =
           </div>
 
           {/* Pagination Info */}
-          <div className="text-sm text-slate-600 text-center pt-4 font-medium">
+          <div className="text-sm text-slate-600 text-center pt-4 font-medium dark:text-slate-400">
             Showing {startIndex + 1}-{Math.min(endIndex, totalReviews)} of {totalReviews} reviews
           </div>
         </div>

@@ -129,10 +129,10 @@ const QuizEditor = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          <p className="mt-4 text-slate-600">Loading quiz...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 dark:border-primary-400"></div>
+          <p className="mt-4 text-slate-600 dark:text-slate-400">Loading quiz...</p>
         </div>
       </div>
     );
@@ -141,7 +141,7 @@ const QuizEditor = () => {
   if (!quiz) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-800 dark:text-red-300">
           Quiz not found
         </div>
       </div>
@@ -149,17 +149,17 @@ const QuizEditor = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         {/* Header - Coursera Style */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Edit Quiz</h1>
-            <p className="text-slate-600 mt-1 text-sm">Manage quiz details, questions, and choices</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Edit Quiz</h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-1 text-sm">Manage quiz details, questions, and choices</p>
           </div>
           <button
             onClick={() => navigate(`/teacher/courses/${quiz.course}/quizzes`)}
-            className="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border-2 border-slate-300 rounded-lg hover:bg-slate-50 transition"
+            className="px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition"
           >
             Back to Course Quizzes
           </button>
@@ -167,11 +167,11 @@ const QuizEditor = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 text-red-800 dark:text-red-300 text-sm">
           {error}
           <button
             onClick={() => setError(null)}
-            className="ml-4 text-sm underline"
+            className="ml-4 text-sm underline hover:text-red-900 dark:hover:text-red-400"
           >
             Dismiss
           </button>
@@ -179,38 +179,38 @@ const QuizEditor = () => {
       )}
 
       {/* Quiz Info Form - Coursera Style */}
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-md border-2 border-slate-200 p-6 space-y-3">
-        <h2 className="text-lg font-semibold text-slate-900 mb-3">Quiz Information</h2>
+      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-2xl shadow-md border-2 border-slate-200 dark:border-slate-700 p-6 space-y-3">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-3">Quiz Information</h2>
         <div className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Title <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+              className="w-full px-3 py-2 text-sm border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
               placeholder="Enter quiz title"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+              className="w-full px-3 py-2 text-sm border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
               placeholder="Enter quiz description"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Time Limit (minutes)
               </label>
               <input
@@ -218,7 +218,7 @@ const QuizEditor = () => {
                 value={formData.time_limit}
                 onChange={(e) => setFormData({ ...formData, time_limit: e.target.value })}
                 min="1"
-                className="w-full px-3 py-2 text-sm border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition"
+                className="w-full px-3 py-2 text-sm border-2 border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 transition bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="Optional"
               />
             </div>
@@ -231,7 +231,7 @@ const QuizEditor = () => {
                   onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
                   className="w-4 h-4 text-primary-500 border-slate-300 rounded focus:ring-primary-500"
                 />
-                <span className="text-sm font-medium text-slate-700">Published</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Published</span>
               </label>
             </div>
           </div>
@@ -249,9 +249,9 @@ const QuizEditor = () => {
       </div>
 
       {/* Questions Section - Coursera Style */}
-      <div className="bg-white shadow-md rounded-2xl p-4 border-2 border-slate-200">
+      <div className="bg-white dark:bg-slate-800 shadow-md rounded-2xl p-4 border-2 border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-slate-900">Questions</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Questions</h2>
           <button
             onClick={handleAddQuestion}
             disabled={addingQuestion}
@@ -284,7 +284,7 @@ const QuizEditor = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-6 text-slate-500 text-sm">
+          <div className="text-center py-6 text-slate-500 dark:text-slate-400 text-sm">
             <p>No questions yet. Click "Add Question" to create your first question.</p>
           </div>
         )}
