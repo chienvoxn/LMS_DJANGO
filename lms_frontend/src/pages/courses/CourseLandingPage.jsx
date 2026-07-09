@@ -11,6 +11,7 @@ import {
 } from "../../api/client";
 import { useAuth } from "../../context/AuthContext";
 import RatingStars from "../../components/RatingStars";
+import CourseReviewForm from "../../components/CourseReviewForm";
 import CourseReviewList from "../../components/CourseReviewList";
 import QuizStatusBadge from "../../components/QuizStatusBadge";
 import AssignmentStatusBadge from "../../components/AssignmentStatusBadge";
@@ -39,6 +40,9 @@ const CourseLandingPage = () => {
   const [loadingAssignments, setLoadingAssignments] = useState(false);
   const [assignmentStatuses, setAssignmentStatuses] = useState({});
   const [assignmentScores, setAssignmentScores] = useState({});
+  const [myReview, setMyReview] = useState(null);
+  const [submittingReview, setSubmittingReview] = useState(false);
+  const [loadingReviews, setLoadingReviews] = useState(false);
 
   useEffect(() => {
     fetchCourseData();
@@ -55,6 +59,7 @@ const CourseLandingPage = () => {
     if (isEnrolled && isAuthenticated && user?.role === "student") {
       fetchQuizzes();
       fetchAssignments();
+      fetchMyReview();
     }
   }, [course?.is_enrolled, isAuthenticated, user?.role, courseId]);
 
@@ -216,6 +221,19 @@ const CourseLandingPage = () => {
       console.error("Error fetching assignments:", err);
     } finally {
       setLoadingAssignments(false);
+    }
+  };
+
+  const fetchMyReview = async () => {
+    try {
+      setLoadingReviews(true);
+      const response = await reviewsAPI.getMyCourseReview(courseId);
+      setMyReview(response.data || null);
+    } catch (err) {
+      console.error("Error fetching my review:", err);
+      setMyReview(null);
+    } finally {
+      setLoadingReviews(false);
     }
   };
 
@@ -1036,38 +1054,105 @@ const CourseLandingPage = () => {
           )}
 
           {/* REVIEWS - Coursera Style */}
-          {reviews.length > 0 && (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
-                Student reviews
-              </h2>
-              <div className="mb-8 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-slate-900 dark:via-slate-900 rounded-xl p-6 border-2 border-primary-100">
-                <div className="flex items-center gap-4">
-                  <div className="text-5xl font-bold text-slate-900 dark:text-slate-100">
-                    {ratingSummary.average_rating
-                      ? ratingSummary.average_rating.toFixed(1)
-                      : "0.0"}
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+              Student reviews
+            </h2>
+            <div className="mb-8 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-slate-900 dark:via-slate-900 rounded-xl p-6 border-2 border-primary-100">
+              <div className="flex items-center gap-4">
+                <div className="text-5xl font-bold text-slate-900 dark:text-slate-100">
+                  {ratingSummary.average_rating
+                    ? ratingSummary.average_rating.toFixed(1)
+                    : "0.0"}
+                </div>
+                <div className="flex-1">
+                  <div className="mb-2">
+                    <RatingStars
+                      value={ratingSummary.average_rating || 0}
+                      size="lg"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <div className="mb-2">
-                      <RatingStars
-                        value={ratingSummary.average_rating || 0}
-                        size="lg"
-                      />
-                    </div>
-                    <p className="text-base font-semibold text-slate-700 dark:text-slate-300">
-                      Course average rating
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                      Based on {ratingSummary.total_reviews || 0}{" "}
-                      {ratingSummary.total_reviews === 1 ? "review" : "reviews"}
-                    </p>
-                  </div>
+                  <p className="text-base font-semibold text-slate-700 dark:text-slate-300">
+                    Course average rating
+                  </p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    Based on {ratingSummary.total_reviews || 0}{" "}
+                    {ratingSummary.total_reviews === 1 ? "review" : "reviews"}
+                  </p>
                 </div>
               </div>
-              <CourseReviewList reviews={reviews} currentUserId={user?.id} />
             </div>
-          )}
+
+            {/* Review form for enrolled students only */}
+            {isAuthenticated && user?.role === "student" && isEnrolled && (
+              <div className="mb-6">
+                {loadingReviews ? (
+                  <div className="text-sm text-slate-500">Loading your review...</div>
+                ) : (
+                  <CourseReviewForm
+                    initialRating={myReview?.rating || null}
+                    initialComment={myReview?.comment || ""}
+                    disabled={submittingReview}
+                    onSubmit={async ({ rating, comment }) => {
+                      setSubmittingReview(true);
+                      try {
+                        const response = await reviewsAPI.upsertCourseReview(courseId, { rating, comment });
+                        setMyReview(response.data);
+                        // Refresh reviews list
+                        const reviewsResponse = await reviewsAPI.getCourseReviews(courseId);
+                        let reviewsData = [];
+                        if (Array.isArray(reviewsResponse.data)) {
+                          reviewsData = reviewsResponse.data;
+                        } else if (reviewsResponse.data?.results) {
+                          reviewsData = reviewsResponse.data.results;
+                        }
+                        setReviews(reviewsData.slice(0, 10));
+                        // Refresh rating summary
+                        const summaryResponse = await reviewsAPI.getCourseRatingSummary(courseId);
+                        setRatingSummary(summaryResponse.data || { average_rating: 0, total_reviews: 0 });
+                      } catch (error) {
+                        console.error('Error submitting review:', error);
+                        throw error;
+                      } finally {
+                        setSubmittingReview(false);
+                      }
+                    }}
+                    onDelete={
+                      myReview
+                        ? async () => {
+                            if (!myReview?.id) return;
+                            setSubmittingReview(true);
+                            try {
+                              await reviewsAPI.deleteCourseReview(myReview.id);
+                              setMyReview(null);
+                              // Refresh reviews list
+                              const reviewsResponse = await reviewsAPI.getCourseReviews(courseId);
+                              let reviewsData = [];
+                              if (Array.isArray(reviewsResponse.data)) {
+                                reviewsData = reviewsResponse.data;
+                              } else if (reviewsResponse.data?.results) {
+                                reviewsData = reviewsResponse.data.results;
+                              }
+                              setReviews(reviewsData.slice(0, 10));
+                              // Refresh rating summary
+                              const summaryResponse = await reviewsAPI.getCourseRatingSummary(courseId);
+                              setRatingSummary(summaryResponse.data || { average_rating: 0, total_reviews: 0 });
+                            } catch (error) {
+                              console.error('Error deleting review:', error);
+                              throw error;
+                            } finally {
+                              setSubmittingReview(false);
+                            }
+                          }
+                        : undefined
+                    }
+                  />
+                )}
+              </div>
+            )}
+
+            <CourseReviewList reviews={reviews} currentUserId={user?.id} />
+          </div>
         </div>
 
         {/* RIGHT SIDEBAR - Purchase CTA - Coursera Style */}
