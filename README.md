@@ -3,6 +3,7 @@
 ## Tổng quan dự án
 
 LMS_DJANGO là một hệ thống quản lý học tập (Learning Management System) được xây dựng với kiến trúc **Frontend分离**:
+
 - **Backend**: Django REST Framework (Python)
 - **Frontend**: React.js với Vite + TailwindCSS
 
@@ -39,27 +40,30 @@ LMS_DJANGO/
 ## Công nghệ sử dụng
 
 ### Backend
-| Công nghệ | Phiên bản | Mục đích |
-|-----------|-----------|----------|
-| Django | 5.2.7 | Web framework |
-| Django REST Framework | 3.16.1 | RESTful API |
-| SimpleJWT | - | Xác thực JWT |
-| MySQL | - | Cơ sở dữ liệu |
-| django-cors-headers | - | CORS middleware |
+
+| Công nghệ             | Phiên bản | Mục đích        |
+| --------------------- | --------- | --------------- |
+| Django                | 5.2.7     | Web framework   |
+| Django REST Framework | 3.16.1    | RESTful API     |
+| SimpleJWT             | -         | Xác thực JWT    |
+| MySQL                 | -         | Cơ sở dữ liệu   |
+| django-cors-headers   | -         | CORS middleware |
 
 ### Frontend
-| Công nghệ | Phiên bản | Mục đích |
-|-----------|-----------|----------|
-| React | 18.2.0 | UI Library |
-| React Router DOM | 6.20.0 | Routing |
-| Axios | 1.6.2 | HTTP Client |
-| Vite | 5.0.8 | Build tool |
-| TailwindCSS | 3.4.0 | CSS Framework |
-| Recharts | 3.5.1 | Biểu đồ/Thống kê |
+
+| Công nghệ        | Phiên bản | Mục đích         |
+| ---------------- | --------- | ---------------- |
+| React            | 18.2.0    | UI Library       |
+| React Router DOM | 6.20.0    | Routing          |
+| Axios            | 1.6.2     | HTTP Client      |
+| Vite             | 5.0.8     | Build tool       |
+| TailwindCSS      | 3.4.0     | CSS Framework    |
+| Recharts         | 3.5.1     | Biểu đồ/Thống kê |
 
 ## Cài đặt và chạy dự án
 
 ### Yêu cầu hệ thống
+
 - Python 3.10+
 - Node.js 18+
 - MySQL Server
@@ -93,6 +97,8 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+Trước khi chạy dữ án, hãy xây build file .env phù hợp mục đích người sử dụng, tham khảo `/lms_api/.env.example`
+
 Backend sẽ chạy tại: `http://127.0.0.1:8000`
 
 ### Frontend Setup
@@ -112,68 +118,80 @@ Frontend sẽ chạy tại: `http://localhost:5173`
 ## Các mô hình dữ liệu
 
 ### 1. Users (Người dùng)
+
 - **User Model**: Mô hình tùy chỉnh kế thừa từ AbstractUser
 - **Roles**: Student (Học viên), Teacher (Giảng viên), Admin
 - **Fields**: username, email, first_name, last_name, role, avatar...
 
 ### 2. Courses (Khóa học)
+
 - **Course**: Khóa học chính
 - **Category**: Danh mục khóa học
 - **Lesson**: Bài học trong khóa học
 
 ### 3. Enrollments (Đăng ký)
+
 - **Enrollment**: Đăng ký khóa học của học viên
 - **Cart**: Giỏ hàng đăng ký
 
 ### 4. Assessments (Đánh giá)
+
 - **Quiz/Bai_kiem_tra**: Các bài kiểm tra
 - **Question**: Câu hỏi
 - **Answer**: Đáp án
 
 ### 5. Reviews (Đánh giá)
+
 - **Review**: Đánh giá khóa học từ học viên
 
 ### 6. Analytics (Thống kê)
+
 - **Statistics**: Thống kê khóa học, người dùng
 
 ## API Endpoints
 
 ### Xác thực (Authentication)
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
-| POST | `/api/auth/register/` | Đăng ký tài khoản |
-| POST | `/api/auth/login/` | Đăng nhập (JWT) |
-| POST | `/api/auth/refresh/` | Làm mới access token |
-| GET | `/api/auth/me/` | Lấy thông tin người dùng hiện tại |
-| POST | `/api/auth/change-password/` | Đổi mật khẩu |
+
+| Method | Endpoint                     | Mô tả                             |
+| ------ | ---------------------------- | --------------------------------- |
+| POST   | `/api/auth/register/`        | Đăng ký tài khoản                 |
+| POST   | `/api/auth/login/`           | Đăng nhập (JWT)                   |
+| POST   | `/api/auth/refresh/`         | Làm mới access token              |
+| GET    | `/api/auth/me/`              | Lấy thông tin người dùng hiện tại |
+| POST   | `/api/auth/change-password/` | Đổi mật khẩu                      |
 
 ### Quản lý người dùng
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
+
+| Method  | Endpoint      | Mô tả                         |
+| ------- | ------------- | ----------------------------- |
 | GET/PUT | `/api/users/` | Danh sách/Cập nhật người dùng |
 
 ### Khóa học
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
-| GET/POST | `/api/courses/` | Danh sách/Tạo khóa học |
+
+| Method         | Endpoint             | Mô tả                     |
+| -------------- | -------------------- | ------------------------- |
+| GET/POST       | `/api/courses/`      | Danh sách/Tạo khóa học    |
 | GET/PUT/DELETE | `/api/courses/{id}/` | Chi tiết/Sửa/Xóa khóa học |
 
 ### Đăng ký khóa học
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
-| GET/POST | `/api/enrollments/` | Danh sách/Tạo đăng ký |
-| GET | `/api/student/my-courses/` | Khóa học của học viên |
-| GET | `/api/teacher/courses/{id}/students/` | DS học viên theo khóa |
+
+| Method   | Endpoint                              | Mô tả                 |
+| -------- | ------------------------------------- | --------------------- |
+| GET/POST | `/api/enrollments/`                   | Danh sách/Tạo đăng ký |
+| GET      | `/api/student/my-courses/`            | Khóa học của học viên |
+| GET      | `/api/teacher/courses/{id}/students/` | DS học viên theo khóa |
 
 ### Đánh giá
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
+
+| Method   | Endpoint        | Mô tả                  |
+| -------- | --------------- | ---------------------- |
 | GET/POST | `/api/reviews/` | Danh sách/Tạo đánh giá |
 
 ### Thống kê
-| Method | Endpoint | Mô tả |
-|--------|----------|-------|
-| GET | `/api/analytics/` | Thống kê tổng quan |
+
+| Method | Endpoint          | Mô tả              |
+| ------ | ----------------- | ------------------ |
+| GET    | `/api/analytics/` | Thống kê tổng quan |
 
 ## Cấu hình JWT
 
@@ -196,6 +214,7 @@ CORS_ALLOW_CREDENTIALS = True
 ## Chức năng chính
 
 ### Cho Học viên
+
 - Đăng ký/đăng nhập tài khoản
 - Duyệt và tìm kiếm khóa học
 - Đăng ký khóa học
@@ -205,6 +224,7 @@ CORS_ALLOW_CREDENTIALS = True
 - Xem thống kê tiến độ
 
 ### Cho Giảng viên
+
 - Tạo và quản lý khóa học
 - Tạo bài học và bài kiểm tra
 - Xem danh sách học viên theo khóa học
@@ -212,6 +232,7 @@ CORS_ALLOW_CREDENTIALS = True
 - Quản lý đánh giá
 
 ### Cho Admin
+
 - Quản lý người dùng
 - Quản lý tất cả khóa học
 - Xem thống kê tổng quan
@@ -220,17 +241,20 @@ CORS_ALLOW_CREDENTIALS = True
 ## Phát triển
 
 ### Thêm ứng dụng mới
+
 ```bash
 python manage.py startapp <app_name>
 ```
 
 ### Tạo Migration
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 ### Chạy Test
+
 ```bash
 python manage.py test
 ```
