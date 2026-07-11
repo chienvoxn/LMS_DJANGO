@@ -33,6 +33,7 @@ import CartPage from '../pages/CartPage';
 import CartCheckoutPage from '../pages/CartCheckoutPage';
 import StudentPaymentHistory from '../pages/StudentPaymentHistory';
 import BrowseCourses from '../pages/BrowseCourses';
+import ChatPage from '../pages/ChatPage';
 import Navbar from '../components/Navbar';
 
 const ProtectedRoute = ({ children }) => {
@@ -288,6 +289,16 @@ const AppRouter = () => {
             </TeacherRoute>
           }
         />
+        {/* Chat */}
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <ChatPage />
+            </ProtectedRoute>
+          }
+        />
+
         {/* Student Quiz Player */}
         <Route
           path="/courses/:courseId/quizzes/:quizId/take"

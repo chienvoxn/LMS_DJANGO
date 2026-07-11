@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/', include('assessments.urls')),
     path('api/', include('reviews.urls')),
     path('api/', include('analytics.urls')),
+    path('api/', include('chat.urls')),
     # Student endpoints
     path('api/student/my-courses/', StudentMyCoursesAPIView.as_view(), name='student-my-courses'),
     # Student public profile

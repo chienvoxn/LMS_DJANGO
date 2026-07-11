@@ -10,11 +10,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showChatDialog, setShowChatDialog] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef(null);
-  const chatRef = useRef(null);
 
   const handleLogout = () => {
     logout();
@@ -56,19 +54,16 @@ const Navbar = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
-      if (chatRef.current && !chatRef.current.contains(event.target)) {
-        setShowChatDialog(false);
-      }
     };
 
-    if (showDropdown || showChatDialog) {
+    if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showDropdown, showChatDialog]);
+  }, [showDropdown]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -277,45 +272,26 @@ const Navbar = () => {
               )}
 
               {/* Chat Button - Authenticated users */}
-              <div className="relative" ref={chatRef}>
-                <button
-                  onClick={() => setShowChatDialog(!showChatDialog)}
-                  className="p-2 rounded-lg text-slate-700 hover:text-primary-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-primary-400 dark:hover:bg-slate-700 transition-colors relative"
-                  aria-label="Open chat"
+              <button
+                onClick={() => navigate('/chat')}
+                className="p-2 rounded-lg text-slate-700 hover:text-primary-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-primary-400 dark:hover:bg-slate-700 transition-colors relative"
+                aria-label="Open chat"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
-                    />
-                  </svg>
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full ring-2 ring-white dark:ring-slate-800"></span>
-                </button>
-
-                {/* Chat Dialog Placeholder */}
-                {showChatDialog && (
-                  <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 py-2 z-50">
-                    <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
-                      <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                        Chat hỗ trợ
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
-                        Chúng tôi sẽ hỗ trợ bạn
-                      </p>
-                    </div>
-                    <div className="px-4 py-6 text-center text-slate-500 dark:text-slate-400 text-sm min-h-[200px] flex items-center justify-center">
-                      Hộp thoại chat sẽ được bổ sung sau
-                    </div>
-                  </div>
-                )}
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
+                  />
+                </svg>
+                <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full ring-2 ring-white dark:ring-slate-800"></span>
+              </button>
 
               {/* User Menu Dropdown */}
               <div className="relative" ref={dropdownRef}>

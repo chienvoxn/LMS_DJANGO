@@ -262,5 +262,14 @@ export const checkoutCart = (itemIds = null) => {
   return api.post("/enrollments/cart/checkout/", payload);
 };
 
+// Chat APIs
+export const chatAPI = {
+  getConversations: () => api.get('/chat/conversations/'),
+  getConversationDetail: (id) => api.get(`/chat/conversations/${id}/`),
+  createConversation: (emails) => api.post('/chat/conversations/', { emails }),
+  getMessages: (conversationId) => api.get(`/chat/conversations/${conversationId}/messages/`),
+  sendMessage: (conversationId, content) => api.post(`/chat/conversations/${conversationId}/messages/`, { content }),
+};
+
 export default api;
 
