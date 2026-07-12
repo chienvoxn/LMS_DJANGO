@@ -23,21 +23,26 @@ from .quiz_views import (
 from .upload_views import upload_file_view
 
 __all__ = [
+    # Quiz dành cho giảng viên
     "TeacherQuizViewSet",
     "QuestionCreateAPIView",
     "QuestionDetailAPIView",
     "ChoiceCreateAPIView",
     "ChoiceDetailAPIView",
+    # Quiz dành cho học viên
     "CourseQuizzesListAPIView",
     "QuizDetailAPIView",
     "QuizStartAPIView",
     "QuizSubmitAPIView",
     "QuizAttemptsMeAPIView",
+    # Bài tập dành cho giảng viên
     "TeacherAssignmentViewSet",
     "SubmissionGradeAPIView",
+    # Bài tập dành cho học viên
     "CourseAssignmentsListAPIView",
     "AssignmentDetailAPIView",
     "AssignmentSubmitAPIView",
     "AssignmentMySubmissionAPIView",
+    # Upload file
     "upload_file_view",
 ]

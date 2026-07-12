@@ -2,22 +2,22 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
-    AssignmentDetailAPIView,
-    AssignmentMySubmissionAPIView,
-    AssignmentSubmitAPIView,
-    ChoiceCreateAPIView,
-    ChoiceDetailAPIView,
-    CourseAssignmentsListAPIView,
-    CourseQuizzesListAPIView,
+    TeacherQuizViewSet,
     QuestionCreateAPIView,
     QuestionDetailAPIView,
-    QuizAttemptsMeAPIView,
+    ChoiceCreateAPIView,
+    ChoiceDetailAPIView,
+    CourseQuizzesListAPIView,
     QuizDetailAPIView,
     QuizStartAPIView,
     QuizSubmitAPIView,
-    SubmissionGradeAPIView,
+    QuizAttemptsMeAPIView,
     TeacherAssignmentViewSet,
-    TeacherQuizViewSet,
+    SubmissionGradeAPIView,
+    CourseAssignmentsListAPIView,
+    AssignmentDetailAPIView,
+    AssignmentSubmitAPIView,
+    AssignmentMySubmissionAPIView,
     upload_file_view,
 )
 
