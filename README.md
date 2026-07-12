@@ -2,7 +2,7 @@
 
 # LMS_DJANGO
 
-**Hệ thống quản lý học tập full-stack xây dựng bằng Django REST Framework và React**
+**Nền tảng học tập trực tuyến full-stack được xây dựng bằng Django REST Framework và React**
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.2.7-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
@@ -13,16 +13,82 @@
 
 ## Giới thiệu
 
-**LMS_DJANGO** là một hệ thống quản lý học tập (_Learning Management System — LMS_) sử dụng kiến trúc tách biệt frontend và backend:
+**LMS_DJANGO** là một nền tảng học tập trực tuyến được phát triển theo mô hình của các hệ thống như **Coursera** và **Udemy**.
+
+Nền tảng cho phép giảng viên xây dựng và quản lý khóa học, đồng thời hỗ trợ học viên tìm kiếm khóa học, đăng ký học, theo dõi tiến độ, làm bài kiểm tra, nộp bài tập, đánh giá khóa học và nhận chứng chỉ sau khi hoàn thành.
+
+Hệ thống sử dụng kiến trúc tách biệt giữa frontend và backend:
 
 - **Backend:** Django REST Framework.
 - **Frontend:** React, Vite và Tailwind CSS.
 - **Database:** MySQL.
-- **Authentication:** JSON Web Token (JWT).
+- **Authentication:** JSON Web Token.
+- **Kiến trúc API:** RESTful API.
 
-Hệ thống hỗ trợ học viên, giảng viên và quản trị viên trong việc quản lý khóa học, nội dung học tập, đăng ký học, tiến độ, bài kiểm tra, bài tập, đánh giá, chứng chỉ, thanh toán mô phỏng, thống kê và nhắn tin.
+Các nhóm người dùng chính gồm:
 
-> Dự án được phát triển chủ yếu cho mục đích học tập và thực hành xây dựng ứng dụng web full-stack.
+- **Khách:** xem và tìm kiếm thông tin khóa học.
+- **Học viên:** đăng ký khóa học và tham gia học tập.
+- **Giảng viên:** xây dựng và quản lý nội dung khóa học.
+- **Quản trị viên:** quản lý dữ liệu hệ thống thông qua Django Admin.
+
+> Dự án được phát triển chủ yếu cho mục đích học tập, nghiên cứu và thực hành xây dựng một nền tảng giáo dục trực tuyến full-stack.
+
+---
+
+## Tính năng chính
+
+### Khách
+
+- Xem danh sách khóa học.
+- Xem thông tin chi tiết của từng khóa học.
+- Tìm kiếm khóa học.
+- Xem thông tin giảng viên.
+- Đăng ký tài khoản.
+- Đăng nhập vào hệ thống.
+
+### Học viên
+
+- Đăng ký, đăng nhập và quản lý hồ sơ cá nhân.
+- Duyệt và tìm kiếm khóa học.
+- Xem thông tin chi tiết, nội dung và đánh giá khóa học.
+- Thêm khóa học vào giỏ hàng.
+- Thực hiện thanh toán mô phỏng.
+- Đăng ký và tham gia khóa học.
+- Xem chương học, bài giảng và tài liệu học tập.
+- Theo dõi tiến độ hoàn thành từng bài học.
+- Làm quiz và xem kết quả.
+- Nộp bài tập cho giảng viên.
+- Xem điểm số và phản hồi.
+- Đánh giá và nhận xét khóa học.
+- Nhận chứng chỉ sau khi hoàn thành.
+- Xem lịch sử đăng ký và thanh toán.
+- Nhắn tin trực tiếp hoặc theo nhóm.
+
+### Giảng viên
+
+- Tạo và quản lý khóa học.
+- Cập nhật thông tin, hình ảnh và giá khóa học.
+- Tạo chương học và bài giảng.
+- Thêm video, tài liệu và nội dung học tập.
+- Tạo quiz, câu hỏi và đáp án.
+- Tạo và quản lý bài tập.
+- Xem danh sách bài nộp của học viên.
+- Chấm điểm và phản hồi bài tập.
+- Quản lý danh sách học viên trong khóa học.
+- Theo dõi tiến độ và hoạt động học tập.
+- Xem thống kê khóa học và mức độ tương tác.
+- Trao đổi với học viên qua hệ thống nhắn tin.
+
+### Quản trị viên
+
+- Đăng nhập vào giao diện Django Admin.
+- Quản lý tài khoản người dùng.
+- Quản lý vai trò và quyền truy cập.
+- Quản lý các model đã được đăng ký trong Django Admin.
+- Theo dõi và chỉnh sửa dữ liệu hệ thống ở cấp quản trị.
+
+> Phiên bản hiện tại chưa có trang quản trị riêng trên frontend React. Các chức năng quản trị chủ yếu được thực hiện thông qua Django Admin.
 
 ## Tính năng
 
