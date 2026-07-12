@@ -1,38 +1,103 @@
-from django.urls import path, include
+"""Khai báo URL cho khóa học, chương học và bài học."""
+
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import CourseViewSet, CourseCurriculumAPIView, LessonDetailAPIView, CourseCategoriesListAPIView
-from .teacher_views import TeacherCourseViewSet, TeacherSectionViewSet, TeacherLessonViewSet
+
 from enrollments.views import (
-    EnrollCourseAPIView, 
     CompleteLessonAPIView,
-    PurchaseCourseAPIView,
+    EnrollCourseAPIView,
     IssueCertificateAPIView,
     MyCertificateAPIView,
-    MyCertificatesListAPIView
+    MyCertificatesListAPIView,
+    PurchaseCourseAPIView,
 )
 
-# Public router
-router = DefaultRouter()
-router.register(r'courses', CourseViewSet, basename='course')
+from .teacher_views import (
+    TeacherCourseViewSet,
+    TeacherLessonViewSet,
+    TeacherSectionViewSet,
+)
+from .views import (
+    CourseCategoriesListAPIView,
+    CourseCurriculumAPIView,
+    CourseViewSet,
+    LessonDetailAPIView,
+)
 
-# Teacher router
+# Router dành cho API công khai
+router = DefaultRouter()
+router.register(
+    r"courses",
+    CourseViewSet,
+    basename="course",
+)
+
+
+# Router dành cho giảng viên
 teacher_router = DefaultRouter()
-teacher_router.register(r'teacher/courses', TeacherCourseViewSet, basename='teacher-courses')
-teacher_router.register(r'teacher/sections', TeacherSectionViewSet, basename='teacher-sections')
-teacher_router.register(r'teacher/lessons', TeacherLessonViewSet, basename='teacher-lessons')
+teacher_router.register(
+    r"teacher/courses",
+    TeacherCourseViewSet,
+    basename="teacher-courses",
+)
+teacher_router.register(
+    r"teacher/sections",
+    TeacherSectionViewSet,
+    basename="teacher-sections",
+)
+teacher_router.register(
+    r"teacher/lessons",
+    TeacherLessonViewSet,
+    basename="teacher-lessons",
+)
+
 
 urlpatterns = [
-    # Public endpoints
-    path('courses/categories/', CourseCategoriesListAPIView.as_view(), name='course-categories'),
-    path('courses/<int:pk>/curriculum/', CourseCurriculumAPIView.as_view(), name='course-curriculum'),
-    path('courses/<int:course_id>/enroll/', EnrollCourseAPIView.as_view(), name='course-enroll'),
-    path('courses/<int:course_id>/purchase/', PurchaseCourseAPIView.as_view(), name='course-purchase'),
-    path('courses/<int:course_id>/certificate/issue/', IssueCertificateAPIView.as_view(), name='certificate-issue'),
-    path('courses/<int:course_id>/certificate/me/', MyCertificateAPIView.as_view(), name='certificate-me'),
-    path('lessons/<int:pk>/', LessonDetailAPIView.as_view(), name='lesson-detail'),
-    path('lessons/<int:lesson_id>/complete/', CompleteLessonAPIView.as_view(), name='lesson-complete'),
-    # Include routers
-    path('', include(router.urls)),
-    path('', include(teacher_router.urls)),
+    # Danh mục và chương trình khóa học
+    path(
+        "courses/categories/",
+        CourseCategoriesListAPIView.as_view(),
+        name="course-categories",
+    ),
+    path(
+        "courses/<int:pk>/curriculum/",
+        CourseCurriculumAPIView.as_view(),
+        name="course-curriculum",
+    ),
+    # Đăng ký và mua khóa học
+    path(
+        "courses/<int:course_id>/enroll/",
+        EnrollCourseAPIView.as_view(),
+        name="course-enroll",
+    ),
+    path(
+        "courses/<int:course_id>/purchase/",
+        PurchaseCourseAPIView.as_view(),
+        name="course-purchase",
+    ),
+    # Chứng chỉ
+    path(
+        "courses/<int:course_id>/certificate/issue/",
+        IssueCertificateAPIView.as_view(),
+        name="certificate-issue",
+    ),
+    path(
+        "courses/<int:course_id>/certificate/me/",
+        MyCertificateAPIView.as_view(),
+        name="certificate-me",
+    ),
+    # Bài học và tiến độ
+    path(
+        "lessons/<int:pk>/",
+        LessonDetailAPIView.as_view(),
+        name="lesson-detail",
+    ),
+    path(
+        "lessons/<int:lesson_id>/complete/",
+        CompleteLessonAPIView.as_view(),
+        name="lesson-complete",
+    ),
+    # Các endpoint do router tạo
+    path("", include(router.urls)),
+    path("", include(teacher_router.urls)),
 ]
-

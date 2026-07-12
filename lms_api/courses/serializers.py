@@ -1,283 +1,359 @@
+"""Các serializer của khóa học, chương học và bài học."""
+
 from rest_framework import serializers
-from .models import Course, Section, Lesson
+
+from .models import Course, Lesson, Section
+
+# =========================================================
+# Serializer cơ bản
+# =========================================================
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    """Serializer for Lesson model."""
-    
+    """Định dạng thông tin đầy đủ của một bài học."""
+
     document_file_url = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Lesson
         fields = [
-            'id',
-            'section',
-            'title',
-            'video_url',
-            'document_file',
-            'document_file_url',
-            'content',
-            'duration',
-            'sort_order',
+            "id",
+            "section",
+            "title",
+            "video_url",
+            "document_file",
+            "document_file_url",
+            "content",
+            "duration",
+            "sort_order",
         ]
-    
+
     def get_document_file_url(self, obj):
-        """Return full URL for document file if exists."""
+        """Trả về URL đầy đủ của tài liệu nếu tồn tại."""
+
         if obj.document_file:
-            request = self.context.get('request')
+            request = self.context.get("request")
+
             if request:
                 return request.build_absolute_uri(obj.document_file.url)
+
             return obj.document_file.url
+
         return None
 
 
 class SectionSerializer(serializers.ModelSerializer):
-    """Serializer for Section model."""
-    
+    """Định dạng thông tin cơ bản của một chương học."""
+
     class Meta:
         model = Section
         fields = [
-            'id',
-            'course',
-            'title',
-            'sort_order',
+            "id",
+            "course",
+            "title",
+            "sort_order",
         ]
+
+
+# =========================================================
+# Serializer khóa học
+# =========================================================
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    """Serializer for Course model (list view)."""
-    
+    """Định dạng khóa học trong danh sách."""
+
     average_rating = serializers.SerializerMethodField()
     reviews_count = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Course
         fields = [
-            'id',
-            'title',
-            'subtitle',
-            'thumbnail_url',
-            'price',
-            'level',
-            'category',
-            'is_published',
-            'created_at',
-            'average_rating',
-            'reviews_count',
+            "id",
+            "title",
+            "subtitle",
+            "thumbnail_url",
+            "price",
+            "level",
+            "category",
+            "is_published",
+            "created_at",
+            "average_rating",
+            "reviews_count",
         ]
-        read_only_fields = ['created_at', 'average_rating', 'reviews_count']
-    
+        read_only_fields = [
+            "created_at",
+            "average_rating",
+            "reviews_count",
+        ]
+
     def get_average_rating(self, obj):
-        """Calculate average rating from all reviews."""
+        """Tính điểm đánh giá trung bình của khóa học."""
+
         from django.db.models import Avg
-        result = obj.reviews.aggregate(avg_rating=Avg('rating'))
-        return round(result['avg_rating'], 2) if result['avg_rating'] else None
-    
+
+        result = obj.reviews.aggregate(avg_rating=Avg("rating"))
+
+        return round(result["avg_rating"], 2) if result["avg_rating"] else None
+
     def get_reviews_count(self, obj):
-        """Get total number of reviews."""
+        """Trả về tổng số đánh giá của khóa học."""
+
         return obj.reviews.count()
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
-    """Serializer for Course model (detail view)."""
-    
-    teacher_id = serializers.IntegerField(source='teacher.id', read_only=True)
-    teacher_name = serializers.CharField(source='teacher.full_name', read_only=True)
+    """Định dạng thông tin chi tiết của khóa học."""
+
+    teacher_id = serializers.IntegerField(
+        source="teacher.id",
+        read_only=True,
+    )
+    teacher_name = serializers.CharField(
+        source="teacher.full_name",
+        read_only=True,
+    )
     average_rating = serializers.SerializerMethodField()
     reviews_count = serializers.SerializerMethodField()
     is_enrolled = serializers.SerializerMethodField()
     enrollment_type = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Course
         fields = [
-            'id',
-            'title',
-            'subtitle',
-            'description',
-            'thumbnail_url',
-            'price',
-            'level',
-            'category',
-            'is_published',
-            'created_at',
-            'updated_at',
-            'teacher',
-            'teacher_id',
-            'teacher_name',
-            'average_rating',
-            'reviews_count',
-            'is_enrolled',
-            'enrollment_type',
+            "id",
+            "title",
+            "subtitle",
+            "description",
+            "thumbnail_url",
+            "price",
+            "level",
+            "category",
+            "is_published",
+            "created_at",
+            "updated_at",
+            "teacher",
+            "teacher_id",
+            "teacher_name",
+            "average_rating",
+            "reviews_count",
+            "is_enrolled",
+            "enrollment_type",
         ]
-        read_only_fields = ['created_at', 'updated_at', 'average_rating', 'reviews_count', 'is_enrolled', 'enrollment_type']
-    
+        read_only_fields = [
+            "created_at",
+            "updated_at",
+            "average_rating",
+            "reviews_count",
+            "is_enrolled",
+            "enrollment_type",
+        ]
+
     def get_average_rating(self, obj):
-        """Calculate average rating from all reviews."""
+        """Tính điểm đánh giá trung bình của khóa học."""
+
         from django.db.models import Avg
-        result = obj.reviews.aggregate(avg_rating=Avg('rating'))
-        return round(result['avg_rating'], 2) if result['avg_rating'] else None
-    
+
+        result = obj.reviews.aggregate(avg_rating=Avg("rating"))
+
+        return round(result["avg_rating"], 2) if result["avg_rating"] else None
+
     def get_reviews_count(self, obj):
-        """Get total number of reviews."""
+        """Trả về tổng số đánh giá của khóa học."""
+
         return obj.reviews.count()
-    
+
     def get_is_enrolled(self, obj):
-        """Check if current user is enrolled in this course."""
-        request = self.context.get('request')
+        """Kiểm tra học viên hiện tại đã đăng ký khóa học chưa."""
+
+        request = self.context.get("request")
+
         if not request or not request.user or not request.user.is_authenticated:
             return False
-        if request.user.role != 'student':
+
+        if request.user.role != "student":
             return False
-        
+
         from enrollments.models import Enrollment
+
         return Enrollment.objects.filter(
             student=request.user,
-            course=obj
+            course=obj,
         ).exists()
-    
+
     def get_enrollment_type(self, obj):
-        """Get enrollment type for current user if enrolled."""
-        request = self.context.get('request')
+        """Trả về loại đăng ký của học viên hiện tại."""
+
+        request = self.context.get("request")
+
         if not request or not request.user or not request.user.is_authenticated:
             return None
-        if request.user.role != 'student':
+
+        if request.user.role != "student":
             return None
-        
+
         from enrollments.models import Enrollment
+
         enrollment = Enrollment.objects.filter(
             student=request.user,
-            course=obj
+            course=obj,
         ).first()
-        
+
         return enrollment.enrollment_type if enrollment else None
 
 
+# =========================================================
+# Serializer chương trình học
+# =========================================================
+
+
 class CurriculumLessonSerializer(serializers.ModelSerializer):
-    """Serializer for Lesson in curriculum with completion status."""
+    """Định dạng bài học kèm trạng thái hoàn thành."""
+
     is_completed = serializers.SerializerMethodField()
     document_file_url = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Lesson
         fields = [
-            'id',
-            'title',
-            'video_url',
-            'document_file',
-            'document_file_url',
-            'content',
-            'duration',
-            'sort_order',
-            'is_completed',
+            "id",
+            "title",
+            "video_url",
+            "document_file",
+            "document_file_url",
+            "content",
+            "duration",
+            "sort_order",
+            "is_completed",
         ]
-    
+
     def get_document_file_url(self, obj):
-        """Return full URL for document file if exists."""
+        """Trả về URL đầy đủ của tài liệu nếu tồn tại."""
+
         if obj.document_file:
-            request = self.context.get('request')
+            request = self.context.get("request")
+
             if request:
                 return request.build_absolute_uri(obj.document_file.url)
+
             return obj.document_file.url
+
         return None
-    
+
     def get_is_completed(self, obj):
-        """Check if lesson is completed for the current user."""
-        request = self.context.get('request')
+        """Kiểm tra học viên đã hoàn thành bài học chưa."""
+
+        request = self.context.get("request")
+
         if not request or not request.user or not request.user.is_authenticated:
             return False
-        
-        # Get enrollment for this course
-        from enrollments.models import Enrollment, LessonProgress
+
+        from enrollments.models import (
+            Enrollment,
+            LessonProgress,
+        )
+
         try:
             enrollment = Enrollment.objects.get(
                 student=request.user,
-                course=obj.section.course
+                course=obj.section.course,
             )
-            # Check if lesson progress exists and is completed
+
             lesson_progress = LessonProgress.objects.filter(
                 enrollment=enrollment,
                 lesson=obj,
-                is_completed=True
+                is_completed=True,
             ).first()
+
             return lesson_progress is not None
+
         except Enrollment.DoesNotExist:
             return False
 
 
 class CurriculumSectionSerializer(serializers.ModelSerializer):
-    """Serializer for Section with nested lessons (for curriculum)."""
-    
-    lessons = CurriculumLessonSerializer(many=True, read_only=True)
-    
+    """Định dạng chương học cùng danh sách bài học."""
+
+    lessons = CurriculumLessonSerializer(
+        many=True,
+        read_only=True,
+    )
+
     class Meta:
         model = Section
         fields = [
-            'id',
-            'title',
-            'sort_order',
-            'lessons',
+            "id",
+            "title",
+            "sort_order",
+            "lessons",
         ]
 
 
 class CourseCurriculumSerializer(serializers.ModelSerializer):
-    """Serializer for Course with nested sections and lessons."""
-    
-    sections = CurriculumSectionSerializer(many=True, read_only=True)
-    
+    """Định dạng toàn bộ chương trình của khóa học."""
+
+    sections = CurriculumSectionSerializer(
+        many=True,
+        read_only=True,
+    )
+
     class Meta:
         model = Course
         fields = [
-            'id',
-            'title',
-            'subtitle',
-            'description',
-            'level',
-            'sections',
+            "id",
+            "title",
+            "subtitle",
+            "description",
+            "level",
+            "sections",
         ]
 
 
-# Teacher CRUD Serializers
+# =========================================================
+# Serializer CRUD dành cho giảng viên
+# =========================================================
+
+
 class CourseCreateUpdateSerializer(serializers.ModelSerializer):
-    """Serializer for creating/updating courses (teacher only)."""
-    
+    """Dữ liệu tạo hoặc cập nhật khóa học."""
+
     class Meta:
         model = Course
         fields = [
-            'title',
-            'subtitle',
-            'description',
-            'thumbnail_url',
-            'price',
-            'level',
-            'category',
-            'is_published',
+            "title",
+            "subtitle",
+            "description",
+            "thumbnail_url",
+            "price",
+            "level",
+            "category",
+            "is_published",
         ]
 
 
 class SectionCreateUpdateSerializer(serializers.ModelSerializer):
-    """Serializer for creating/updating sections (teacher only)."""
-    
+    """Dữ liệu tạo hoặc cập nhật chương học."""
+
     class Meta:
         model = Section
         fields = [
-            'course',
-            'title',
-            'sort_order',
+            "course",
+            "title",
+            "sort_order",
         ]
 
 
 class LessonCreateUpdateSerializer(serializers.ModelSerializer):
-    """Serializer for creating/updating lessons (teacher only)."""
-    
+    """Dữ liệu tạo hoặc cập nhật bài học."""
+
     class Meta:
         model = Lesson
         fields = [
-            'section',
-            'title',
-            'video_url',
-            'document_file',
-            'content',
-            'duration',
-            'sort_order',
+            "section",
+            "title",
+            "video_url",
+            "document_file",
+            "content",
+            "duration",
+            "sort_order",
         ]
