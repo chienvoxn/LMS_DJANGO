@@ -2,8 +2,8 @@ from rest_framework import serializers
 
 
 class TeacherAnalyticsSummarySerializer(serializers.Serializer):
-    """Serializer for teacher analytics summary."""
-    
+    """Dữ liệu thống kê tổng quan của giảng viên."""
+
     total_courses = serializers.IntegerField()
     total_enrollments = serializers.IntegerField()
     total_students = serializers.IntegerField()
@@ -11,16 +11,22 @@ class TeacherAnalyticsSummarySerializer(serializers.Serializer):
     total_reviews = serializers.IntegerField()
     total_paid_enrollments = serializers.IntegerField()
     total_audit_enrollments = serializers.IntegerField()
-    total_revenue = serializers.DecimalField(max_digits=10, decimal_places=2)
+    total_revenue = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+    )
     total_certificates_issued = serializers.IntegerField()
 
 
 class TeacherCourseStatsSerializer(serializers.Serializer):
-    """Serializer for per-course analytics stats."""
-    
+    """Dữ liệu thống kê của từng khóa học."""
+
     course_id = serializers.IntegerField()
     course_title = serializers.CharField()
-    course_thumbnail = serializers.URLField(allow_null=True, allow_blank=True)
+    course_thumbnail = serializers.URLField(
+        allow_null=True,
+        allow_blank=True,
+    )
     enrollments_count = serializers.IntegerField()
     unique_students_count = serializers.IntegerField()
     average_rating = serializers.FloatField(allow_null=True)
@@ -32,4 +38,3 @@ class TeacherCourseStatsSerializer(serializers.Serializer):
     audit_enrollments = serializers.IntegerField()
     revenue = serializers.FloatField()
     certificates_issued = serializers.IntegerField()
-
