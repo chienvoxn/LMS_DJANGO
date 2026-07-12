@@ -1,275 +1,312 @@
-# LMS_DJANGO - Hệ thống Quản lý Học tập
+<div align="center">
 
-## Tổng quan dự án
+# LMS_DJANGO
 
-LMS_DJANGO là một hệ thống quản lý học tập (Learning Management System) được xây dựng với kiến trúc **Frontend分离**:
+**Hệ thống quản lý học tập full-stack xây dựng bằng Django REST Framework và React**
 
-- **Backend**: Django REST Framework (Python)
-- **Frontend**: React.js với Vite + TailwindCSS
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-5.2.7-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 
-## Kiến trúc dự án
+</div>
 
-```
-LMS_DJANGO/
-├── lms_api/                    # Backend API (Django)
-│   ├── lms_backend/           # Cấu hình Django chính
-│   │   ├── settings.py        # Cài đặt ứng dụng
-│   │   ├── urls.py            # Routes chính
-│   │   ├── wsgi.py
-│   │   └── asgi.py
-│   ├── users/                 # Quản lý người dùng
-│   ├── courses/               # Quản lý khóa học
-│   ├── enrollments/           # Quản lý đăng ký khóa học
-│   ├── assessments/           # Quản lý bài kiểm tra/đánh giá
-│   ├── reviews/               # Quản lý đánh giá
-│   ├── analytics/             # Thống kê và phân tích
-│   ├── common/                # Chức năng chung
-│   ├── media/                 # Thư mục lưu trữ media
-│   └── manage.py
-│
-├── lms_frontend/              # Frontend (React)
-│   ├── src/                   # Mã nguồn React
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── tailwind.config.js
-│   └── postcss.config.js
-│
-└── requirements.txt           # Dependencies Python
-```
+## Giới thiệu
 
-## Công nghệ sử dụng
+**LMS_DJANGO** là một hệ thống quản lý học tập (_Learning Management System — LMS_) sử dụng kiến trúc tách biệt frontend và backend:
+
+- **Backend:** Django REST Framework.
+- **Frontend:** React, Vite và Tailwind CSS.
+- **Database:** MySQL.
+- **Authentication:** JSON Web Token (JWT).
+
+Hệ thống hỗ trợ học viên, giảng viên và quản trị viên trong việc quản lý khóa học, nội dung học tập, đăng ký học, tiến độ, bài kiểm tra, bài tập, đánh giá, chứng chỉ, thanh toán mô phỏng, thống kê và nhắn tin.
+
+> Dự án được phát triển chủ yếu cho mục đích học tập và thực hành xây dựng ứng dụng web full-stack.
+
+## Tính năng
+
+### Học viên
+
+- Đăng ký, đăng nhập và quản lý hồ sơ.
+- Duyệt, tìm kiếm và đăng ký khóa học.
+- Xem chương học, bài học và theo dõi tiến độ.
+- Làm quiz, nộp bài tập và xem kết quả.
+- Quản lý giỏ hàng và lịch sử thanh toán.
+- Đánh giá khóa học và nhận chứng chỉ.
+- Nhắn tin trực tiếp hoặc theo nhóm.
+
+### Giảng viên
+
+- Tạo và quản lý khóa học, chương học và bài học.
+- Tạo quiz, câu hỏi, đáp án và bài tập.
+- Xem bài nộp và chấm điểm học viên.
+- Quản lý danh sách học viên.
+- Xem thống kê khóa học và mức độ tương tác.
+
+### Quản trị viên
+
+- Quản lý người dùng và vai trò.
+- Quản lý dữ liệu hệ thống qua Django Admin.
+- Giám sát khóa học và các tài nguyên liên quan.
+
+## Công nghệ
 
 ### Backend
 
-| Công nghệ             | Phiên bản | Mục đích        |
-| --------------------- | --------- | --------------- |
-| Django                | 5.2.7     | Web framework   |
-| Django REST Framework | 3.16.1    | RESTful API     |
-| SimpleJWT             | -         | Xác thực JWT    |
-| MySQL                 | -         | Cơ sở dữ liệu   |
-| django-cors-headers   | -         | CORS middleware |
+| Công nghệ             |      Phiên bản |
+| --------------------- | -------------: |
+| Python                |          3.10+ |
+| Django                |          5.2.7 |
+| Django REST Framework |         3.16.1 |
+| Simple JWT            |          5.5.1 |
+| MySQL                 | 8+ khuyến nghị |
+| mysqlclient           |          2.2.7 |
+| django-cors-headers   |          4.9.0 |
+| python-dotenv         |          1.2.2 |
 
 ### Frontend
 
-| Công nghệ        | Phiên bản | Mục đích         |
-| ---------------- | --------- | ---------------- |
-| React            | 18.2.0    | UI Library       |
-| React Router DOM | 6.20.0    | Routing          |
-| Axios            | 1.6.2     | HTTP Client      |
-| Vite             | 5.0.8     | Build tool       |
-| TailwindCSS      | 3.4.0     | CSS Framework    |
-| Recharts         | 3.5.1     | Biểu đồ/Thống kê |
+| Công nghệ        | Phiên bản |
+| ---------------- | --------: |
+| React            |    18.2.0 |
+| React Router DOM |    6.20.0 |
+| Axios            |     1.6.2 |
+| Vite             |     5.0.8 |
+| Tailwind CSS     |     3.4.0 |
+| Recharts         |     3.5.1 |
 
-## Cài đặt và chạy dự án
+## Kiến trúc
 
-### Yêu cầu hệ thống
+```text
+React Client
+    │ HTTP/JSON + Bearer JWT
+    ▼
+Django REST Framework
+    │ Django ORM
+    ▼
+MySQL
+```
 
+## Cấu trúc dự án
+
+```text
+LMS_DJANGO/
+├── lms_api/
+│   ├── lms_backend/       # Cấu hình Django
+│   ├── users/             # Người dùng và xác thực
+│   ├── courses/           # Khóa học, chương và bài học
+│   ├── enrollments/       # Đăng ký, tiến độ, giỏ hàng, thanh toán
+│   ├── assessments/       # Quiz, câu hỏi, bài tập, bài nộp
+│   ├── reviews/           # Đánh giá khóa học
+│   ├── analytics/         # Thống kê giảng viên
+│   ├── chat/              # Hội thoại và tin nhắn
+│   ├── common/            # Thành phần dùng chung
+│   ├── cert/              # Chứng chỉ CA cho database
+│   ├── media/             # Tệp tải lên
+│   ├── .env.example
+│   └── manage.py
+├── lms_frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── config/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── routes/
+│   └── package.json
+├── requirements.txt
+└── README.md
+```
+
+Các model chính:
+
+```text
+User
+├── Course → Section → Lesson
+├── Enrollment → LessonProgress → Certificate
+├── Quiz → Question → Choice → StudentQuizAttempt
+├── Assignment → Submission
+├── CartItem
+├── Payment
+├── CourseReview
+└── Conversation → Message
+```
+
+## Bắt đầu
+
+### Yêu cầu
+
+- Git
 - Python 3.10+
 - Node.js 18+
+- npm
 - MySQL Server
 
-### Backend Setup
+### 1. Clone repository
 
 ```bash
-# Clone repository
 git clone https://github.com/chienvoxn/LMS_DJANGO.git
-cd LMS_DJANGO/lms_api
+cd LMS_DJANGO
+```
 
-# Tạo virtual environment
+### 2. Tạo database
+
+```sql
+CREATE DATABASE lms_backend
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+```
+
+### 3. Cài đặt backend
+
+```bash
+cd lms_api
 python -m venv venv
-venv\Scripts\activate   # Windows
-# source venv/bin/activate  # Linux/Mac
+```
 
-# Cài dependencies
+Kích hoạt môi trường ảo:
+
+```powershell
+# Windows
+venv\Scripts\activate
+```
+
+```bash
+# Linux/macOS
+source venv/bin/activate
+```
+
+Cài dependencies:
+
+```bash
+python -m pip install --upgrade pip
 pip install -r ../requirements.txt
+```
 
-# Tạo database MySQL
-mysql -u root -p
-CREATE DATABASE lms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+### 4. Cấu hình môi trường
 
-# Chạy migrations
+Backend đọc biến môi trường từ `lms_api/.env.local`.
+
+Tạo tệp từ mẫu:
+
+```powershell
+# Windows
+copy .env.example .env.local
+```
+
+```bash
+# Linux/macOS
+cp .env.example .env.local
+```
+
+Nội dung mẫu:
+
+```dotenv
+SECRET_KEY=your_secure_django_secret_key
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+
+DB_NAME=lms_backend
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_HOST=127.0.0.1
+DB_PORT=3306
+
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+```
+
+Tạo `SECRET_KEY`:
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+> Không commit `.env.local`, mật khẩu hoặc khóa bí mật lên GitHub.
+
+### 5. Chạy backend
+
+```bash
 python manage.py migrate
-
-# Tạo superuser
 python manage.py createsuperuser
-
-# Chạy server
 python manage.py runserver
 ```
 
-Trước khi chạy dữ án, hãy xây build file .env phù hợp mục đích người sử dụng, tham khảo `/lms_api/.env.example`
+- API: `http://127.0.0.1:8000`
+- Django Admin: `http://127.0.0.1:8000/admin/`
 
-Backend sẽ chạy tại: `http://127.0.0.1:8000`
+### 6. Chạy frontend
 
-### Frontend Setup
+Mở terminal mới:
 
 ```bash
 cd LMS_DJANGO/lms_frontend
-
-# Cài dependencies
 npm install
-
-# Chạy development server
 npm run dev
 ```
 
-Frontend sẽ chạy tại: `http://localhost:5173`
+Frontend mặc định chạy tại `http://localhost:5173`.
 
-## Các mô hình dữ liệu
+## Xác thực
 
-### 1. Users (Người dùng)
+Các API được bảo vệ sử dụng JWT:
 
-- **User Model**: Mô hình tùy chỉnh kế thừa từ AbstractUser
-- **Roles**: Student (Học viên), Teacher (Giảng viên), Admin
-- **Fields**: username, email, first_name, last_name, role, avatar...
-
-### 2. Courses (Khóa học)
-
-- **Course**: Khóa học chính
-- **Category**: Danh mục khóa học
-- **Lesson**: Bài học trong khóa học
-
-### 3. Enrollments (Đăng ký)
-
-- **Enrollment**: Đăng ký khóa học của học viên
-- **Cart**: Giỏ hàng đăng ký
-
-### 4. Assessments (Đánh giá)
-
-- **Quiz/Bai_kiem_tra**: Các bài kiểm tra
-- **Question**: Câu hỏi
-- **Answer**: Đáp án
-
-### 5. Reviews (Đánh giá)
-
-- **Review**: Đánh giá khóa học từ học viên
-
-### 6. Analytics (Thống kê)
-
-- **Statistics**: Thống kê khóa học, người dùng
-
-## API Endpoints
-
-### Xác thực (Authentication)
-
-| Method | Endpoint                     | Mô tả                             |
-| ------ | ---------------------------- | --------------------------------- |
-| POST   | `/api/auth/register/`        | Đăng ký tài khoản                 |
-| POST   | `/api/auth/login/`           | Đăng nhập (JWT)                   |
-| POST   | `/api/auth/refresh/`         | Làm mới access token              |
-| GET    | `/api/auth/me/`              | Lấy thông tin người dùng hiện tại |
-| POST   | `/api/auth/change-password/` | Đổi mật khẩu                      |
-
-### Quản lý người dùng
-
-| Method  | Endpoint      | Mô tả                         |
-| ------- | ------------- | ----------------------------- |
-| GET/PUT | `/api/users/` | Danh sách/Cập nhật người dùng |
-
-### Khóa học
-
-| Method         | Endpoint             | Mô tả                     |
-| -------------- | -------------------- | ------------------------- |
-| GET/POST       | `/api/courses/`      | Danh sách/Tạo khóa học    |
-| GET/PUT/DELETE | `/api/courses/{id}/` | Chi tiết/Sửa/Xóa khóa học |
-
-### Đăng ký khóa học
-
-| Method   | Endpoint                              | Mô tả                 |
-| -------- | ------------------------------------- | --------------------- |
-| GET/POST | `/api/enrollments/`                   | Danh sách/Tạo đăng ký |
-| GET      | `/api/student/my-courses/`            | Khóa học của học viên |
-| GET      | `/api/teacher/courses/{id}/students/` | DS học viên theo khóa |
-
-### Đánh giá
-
-| Method   | Endpoint        | Mô tả                  |
-| -------- | --------------- | ---------------------- |
-| GET/POST | `/api/reviews/` | Danh sách/Tạo đánh giá |
-
-### Thống kê
-
-| Method | Endpoint          | Mô tả              |
-| ------ | ----------------- | ------------------ |
-| GET    | `/api/analytics/` | Thống kê tổng quan |
-
-## Cấu hình JWT
-
-```python
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    'ALGORITHM': 'HS256',
-    'AUTH_HEADER_TYPES': ('Bearer',),
-}
+```http
+Authorization: Bearer <access_token>
 ```
 
-## Cấu hình CORS
+- Access token: 1 giờ.
+- Refresh token: 7 ngày.
 
-```python
-CORS_ALLOW_ALL_ORIGINS = True  # Chỉ dùng cho development
-CORS_ALLOW_CREDENTIALS = True
-```
+## API chính
 
-## Chức năng chính
+| Nhóm            | Prefix/Endpoint                     |
+| --------------- | ----------------------------------- |
+| Authentication  | `/api/auth/`                        |
+| Users           | `/api/users/`                       |
+| Courses         | `/api/courses/`                     |
+| Teacher courses | `/api/teacher/courses/`             |
+| Enrollments     | `/api/enrollments/`                 |
+| Cart            | `/api/enrollments/cart/`            |
+| Quizzes         | `/api/quizzes/`                     |
+| Assignments     | `/api/assignments/`                 |
+| Reviews         | `/api/courses/{course_id}/reviews/` |
+| Analytics       | `/api/teacher/analytics/`           |
+| Chat            | `/api/chat/`                        |
 
-### Cho Học viên
+Endpoint xác thực tiêu biểu:
 
-- Đăng ký/đăng nhập tài khoản
-- Duyệt và tìm kiếm khóa học
-- Đăng ký khóa học
-- Xem bài học
-- Làm bài kiểm tra
-- Đánh giá khóa học
-- Xem thống kê tiến độ
+| Method | Endpoint                     | Mô tả               |
+| ------ | ---------------------------- | ------------------- |
+| `POST` | `/api/auth/register/`        | Đăng ký             |
+| `POST` | `/api/auth/login/`           | Đăng nhập           |
+| `POST` | `/api/auth/refresh/`         | Làm mới token       |
+| `GET`  | `/api/auth/me/`              | Người dùng hiện tại |
+| `POST` | `/api/auth/change-password/` | Đổi mật khẩu        |
 
-### Cho Giảng viên
+## Kiểm thử
 
-- Tạo và quản lý khóa học
-- Tạo bài học và bài kiểm tra
-- Xem danh sách học viên theo khóa học
-- Xem thống kê khóa học
-- Quản lý đánh giá
-
-### Cho Admin
-
-- Quản lý người dùng
-- Quản lý tất cả khóa học
-- Xem thống kê tổng quan
-- Quản lý danh mục
-
-## Phát triển
-
-### Thêm ứng dụng mới
+Backend:
 
 ```bash
-python manage.py startapp <app_name>
-```
-
-### Tạo Migration
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### Chạy Test
-
-```bash
+cd lms_api
+python manage.py check
 python manage.py test
+python manage.py makemigrations --check
 ```
 
-## Ghi chú quan trọng
+Frontend:
 
-1. **Bảo mật**: Thay đổi `SECRET_KEY` trong `settings.py` khi deploy production
-2. **Database**: Cấu hình MySQL trong `settings.py` với thông tin thực tế
-3. **CORS**: Tắt `CORS_ALLOW_ALL_ORIGINS` và cấu hình đúng domain trong production
-4. **Media Files**: Cấu hình lại `MEDIA_ROOT` và `MEDIA_URL` cho production
+```bash
+cd lms_frontend
+npm run lint
+npm run build
+```
 
-## License
+## Lưu ý
 
-MIT License
-
-## Tác giả
-
-- GitHub: [chienvoxn](https://github.com/chienvoxn)
+- `settings.py` hiện có cấu hình MySQL SSL. Khi dùng MySQL local không yêu cầu SSL, cần điều chỉnh `DATABASES["default"]["OPTIONS"]`.
+- Kiểm tra đường dẫn chứng chỉ CA trong `settings.py` có khớp với thư mục `lms_api/cert/`.
+- `CORS_ALLOW_ALL_ORIGINS=True` chỉ nên dùng trong development.
+- Không sử dụng `DEBUG=True` trong production.
+- Media upload hiện được lưu trong `lms_api/media/`.
