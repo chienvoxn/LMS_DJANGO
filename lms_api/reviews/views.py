@@ -1,192 +1,242 @@
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
+"""Các API quản lý đánh giá và xếp hạng khóa học."""
+
 from django.db.models import Avg, Count
-from .models import CourseReview
-from .serializers import (
-    CourseReviewSerializer,
-    CourseReviewCreateUpdateSerializer,
-    CourseRatingSummarySerializer,
-)
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, permissions, status
+from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.response import Response
+
 from courses.models import Course
 from enrollments.models import Enrollment
+
+from .models import CourseReview
+from .serializers import (
+    CourseRatingSummarySerializer,
+    CourseReviewCreateUpdateSerializer,
+    CourseReviewSerializer,
+)
+
+# =========================================================
+# Danh sách và tạo đánh giá
+# =========================================================
 
 
 class CourseReviewListCreateAPIView(generics.ListCreateAPIView):
     """
-    List all reviews for a course and create/update current user's review.
-    
-    GET /api/courses/<int:course_id>/reviews/ - List all reviews (AllowAny)
-    POST /api/courses/<int:course_id>/reviews/ - Create or update current user's review (IsAuthenticated)
-    
-    Flow:
-    - Student enrolls a course
-    - After learning, they call POST /api/courses/{course_id}/reviews/ with rating + comment
-    - They can later update using the same endpoint (if review exists, it updates)
+    Trả về danh sách đánh giá hoặc tạo đánh giá khóa học.
+
+    GET:
+        Mọi người đều có thể xem đánh giá.
+
+    POST:
+        Người dùng phải đăng nhập và đã đăng ký khóa học.
+        Nếu đã có đánh giá, hệ thống cập nhật đánh giá đó.
     """
-    
+
     serializer_class = CourseReviewSerializer
-    
+
     def get_permissions(self):
-        """GET: AllowAny, POST: IsAuthenticated"""
-        if self.request.method == 'GET':
+        """Chọn quyền truy cập theo phương thức HTTP."""
+
+        if self.request.method == "GET":
             return [permissions.AllowAny()]
+
         return [permissions.IsAuthenticated()]
-    
+
     def get_queryset(self):
-        """Return all reviews for the specified course, ordered by created_at desc."""
-        course_id = self.kwargs['course_id']
-        return CourseReview.objects.filter(
-            course_id=course_id,
-            course__is_published=True
-        ).select_related('user', 'course').order_by('-created_at')
-    
+        """Lấy đánh giá của khóa học đã xuất bản."""
+
+        course_id = self.kwargs["course_id"]
+
+        return (
+            CourseReview.objects.filter(
+                course_id=course_id,
+                course__is_published=True,
+            )
+            .select_related(
+                "user",
+                "course",
+            )
+            .order_by("-created_at")
+        )
+
     def create(self, request, *args, **kwargs):
-        """
-        Create or update current user's review for a course.
-        
-        If user already has a review for this course, update it.
-        Otherwise, create a new review.
-        
-        User must be enrolled in the course to create/update a review.
-        """
-        course_id = self.kwargs['course_id']
-        course = get_object_or_404(Course, id=course_id, is_published=True)
-        
-        # Check if user is enrolled in the course
+        """Tạo mới hoặc cập nhật đánh giá của người dùng."""
+
+        course_id = self.kwargs["course_id"]
+
+        course = get_object_or_404(
+            Course,
+            id=course_id,
+            is_published=True,
+        )
+
         is_enrolled = Enrollment.objects.filter(
             student=request.user,
-            course=course
+            course=course,
         ).exists()
-        
+
         if not is_enrolled:
             return Response(
-                {'detail': 'You must enroll in this course before leaving a review.'},
-                status=status.HTTP_403_FORBIDDEN
+                {
+                    "detail": (
+                        "You must enroll in this course " "before leaving a review."
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN,
             )
-        
-        # Check if review already exists
+
         try:
-            review = CourseReview.objects.get(course=course, user=request.user)
-            # Update existing review
-            serializer = CourseReviewCreateUpdateSerializer(review, data=request.data, partial=True)
+            review = CourseReview.objects.get(
+                course=course,
+                user=request.user,
+            )
+
+            serializer = CourseReviewCreateUpdateSerializer(
+                review,
+                data=request.data,
+                partial=True,
+            )
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            return Response(CourseReviewSerializer(review).data, status=status.HTTP_200_OK)
+
+            return Response(
+                CourseReviewSerializer(review).data,
+                status=status.HTTP_200_OK,
+            )
+
         except CourseReview.DoesNotExist:
-            # Create new review
             serializer = CourseReviewCreateUpdateSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            review = serializer.save(course=course, user=request.user)
-            return Response(CourseReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+
+            review = serializer.save(
+                course=course,
+                user=request.user,
+            )
+
+            return Response(
+                CourseReviewSerializer(review).data,
+                status=status.HTTP_201_CREATED,
+            )
+
+
+# =========================================================
+# Chi tiết đánh giá
+# =========================================================
 
 
 class CourseReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Get, update, or delete a single review by id.
-    
-    GET /api/reviews/<int:pk>/ - Get review (AllowAny)
-    PUT /api/reviews/<int:pk>/ - Update review (IsAuthenticated, owner only)
-    PATCH /api/reviews/<int:pk>/ - Partial update review (IsAuthenticated, owner only)
-    DELETE /api/reviews/<int:pk>/ - Delete review (IsAuthenticated, owner only)
+    Xem, cập nhật hoặc xóa một đánh giá.
+
+    Mọi người có thể xem đánh giá.
+    Chỉ chủ sở hữu mới được sửa hoặc xóa.
     """
-    
-    queryset = CourseReview.objects.all().select_related('user', 'course')
+
+    queryset = CourseReview.objects.all().select_related(
+        "user",
+        "course",
+    )
     serializer_class = CourseReviewSerializer
-    
+
     def get_permissions(self):
-        """GET: AllowAny, PUT/PATCH/DELETE: IsAuthenticated"""
-        if self.request.method == 'GET':
+        """Chọn quyền truy cập theo phương thức HTTP."""
+
+        if self.request.method == "GET":
             return [permissions.AllowAny()]
+
         return [permissions.IsAuthenticated()]
-    
+
     def get_serializer_class(self):
-        """Use different serializer for update."""
-        if self.request.method in ['PUT', 'PATCH']:
+        """Dùng serializer nhập liệu khi cập nhật."""
+
+        if self.request.method in ["PUT", "PATCH"]:
             return CourseReviewCreateUpdateSerializer
+
         return CourseReviewSerializer
-    
+
     def get_object(self):
-        """Get review and check ownership for update/delete."""
+        """Lấy đánh giá và kiểm tra quyền sở hữu."""
+
         review = super().get_object()
-        
-        # For PUT/PATCH/DELETE, ensure user owns the review
-        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+
+        if self.request.method in [
+            "PUT",
+            "PATCH",
+            "DELETE",
+        ]:
             if review.user != self.request.user:
-                from rest_framework.exceptions import PermissionDenied
-                raise PermissionDenied("You can only update or delete your own reviews.")
-        
+                raise PermissionDenied(
+                    "You can only update or delete " "your own reviews."
+                )
+
         return review
 
 
+# =========================================================
+# Thống kê đánh giá
+# =========================================================
+
+
 class CourseRatingSummaryAPIView(generics.GenericAPIView):
-    """
-    Get rating summary for a course.
-    
-    GET /api/courses/<int:course_id>/rating-summary/
-    
-    Returns:
-    {
-        "average_rating": 4.7,
-        "total_reviews": 123
-    }
-    
-    If no reviews:
-    {
-        "average_rating": 0.0,
-        "total_reviews": 0
-    }
-    
-    Used on CourseDetail page to display average rating + total reviews.
-    """
-    
+    """Trả về điểm trung bình và tổng số đánh giá."""
+
     permission_classes = [permissions.AllowAny]
     serializer_class = CourseRatingSummarySerializer
-    
+
     def get(self, request, course_id):
-        """Calculate and return rating summary."""
-        course = get_object_or_404(Course, id=course_id, is_published=True)
-        
-        # Aggregate reviews for this course
-        result = CourseReview.objects.filter(course=course).aggregate(
-            average_rating=Avg('rating'),
-            total_reviews=Count('id')
+        """Tính thống kê đánh giá của khóa học."""
+
+        course = get_object_or_404(
+            Course,
+            id=course_id,
+            is_published=True,
         )
-        
-        # Format response
+
+        result = CourseReview.objects.filter(course=course).aggregate(
+            average_rating=Avg("rating"),
+            total_reviews=Count("id"),
+        )
+
         data = {
-            'average_rating': round(result['average_rating'], 2) if result['average_rating'] else 0.0,
-            'total_reviews': result['total_reviews'] or 0
+            "average_rating": (
+                round(result["average_rating"], 2) if result["average_rating"] else 0.0
+            ),
+            "total_reviews": (result["total_reviews"] or 0),
         }
-        
+
         serializer = self.get_serializer(data)
+
         return Response(serializer.data)
 
 
+# =========================================================
+# Đánh giá của người dùng hiện tại
+# =========================================================
+
+
 class MyCourseReviewAPIView(generics.RetrieveAPIView):
-    """
-    Get current user's review for a specific course.
-    
-    GET /api/courses/<int:course_id>/my-review/
-    
-    Returns:
-    - 200: Review found (CourseReviewSerializer)
-    - 404: Review not found (user hasn't reviewed this course yet)
-    - 401: Not authenticated
-    
-    Used on CourseDetail page to prefill review form.
-    """
-    
+    """Trả về đánh giá của người dùng cho một khóa học."""
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = CourseReviewSerializer
-    
+
     def get_object(self):
-        """Get current user's review for the course."""
-        course_id = self.kwargs['course_id']
-        course = get_object_or_404(Course, id=course_id, is_published=True)
-        
+        """Tìm đánh giá theo khóa học và người dùng."""
+
+        course_id = self.kwargs["course_id"]
+
+        course = get_object_or_404(
+            Course,
+            id=course_id,
+            is_published=True,
+        )
+
         try:
-            return CourseReview.objects.get(course=course, user=self.request.user)
+            return CourseReview.objects.get(
+                course=course,
+                user=self.request.user,
+            )
+
         except CourseReview.DoesNotExist:
-            from rest_framework.exceptions import NotFound
             raise NotFound("You have not reviewed this course yet.")
