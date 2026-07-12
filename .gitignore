@@ -45,3 +45,8 @@ database.sql
 .idea/
 .DS_Store
 Thumbs.db
+
+# Prompt and AI docs:
+PROMPT.md
+OPENCODE.md
+CHAT.md
