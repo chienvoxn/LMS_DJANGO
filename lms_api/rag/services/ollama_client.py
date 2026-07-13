@@ -12,7 +12,7 @@ class OllamaService:
             "RAG_OLLAMA_BASE_URL",
             "http://127.0.0.1:11434",
         )
-        self.embed_model = rag_setting("RAG_EMBED_MODEL", "bge-m3")
+        self.embed_model = rag_setting("RAG_EMBED_MODEL", "bge-m3:latest")
         self.llm_model = rag_setting("RAG_LLM_MODEL", "qwen2.5:3b")
         timeout = float(rag_setting("RAG_OLLAMA_TIMEOUT", 180))
         self.client = Client(host=self.base_url, timeout=timeout)

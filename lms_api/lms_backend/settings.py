@@ -272,7 +272,7 @@ RAG_COLLECTION_NAME = os.getenv(
 
 RAG_OLLAMA_BASE_URL = os.getenv(
     "RAG_OLLAMA_BASE_URL",
-    "http://127.0.0.1:11434",
+    "http://localhost:11434",
 )
 
 RAG_LLM_MODEL = os.getenv(
@@ -282,7 +282,7 @@ RAG_LLM_MODEL = os.getenv(
 
 RAG_EMBED_MODEL = os.getenv(
     "RAG_EMBED_MODEL",
-    "bge-m3",
+    "bge-m3:latest",
 )
 
 RAG_CHUNK_SIZE = int(os.getenv("RAG_CHUNK_SIZE", "1000"))
