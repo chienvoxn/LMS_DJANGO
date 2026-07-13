@@ -29,7 +29,7 @@ env/
 # Bỏ qua file database.sql bạn vừa liệt kê ở thư mục gốc 
 # (Tránh lộ dữ liệu thật hoặc đè file cấu hình khi kéo code về)
 database.sql
-
+database_*.sql
 # ==========================================
 # 4. Bảo mật môi trường (Environment Variables)
 # ==========================================
