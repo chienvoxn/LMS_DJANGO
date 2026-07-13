@@ -1,8 +1,7 @@
 """Các API quản lý khóa học dành cho giảng viên."""
 
-from django.db.models import Q
 from rest_framework import permissions, viewsets
-from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 
 from common.permissions import (
     IsOwnerOrReadOnly,
@@ -40,10 +39,12 @@ class TeacherCourseViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        """Chỉ trả về khóa học thuộc giảng viên hiện tại."""
+        """Chỉ trả về các khóa học của giảng viên hiện tại."""
 
-        return Course.objects.filter(teacher=self.request.user).select_related(
-            "teacher"
+        return (
+            Course.objects.filter(teacher=self.request.user)
+            .select_related("teacher")
+            .order_by("-created_at", "id")
         )
 
     def get_serializer_class(self):
@@ -84,19 +85,28 @@ class TeacherSectionViewSet(viewsets.ModelViewSet):
         IsTeacher,
     ]
 
-    def get_queryset(self):
-        """Chỉ trả về chương thuộc khóa học của giảng viên."""
+    # Curriculum editor needs every section of the selected course.
+    pagination_class = None
 
-        return (
-            Section.objects.filter(course__teacher=self.request.user)
-            .select_related(
-                "course",
-                "course__teacher",
-            )
-            .order_by(
-                "course",
-                "sort_order",
-            )
+    def get_queryset(self):
+        """Chỉ trả về các chương thuộc khóa học của giảng viên hiện tại."""
+
+        queryset = Section.objects.filter(
+            course__teacher=self.request.user
+        ).select_related(
+            "course",
+            "course__teacher",
+        )
+
+        course_id = self.request.query_params.get("course")
+
+        if course_id:
+            queryset = queryset.filter(course_id=course_id)
+
+        return queryset.order_by(
+            "course_id",
+            "sort_order",
+            "id",
         )
 
     def get_serializer_class(self):
@@ -117,11 +127,7 @@ class TeacherSectionViewSet(viewsets.ModelViewSet):
         course = serializer.validated_data.get("course")
 
         if course.teacher != self.request.user:
-            from rest_framework.exceptions import PermissionDenied
-
-            raise PermissionDenied(
-                "You can only create sections " "for your own courses."
-            )
+            raise PermissionDenied("You can only create sections for your own courses.")
 
         serializer.save()
 
@@ -134,11 +140,7 @@ class TeacherSectionViewSet(viewsets.ModelViewSet):
         )
 
         if course.teacher != self.request.user:
-            from rest_framework.exceptions import PermissionDenied
-
-            raise PermissionDenied(
-                "You can only update sections " "for your own courses."
-            )
+            raise PermissionDenied("You can only update sections for your own courses.")
 
         serializer.save()
 
@@ -160,20 +162,35 @@ class TeacherLessonViewSet(viewsets.ModelViewSet):
         IsTeacher,
     ]
 
-    def get_queryset(self):
-        """Chỉ trả về bài học thuộc khóa học của giảng viên."""
+    # Curriculum editor needs every lesson of the selected course.
+    pagination_class = None
 
-        return (
-            Lesson.objects.filter(section__course__teacher=self.request.user)
-            .select_related(
-                "section",
-                "section__course",
-                "section__course__teacher",
-            )
-            .order_by(
-                "section",
-                "sort_order",
-            )
+    def get_queryset(self):
+        """Chỉ trả về các bài học thuộc khóa học của giảng viên hiện tại."""
+
+        queryset = Lesson.objects.filter(
+            section__course__teacher=self.request.user
+        ).select_related(
+            "section",
+            "section__course",
+            "section__course__teacher",
+        )
+
+        course_id = self.request.query_params.get(
+            "section__course"
+        ) or self.request.query_params.get("course")
+        section_id = self.request.query_params.get("section")
+
+        if course_id:
+            queryset = queryset.filter(section__course_id=course_id)
+
+        if section_id:
+            queryset = queryset.filter(section_id=section_id)
+
+        return queryset.order_by(
+            "section_id",
+            "sort_order",
+            "id",
         )
 
     def get_serializer_class(self):
@@ -189,7 +206,7 @@ class TeacherLessonViewSet(viewsets.ModelViewSet):
         return LessonSerializer
 
     def get_serializer_context(self):
-        """Thêm request để xây dựng URL tài liệu."""
+        """Thêm request để serializer xây dựng URL tài liệu."""
 
         context = super().get_serializer_context()
         context["request"] = self.request
@@ -201,10 +218,8 @@ class TeacherLessonViewSet(viewsets.ModelViewSet):
         section = serializer.validated_data.get("section")
 
         if section.course.teacher != self.request.user:
-            from rest_framework.exceptions import PermissionDenied
-
             raise PermissionDenied(
-                "You can only create lessons for " "sections in your own courses."
+                "You can only create lessons for sections in your own courses."
             )
 
         serializer.save()
@@ -218,10 +233,8 @@ class TeacherLessonViewSet(viewsets.ModelViewSet):
         )
 
         if section.course.teacher != self.request.user:
-            from rest_framework.exceptions import PermissionDenied
-
             raise PermissionDenied(
-                "You can only update lessons for " "sections in your own courses."
+                "You can only update lessons for sections in your own courses."
             )
 
         serializer.save()

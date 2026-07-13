@@ -38,6 +38,7 @@ urlpatterns = [
         RegisterView.as_view(),
         name="auth-register",
     ),
+    path("api/rag/", include("rag.urls")),
     path(
         "api/auth/login/",
         CustomTokenObtainPairView.as_view(),

@@ -1,47 +1,47 @@
 import os
 import uuid
 
-from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from rest_framework import permissions, status
-from rest_framework.decorators import (
-    api_view,
-    permission_classes,
-)
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def upload_file_view(request):
-    """Tải file lên thư mục media/uploads."""
+    """Upload a non-empty file to media/uploads."""
 
-    if "file" not in request.FILES:
+    uploaded_file = request.FILES.get("file")
+
+    if uploaded_file is None:
         return Response(
-            {"detail": "No file provided"},
+            {"detail": "No file provided."},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    file = request.FILES["file"]
+    if uploaded_file.size == 0:
+        return Response(
+            {"detail": "The selected file is empty."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    file_ext = os.path.splitext(file.name)[1]
-    unique_filename = f"{uuid.uuid4()}{file_ext}"
-
+    file_extension = os.path.splitext(uploaded_file.name)[1].lower()
+    unique_filename = f"{uuid.uuid4()}{file_extension}"
     upload_path = f"uploads/{unique_filename}"
 
-    saved_path = default_storage.save(
-        upload_path,
-        ContentFile(file.read()),
-    )
+    # Save the uploaded file directly instead of reading it into ContentFile.
+    saved_path = default_storage.save(upload_path, uploaded_file)
 
-    file_url = f"/media/{saved_path}"
+    file_url = default_storage.url(saved_path)
 
     return Response(
         {
             "url": file_url,
             "file_url": file_url,
             "attachment_url": file_url,
-            "filename": file.name,
+            "filename": uploaded_file.name,
+            "size": uploaded_file.size,
         },
         status=status.HTTP_201_CREATED,
     )

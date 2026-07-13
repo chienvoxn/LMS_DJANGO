@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "reviews",
     "analytics",
     "chat",
+    "rag",
 ]
 
 
@@ -257,3 +258,48 @@ LOGGING = {
         },
     },
 }
+
+
+RAG_CHROMA_PATH = os.getenv(
+    "RAG_CHROMA_PATH",
+    str(BASE_DIR / "chroma_db"),
+)
+
+RAG_COLLECTION_NAME = os.getenv(
+    "RAG_COLLECTION_NAME",
+    "lms_user_documents",
+)
+
+RAG_OLLAMA_BASE_URL = os.getenv(
+    "RAG_OLLAMA_BASE_URL",
+    "http://127.0.0.1:11434",
+)
+
+RAG_LLM_MODEL = os.getenv(
+    "RAG_LLM_MODEL",
+    "qwen2.5:3b",
+)
+
+RAG_EMBED_MODEL = os.getenv(
+    "RAG_EMBED_MODEL",
+    "bge-m3",
+)
+
+RAG_CHUNK_SIZE = int(os.getenv("RAG_CHUNK_SIZE", "1000"))
+
+RAG_CHUNK_OVERLAP = int(os.getenv("RAG_CHUNK_OVERLAP", "180"))
+
+RAG_TOP_K = int(os.getenv("RAG_TOP_K", "6"))
+
+RAG_MAX_DISTANCE = float(os.getenv("RAG_MAX_DISTANCE", "0.82"))
+
+RAG_MAX_FILE_SIZE_MB = int(os.getenv("RAG_MAX_FILE_SIZE_MB", "30"))
+
+RAG_OLLAMA_TIMEOUT = float(os.getenv("RAG_OLLAMA_TIMEOUT", "180"))
+
+RAG_ALLOWED_EXTENSIONS = [
+    "pdf",
+    "txt",
+    "docx",
+    "pptx",
+]
