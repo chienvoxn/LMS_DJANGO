@@ -119,7 +119,10 @@ const CourseEditor = () => {
         : sectionsResponse.data?.results || [];
       // Double-check: filter by course ID to ensure we only get sections for this course
       sectionsData = sectionsData
-        .filter(s => s.course === currentCourseId)
+        .filter(
+          (section) =>
+            Number(section.course) === Number(currentCourseId)
+        )
         .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
       setSections(sectionsData);
       
@@ -128,11 +131,21 @@ const CourseEditor = () => {
       let lessonsData = Array.isArray(lessonsResponse.data)
         ? lessonsResponse.data
         : lessonsResponse.data?.results || [];
-      // Double-check: filter by course ID through section
-      const sectionIds = new Set(sectionsData.map(s => s.id));
+      // Filter lessons by the sections belonging to this course
+      const sectionIds = new Set(
+        sectionsData.map((section) => Number(section.id))
+      );
+
       lessonsData = lessonsData
-        .filter(l => sectionIds.has(l.section))
-        .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+        .filter((lesson) =>
+          sectionIds.has(Number(lesson.section))
+        )
+        .sort(
+          (a, b) =>
+            Number(a.sort_order || 0) -
+            Number(b.sort_order || 0)
+        );
+
       setLessons(lessonsData);
       
       // Expand all sections by default

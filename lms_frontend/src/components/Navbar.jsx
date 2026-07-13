@@ -95,24 +95,38 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation Links - Center Left */}
-        <div className="hidden lg:flex items-center gap-6 flex-1">
-          {isAuthenticated && user?.role === "student" && (
-            <>
-              <Link
-                to="/browse"
-                className="text-slate-700 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400 font-medium text-sm transition-colors"
-              >
-                Browse
-              </Link>
-              <Link
-                to="/my-learning"
-                className="text-slate-700 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400 font-medium text-sm transition-colors"
-              >
-                My Learning
-              </Link>
-            </>
-          )}
-        </div>
+      <div className="hidden lg:flex items-center gap-6 flex-1">
+        {isAuthenticated && user?.role === "student" && (
+          <>
+            <Link
+              to="/browse"
+              className="text-slate-700 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400 font-medium text-sm transition-colors"
+            >
+              Browse
+            </Link>
+
+            <Link
+              to="/my-learning"
+              className="text-slate-700 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400 font-medium text-sm transition-colors"
+            >
+              My Learning
+            </Link>
+          </>
+        )}
+
+        {isAuthenticated && (
+          <Link
+            to="/ai-assistant"
+            className={`font-medium text-sm transition-colors ${
+              location.pathname.startsWith("/ai-assistant")
+                ? "text-primary-500 dark:text-primary-400"
+                : "text-slate-700 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400"
+            }`}
+          >
+            ✨ AI Assistant
+          </Link>
+        )}
+      </div>
 
         {/* Search Bar - Center (Coursera style) */}
         {isAuthenticated && user?.role === "student" && (

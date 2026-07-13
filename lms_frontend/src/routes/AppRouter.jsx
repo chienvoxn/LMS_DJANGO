@@ -1,46 +1,65 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
 import { useAuth } from '../context/AuthContext';
+
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import CourseDetail from '../pages/CourseDetail';
+
+import BrowseCourses from '../pages/BrowseCourses';
 import CourseLandingPage from '../pages/courses/CourseLandingPage';
 import CourseLearning from '../pages/CourseLearning';
 import LessonPlayer from '../pages/LessonPlayer';
+
 import StudentDashboard from '../pages/StudentDashboard';
+import MyLearning from '../pages/MyLearning';
+import StudentProfile from '../pages/StudentProfile';
+import StudentCertificates from '../pages/StudentCertificates';
+import StudentPaymentHistory from '../pages/StudentPaymentHistory';
+
 import TeacherDashboard from '../pages/TeacherDashboard';
+import TeacherAnalytics from '../pages/TeacherAnalytics';
+import TeacherStudents from '../pages/TeacherStudents';
 import CourseEditor from '../pages/CourseEditor';
+
 import TeacherCourseQuizzes from '../pages/TeacherCourseQuizzes';
 import QuizEditor from '../pages/QuizEditor';
 import StudentQuizPlayer from '../pages/StudentQuizPlayer';
-import AssignmentDetail from '../pages/AssignmentDetail';
-import StudentAssignmentDetail from '../pages/StudentAssignmentDetail';
+
 import TeacherCourseAssignments from '../pages/TeacherCourseAssignments';
 import TeacherAssignmentEditor from '../pages/TeacherAssignmentEditor';
 import TeacherAssignmentSubmissions from '../pages/TeacherAssignmentSubmissions';
-import TeacherAnalytics from '../pages/TeacherAnalytics';
-import TeacherStudents from '../pages/TeacherStudents';
-import StudentProfile from '../pages/StudentProfile';
-import MyLearning from '../pages/MyLearning';
+import StudentAssignmentDetail from '../pages/StudentAssignmentDetail';
+
 import PublicProfile from '../pages/profile/PublicProfile';
 import EditProfile from '../pages/profile/EditProfile';
 import InstructorProfile from '../pages/instructor/InstructorProfile';
+
 import ChangePassword from '../pages/ChangePassword';
 import CertificateView from '../pages/CertificateView';
-import StudentCertificates from '../pages/StudentCertificates';
+
 import PaymentPage from '../pages/PaymentPage';
 import CartPage from '../pages/CartPage';
 import CartCheckoutPage from '../pages/CartCheckoutPage';
-import StudentPaymentHistory from '../pages/StudentPaymentHistory';
-import BrowseCourses from '../pages/BrowseCourses';
+
 import ChatPage from '../pages/ChatPage';
+import AIAssistant from '../pages/AIAssistant';
+
 import Navbar from '../components/Navbar';
 
+/**
+ * Route dành cho mọi người dùng đã đăng nhập.
+ * Student và teacher đều có thể truy cập.
+ */
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <div className="container">Loading...</div>;
+    return (
+      <div className="container mx-auto px-4 py-10">
+        Loading...
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
@@ -50,11 +69,18 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+/**
+ * Route chỉ dành cho giảng viên.
+ */
 const TeacherRoute = ({ children }) => {
   const { user, isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <div className="container">Loading...</div>;
+    return (
+      <div className="container mx-auto px-4 py-10">
+        Loading...
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
@@ -68,11 +94,18 @@ const TeacherRoute = ({ children }) => {
   return children;
 };
 
+/**
+ * Route chỉ dành cho học viên.
+ */
 const StudentRoute = ({ children }) => {
   const { user, isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <div className="container">Loading...</div>;
+    return (
+      <div className="container mx-auto px-4 py-10">
+        Loading...
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
@@ -90,14 +123,31 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Navbar />
+
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<BrowseCourses />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/student/:studentId/profile" element={<StudentProfile />} />
-        {/* User Profile Routes */}
-        <Route path="/profile/:userId" element={<PublicProfile />} />
+
+        {/* Public profile routes */}
+        <Route
+          path="/student/:studentId/profile"
+          element={<StudentProfile />}
+        />
+
+        <Route
+          path="/profile/:userId"
+          element={<PublicProfile />}
+        />
+
+        <Route
+          path="/instructor/:instructorId/profile"
+          element={<InstructorProfile />}
+        />
+
+        {/* Protected user profile routes */}
         <Route
           path="/profile/:userId/edit"
           element={
@@ -106,9 +156,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* Instructor Public Profile Route */}
-        <Route path="/instructor/:instructorId/profile" element={<InstructorProfile />} />
-        {/* Change Password Route */}
+
         <Route
           path="/account/change-password"
           element={
@@ -117,16 +165,13 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* Payment History Route */}
+
+        {/* Course routes */}
         <Route
-          path="/account/payment-history"
-          element={
-            <StudentRoute>
-              <StudentPaymentHistory />
-            </StudentRoute>
-          }
+          path="/courses/:courseId"
+          element={<CourseLandingPage />}
         />
-        <Route path="/courses/:courseId" element={<CourseLandingPage />} />
+
         <Route
           path="/courses/:courseId/payment"
           element={
@@ -135,6 +180,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/courses/:courseId/learn"
           element={
@@ -143,14 +189,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/courses/:courseId/certificate"
-          element={
-            <ProtectedRoute>
-              <CertificateView />
-            </ProtectedRoute>
-          }
-        />
+
         <Route
           path="/courses/:courseId/lessons/:lessonId"
           element={
@@ -159,6 +198,17 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/courses/:courseId/certificate"
+          element={
+            <ProtectedRoute>
+              <CertificateView />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -167,128 +217,17 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* My Learning */}
+
+        {/* AI Assistant */}
         <Route
-          path="/my-learning"
-          element={
-            <StudentRoute>
-              <MyLearning />
-            </StudentRoute>
-          }
-        />
-        {/* Student Certificates */}
-        <Route
-          path="/student/certificates"
-          element={
-            <StudentRoute>
-              <StudentCertificates />
-            </StudentRoute>
-          }
-        />
-        {/* Cart */}
-        <Route
-          path="/cart"
+          path="/ai-assistant"
           element={
             <ProtectedRoute>
-              <CartPage />
+              <AIAssistant />
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/cart/checkout"
-          element={
-            <ProtectedRoute>
-              <CartCheckoutPage />
-            </ProtectedRoute>
-          }
-        />
-        {/* Teacher Dashboard */}
-        <Route
-          path="/teacher/dashboard"
-          element={
-            <TeacherRoute>
-              <TeacherDashboard />
-            </TeacherRoute>
-          }
-        />
-        {/* Teacher Analytics */}
-        <Route
-          path="/teacher/analytics"
-          element={
-            <TeacherRoute>
-              <TeacherAnalytics />
-            </TeacherRoute>
-          }
-        />
-        {/* Teacher Course Editor */}
-        {/* Put /new route BEFORE /:courseId/edit to avoid route conflict */}
-        <Route
-          path="/teacher/courses/new"
-          element={
-            <TeacherRoute>
-              <CourseEditor />
-            </TeacherRoute>
-          }
-        />
-        <Route
-          path="/teacher/courses/:courseId/edit"
-          element={
-            <TeacherRoute>
-              <CourseEditor />
-            </TeacherRoute>
-          }
-        />
-        {/* Teacher Quiz Management Routes */}
-        <Route
-          path="/teacher/courses/:courseId/quizzes"
-          element={
-            <TeacherRoute>
-              <TeacherCourseQuizzes />
-            </TeacherRoute>
-          }
-        />
-        <Route
-          path="/teacher/quizzes/:quizId/edit"
-          element={
-            <TeacherRoute>
-              <QuizEditor />
-            </TeacherRoute>
-          }
-        />
-        {/* Teacher Assignment Management Routes */}
-        <Route
-          path="/teacher/courses/:courseId/assignments"
-          element={
-            <TeacherRoute>
-              <TeacherCourseAssignments />
-            </TeacherRoute>
-          }
-        />
-        {/* Teacher Student Management Routes */}
-        <Route
-          path="/teacher/courses/:courseId/students"
-          element={
-            <TeacherRoute>
-              <TeacherStudents />
-            </TeacherRoute>
-          }
-        />
-        <Route
-          path="/teacher/assignments/:assignmentId/edit"
-          element={
-            <TeacherRoute>
-              <TeacherAssignmentEditor />
-            </TeacherRoute>
-          }
-        />
-        <Route
-          path="/teacher/assignments/:assignmentId/submissions"
-          element={
-            <TeacherRoute>
-              <TeacherAssignmentSubmissions />
-            </TeacherRoute>
-          }
-        />
+
         {/* Chat */}
         <Route
           path="/chat"
@@ -299,7 +238,54 @@ const AppRouter = () => {
           }
         />
 
-        {/* Student Quiz Player */}
+        {/* Student routes */}
+        <Route
+          path="/my-learning"
+          element={
+            <StudentRoute>
+              <MyLearning />
+            </StudentRoute>
+          }
+        />
+
+        <Route
+          path="/student/certificates"
+          element={
+            <StudentRoute>
+              <StudentCertificates />
+            </StudentRoute>
+          }
+        />
+
+        <Route
+          path="/account/payment-history"
+          element={
+            <StudentRoute>
+              <StudentPaymentHistory />
+            </StudentRoute>
+          }
+        />
+
+        {/* Cart routes */}
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/cart/checkout"
+          element={
+            <ProtectedRoute>
+              <CartCheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Student quiz */}
         <Route
           path="/courses/:courseId/quizzes/:quizId/take"
           element={
@@ -308,7 +294,8 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        {/* Student Assignment Detail */}
+
+        {/* Student assignment */}
         <Route
           path="/courses/:courseId/assignments/:assignmentId"
           element={
@@ -317,11 +304,111 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        {/* Teacher dashboard */}
+        <Route
+          path="/teacher/dashboard"
+          element={
+            <TeacherRoute>
+              <TeacherDashboard />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Teacher analytics */}
+        <Route
+          path="/teacher/analytics"
+          element={
+            <TeacherRoute>
+              <TeacherAnalytics />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Teacher course management */}
+        <Route
+          path="/teacher/courses/new"
+          element={
+            <TeacherRoute>
+              <CourseEditor />
+            </TeacherRoute>
+          }
+        />
+
+        <Route
+          path="/teacher/courses/:courseId/edit"
+          element={
+            <TeacherRoute>
+              <CourseEditor />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Teacher quiz management */}
+        <Route
+          path="/teacher/courses/:courseId/quizzes"
+          element={
+            <TeacherRoute>
+              <TeacherCourseQuizzes />
+            </TeacherRoute>
+          }
+        />
+
+        <Route
+          path="/teacher/quizzes/:quizId/edit"
+          element={
+            <TeacherRoute>
+              <QuizEditor />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Teacher assignment management */}
+        <Route
+          path="/teacher/courses/:courseId/assignments"
+          element={
+            <TeacherRoute>
+              <TeacherCourseAssignments />
+            </TeacherRoute>
+          }
+        />
+
+        <Route
+          path="/teacher/assignments/:assignmentId/edit"
+          element={
+            <TeacherRoute>
+              <TeacherAssignmentEditor />
+            </TeacherRoute>
+          }
+        />
+
+        <Route
+          path="/teacher/assignments/:assignmentId/submissions"
+          element={
+            <TeacherRoute>
+              <TeacherAssignmentSubmissions />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Teacher student management */}
+        <Route
+          path="/teacher/courses/:courseId/students"
+          element={
+            <TeacherRoute>
+              <TeacherStudents />
+            </TeacherRoute>
+          }
+        />
+
+        {/* Fallback route */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default AppRouter;
-
